@@ -1,0 +1,114 @@
+import React, { useState } from 'react';
+import RemoveItem from '../components/RemoveItem';
+import { Link } from 'react-router-dom';
+import useGetAndChange from '../features/customHooks/useGetAndChange';
+import useCreateData from '../features/customHooks/useCreateData';
+import ErrorList from '../components/ErrorList';
+
+// TODO: Info, że pracownicy bez grup nie będą uwzględniani w nowych grafikach
+
+const EmployeesPage = () => {
+
+  const [empsState, {getData: getEmployees}] = useGetAndChange({url: "/api/schedule/employees"})
+  const [groupsState] = useGetAndChange({url: "/api/schedule/groups"})
+  const [newEmployee, setNewEmployee] = useState({firstName:"", lastName:"", groups:[]});
+  const [empState, createEmployee] = useCreateData({url: "/api/schedule/employees", refresh: getEmployees});
+
+  // Adds selected group to groups list
+  // or removes if unselected
+  const handleOnChangeGroup = (GrID) => {
+    if (!newEmployee.groups.includes(GrID)){
+      setNewEmployee((prev)=>{return {...prev, groups:[...prev.groups, GrID]}})
+    } else {
+      const filteredGroups = newEmployee.groups.filter(group => group !== GrID)
+      setNewEmployee((prev)=>{return {...prev, groups:filteredGroups}})
+    }
+  };
+
+  // convert groups ids to its names
+  const getGroupsNamesByIds = (groupsIdsArr)=>{
+    if(groupsIdsArr?.length===0) return [];
+    const groupNames = [];
+
+    groupsIdsArr?.forEach((id) => {
+      const foundGroup = groupsState.data?.find((group) => group.id === id);
+      if(foundGroup){
+        groupNames?.push(foundGroup.group_name);
+      }
+    })
+
+    return groupNames;
+  }
+
+  if(empsState.error || empState.error || groupsState.error){
+    return <ErrorList errors={[empsState.error?.message, empState.error?.message, groupsState.error?.message]} />
+  }
+
+  return (
+  <div>
+      <p>Pracownicy:</p>
+
+      <ol>
+        {empsState.data?.map(employee =>(
+          <React.Fragment key={employee.id}>
+            {/* Nie pokazuj id pracownika i id użytkownika */}
+            <li>{Object.keys(employee).filter((item)=>{return item!=="id" && item!=="user"}).map(objKey =>
+              <React.Fragment key={objKey}>, {objKey} - {objKey === "groups" ? getGroupsNamesByIds(employee[objKey]).map((groupName,index)=>(<span key={index}> {groupName} </span>)) : employee[objKey]} </React.Fragment>
+              )}
+            <RemoveItem name={employee.first_name} url={`/api/schedule/employees/${employee.id}`} refreshList={getEmployees} />
+            <Link to={`/employees/${employee.id}`}>Więcej</Link>
+            </li>
+          </React.Fragment>
+        ))}
+      </ol>
+
+
+      
+      {empState.data && <p> Utworzono: {JSON.stringify(empState.data)}</p>}
+
+      <form onSubmit={(e)=>{
+        e.preventDefault();
+
+        createEmployee({
+          first_name: newEmployee.firstName,
+          last_name: newEmployee.lastName,
+          groups: newEmployee.groups
+        });
+      }}>
+<label>Dodaj pracownika: 
+  <input 
+    type="text" 
+    value={newEmployee.firstName}
+    onChange={(e) => setNewEmployee((prev)=>{return {...prev, firstName:e.target.value }})}
+  />
+  <input 
+    type="text" 
+    value={newEmployee.lastName}
+    onChange={(e) => setNewEmployee((prev)=>{return {...prev, lastName:e.target.value }})}
+  />
+
+  <fieldset>
+    {groupsState.data?.map((group, index) =>
+      <React.Fragment key={index}>
+        <input
+          type="checkbox"
+          id={`custom-checkbox-${index}`}
+          name={group.group_name}
+          value={group.id}
+          checked={ newEmployee.groups.includes(group.id)}
+          onChange={() => handleOnChangeGroup(group.id)}
+        />
+        <label htmlFor={group.group_name}>{group.group_name}</label>
+      </React.Fragment>
+    )}
+    </fieldset>
+</label>
+<input type="submit" />
+</form>
+
+
+  </div>
+  )
+};
+
+export default EmployeesPage;

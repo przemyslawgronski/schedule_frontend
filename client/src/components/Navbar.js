@@ -1,0 +1,37 @@
+import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../features/user";
+
+const Navbar = () => {
+
+    const dispatch = useDispatch();
+    const { isAuthenticated } = useSelector(state => state.user)
+
+    const authLinks = (
+        <>
+            <NavLink to='/dashboard'> Dashboard </NavLink>
+            <NavLink to='/groups'> Groups </NavLink>
+            <NavLink to='/employees'> Employees </NavLink>
+            <NavLink to='/shifts'> Shifts </NavLink>
+            <a href="#!" onClick={()=>dispatch(logout())}> Logout </a>
+        </>
+    );
+
+    const guestLinks = (
+      <>
+            <NavLink to='/login'> Login </NavLink>
+            <NavLink to='/register'> Register </NavLink>
+      </>  
+    );
+
+
+    return (
+    <div>
+        <NavLink to='/'> Home </NavLink>
+        {isAuthenticated ? authLinks : guestLinks}
+
+        {/* Navlink adds class active to active page */}
+    </div> )
+};
+
+export default Navbar;
