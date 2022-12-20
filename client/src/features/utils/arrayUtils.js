@@ -20,7 +20,7 @@ export function create2dArr(rows=0, columns=0, init=false){
     return [...Array(rows)].map(()=>Array(columns).fill(init))
   }
 
-
+//test
 
 // Example for func = () => x:x===1:
 // arr = [0,1,0,[1,0,0],[0,[1],1]] => result = [[1],[3,0],[4,1,0],[4,2]]
