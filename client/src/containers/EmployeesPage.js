@@ -50,7 +50,7 @@ const EmployeesPage = () => {
 
       <ol>
         {empsState.data?.map(employee =>(
-          <React.Fragment key={employee.id}>
+          <React.Fragment key={employee.id}> {/* React.Fragment niepotrzebny, wystarczy dać key na <li></li> - to jedyny element */}
             {/* Nie pokazuj id pracownika i id użytkownika */}
             <li>{Object.keys(employee).filter((item)=>{return item!=="id" && item!=="user"}).map(objKey =>
               <React.Fragment key={objKey}>, {objKey} - {objKey === "groups" ? getGroupsNamesByIds(employee[objKey]).map((groupName,index)=>(<span key={index}> {groupName} </span>)) : employee[objKey]} </React.Fragment>

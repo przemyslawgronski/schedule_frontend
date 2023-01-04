@@ -28,6 +28,15 @@ const GroupPage = () => {
         {setData: setAllEmployees, getData: getAllEmployees}
     ] = useGetAndChange({url: '/api/schedule/employees'});
 
+    // Nie błąd, ale taka seria alternatyw jest jakoś mało elegencka.
+    // Proponuję:
+    //  if ([group.error, groupEmployees.error, batchError, allEmployees.error].some(Boolean))
+    // albo lepiej:
+    //  const errors = [group.error, groupEmployees.error, batchError, allEmployees.error].filter(Boolean);
+    //  ...
+    //  if (errors.length) {
+    //      return <ErrorList errors={errors.map(({ message }) => message)} />;
+    //  }
     if(group.error || groupEmployees.error || batchError || allEmployees.error){
         return <ErrorList 
         errors={[

@@ -1,5 +1,6 @@
 const express = require('express');
 const cookie = require('cookie');
+// Dlaczego nie: `const fetch = ...`? Deklarujemy tu niepotrzebnie i nieelegancko zmienną globalną.
 fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const router = express.Router();

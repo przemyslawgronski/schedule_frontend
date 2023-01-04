@@ -47,7 +47,7 @@ const useGetAndChange = ({ url, test, modify }) => {
 
 
   const getData = useCallback(async () => {
-    if ((typeof test !== "undefined") && !test) return;
+    if ((typeof test !== "undefined") && !test) return; // Raczej unikamy pisania logiki pod testy. W testach można coś ewentualnie zamockować.
 
     try {
       const fetchResponse = await fetch(url, {
@@ -110,6 +110,7 @@ const useGetAndChange = ({ url, test, modify }) => {
     }
   };
 
+  // Gdyby zdefiniować wyżej, można by użyć w funkcji changeData i zredukować powtórzenia kodu.
   const setData = (argData) => {
     dispatchState({
       type: ACTION.CHANGE_DATA,

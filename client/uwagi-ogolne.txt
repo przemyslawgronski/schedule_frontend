@@ -1,0 +1,4 @@
+1. Być może warto byłoby się zastanowić nad jakąś małą biblioteką do obsługi formularzy.
+2. Oczywiście dobrze wyglądałoby to, gdyby komponenty i narzędzia były otestowane (testy jednostkowe).
+3. Niektóre uwagi mają zastosowanie w wielu plikach w analogicznych sytuacjach. Nie powtarzałem się za każdym razem.
+4. Dużo uwag to rzeczy drobne, odnoszące się do "zgrabności" kodu czy przestrzegania konwencji.

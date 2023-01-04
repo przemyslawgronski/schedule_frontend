@@ -10,6 +10,8 @@ const EmployeePage = () => {
 
     const { id } = useParams();
 
+    // Ładniejsza składnia:
+    // const [groupsState] = useGetAndChange({ url: "/api/schedule/groups" });
     const groupsState = useGetAndChange({url:"/api/schedule/groups"})[0];
     const [employeeState, {getData: getEmp, changeData:changeEmp, setData: setEmp}] = useGetAndChange({url:`/api/schedule/employees/${id}`})
     

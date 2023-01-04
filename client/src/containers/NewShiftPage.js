@@ -89,6 +89,7 @@ const NewShiftPage = () => {
 
     {groups && constraints && empsInGroup &&
     <form>
+      {/* <DropDown label="Wybierz grupę" {...} /> itd., itd. */}
       <DropDown label={'Wybierz grupę'} name={"groupId"} options={groups} value_key={'id'}
       obj_key={'id'} obj_text={'group_name'} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 

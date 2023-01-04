@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom"; // TODO: Should be useNavigate ??? 
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../features/user";
 
+// Podobne uwagi jak w LoginPage, nie będę powtarzał.
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const {registered, loading} = useSelector(state => state.user);

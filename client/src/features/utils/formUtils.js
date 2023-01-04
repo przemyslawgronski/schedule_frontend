@@ -1,6 +1,7 @@
+// Nieużywane.
 export const handleOnChange = (event, setterFunc) => {
     const {name, value, type, checked} = event.target;
-    setterFunc((prev)=>{return {
+    setterFunc((prev)=>{return { // Lepiej bez "{ return", tylko od razu zwracać wartość: "(prev) => ({ ...prev itd.".
         ...prev,
         [name]: type==="checkbox" ? checked : value
     }});
