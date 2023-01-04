@@ -1,3 +1,6 @@
+// Nazwy propsów raczej pełnymi słowami. Ponadto konwencja zakłada użtwanie camelCase'a,
+// aczkolwiek nie jest to obowiązkowe. Dobrze jednak trzymać się jednego obranego sposobu
+// nazywania i nie mieszać konwencji.
 const DropDown = ({label, name, defaultVal, options, value_key, obj_key, obj_text, onChangeFunc}) => {
   return (
     <label>

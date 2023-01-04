@@ -1,0 +1,1 @@
+1. Pomimo umieszczenia w repozytorium frontendowym, jest to oczywiście backend (wystawiający REST-owe API Node-owy pośrednik pomiędzy React-owym frontendem, a Django). Jest to raczej nieścisłość organizacyjna niż jakiś "twardy" błąd. Po prostu może być mylące dla innych programistów.

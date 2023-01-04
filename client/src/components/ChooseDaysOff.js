@@ -1,6 +1,6 @@
 import CheckBox from "./form/CheckBox"
 
-const ChooseDaysOff = ({employees, daysOff, handleDaysOff, chosenDaysOff}) => {
+const ChooseDaysOff = ({employees, daysOff, handleDaysOff, chosenDaysOff}) => { // klamra niepotrzebna, skoro nie ma logiki, od razu zwracamy wartość: (...) => (<>...</>);
   return (
     <>
         <p>Wybierz dni wolne:</p>

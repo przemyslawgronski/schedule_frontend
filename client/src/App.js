@@ -34,7 +34,7 @@ const App = ()=>{
   },[dispatch]);
 
   return (
-    <>    
+    <> {/* <></> - niepotrzebne, BrowserRouter może być kontenerem wszystkiego */}
       <BrowserRouter>
         <Navbar />
         
