@@ -22,17 +22,15 @@ const GroupsPage = () => {
     <p>Group Page</p>
       <ul>
         {groups.data?.map(group =>(
-          <React.Fragment key={group.id}>
-            <li>
-              <p>Grupa: {group.group_name}</p>
-              <p>Ilość zmian: {group.num_of_shifts}</p>
-              <button onClick={()=>remove({
-                name:group.group_name,
-                url: `/api/schedule/groups/${group.id}`
-                })}>Usuń</button>
-              <Link to={`/groups/${group.id}`}>Więcej</Link>
-            </li>
-          </React.Fragment>
+          <li key={group.id}>
+            <p>Grupa: {group.group_name}</p>
+            <p>Ilość zmian: {group.num_of_shifts}</p>
+            <button onClick={()=>remove({
+              name:group.group_name,
+              url: `/api/schedule/groups/${group.id}`
+              })}>Usuń</button>
+            <Link to={`/groups/${group.id}`}>Więcej</Link>
+          </li>
         ))}
       </ul>
 

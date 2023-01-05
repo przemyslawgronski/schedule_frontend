@@ -48,17 +48,17 @@ const EmployeesPage = () => {
   <div>
       <p>Pracownicy:</p>
 
+      {/* Nie pokazuj id pracownika i id użytkownika */}
       <ol>
         {empsState.data?.map(employee =>(
-          <React.Fragment key={employee.id}>
-            {/* Nie pokazuj id pracownika i id użytkownika */}
-            <li>{Object.keys(employee).filter((item)=>{return item!=="id" && item!=="user"}).map(objKey =>
-              <React.Fragment key={objKey}>, {objKey} - {objKey === "groups" ? getGroupsNamesByIds(employee[objKey]).map((groupName,index)=>(<span key={index}> {groupName} </span>)) : employee[objKey]} </React.Fragment>
+            <li key={employee.id}>{Object.keys(employee).filter((item)=>{return item!=="id" && item!=="user"}).map(objKey =>
+                <span key={objKey}>
+                  , {objKey} - {objKey === "groups" ? getGroupsNamesByIds(employee[objKey]).map((groupName,index)=>(<span key={index}> {groupName} </span>)) : employee[objKey]}
+                </span>
               )}
             <RemoveItem name={employee.first_name} url={`/api/schedule/employees/${employee.id}`} refreshList={getEmployees} />
             <Link to={`/employees/${employee.id}`}>Więcej</Link>
             </li>
-          </React.Fragment>
         ))}
       </ol>
 
