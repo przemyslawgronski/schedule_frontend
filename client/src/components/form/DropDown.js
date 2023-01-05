@@ -21,6 +21,6 @@ const DropDown = ({label, name, defaultVal, options, valueKey, objKey, objText, 
 
 export default DropDown
 
-// Render options to choose, example:
+// Render options to choose. Example:
 // <DropDown label={"Coś tam obiekt"} options={[{id:1, test:"a"},{id:2, test:"b"}]} obj_key={"id"} obj_text={"test"} onChangeFunc={()=>c onsole.log("obiekt")}/>
 // <DropDown label={"Coś tam tablica"} options={['a','b','c']} onChangeFunc={()=>c onsole.log("tablica")}/>
