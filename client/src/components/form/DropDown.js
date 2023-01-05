@@ -1,5 +1,4 @@
-const DropDown = ({label, name, defaultVal, options, value_key, obj_key, obj_text, onChangeFunc}) => {
-  return (
+const DropDown = ({label, name, defaultVal, options, value_key, obj_key, obj_text, onChangeFunc}) => (
     <label>
         {label}
         <select
@@ -19,7 +18,6 @@ const DropDown = ({label, name, defaultVal, options, value_key, obj_key, obj_tex
         </select>
     </label>
   )
-}
 
 export default DropDown
 
