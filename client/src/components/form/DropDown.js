@@ -1,4 +1,4 @@
-const DropDown = ({label, name, defaultVal, options, value_key, obj_key, obj_text, onChangeFunc}) => (
+const DropDown = ({label, name, defaultVal, options, valueKey, objKey, objText, onChangeFunc}) => (
     <label>
         {label}
         <select
@@ -8,10 +8,10 @@ const DropDown = ({label, name, defaultVal, options, value_key, obj_key, obj_tex
         >
             {options?.map(option =>(
                 <option
-                  key={obj_key ? option[obj_key] : option}
-                  value={value_key ? JSON.stringify(option[value_key]) : JSON.stringify(option)}>
-                    {obj_text ?
-                      typeof obj_text === 'function' ? obj_text(option) : option[obj_text]
+                  key={objKey ? option[objKey] : option}
+                  value={valueKey ? JSON.stringify(option[valueKey]) : JSON.stringify(option)}>
+                    {objText ?
+                      typeof objText === 'function' ? objText(option) : option[objText]
                     : option}
                 </option>
             ))}
