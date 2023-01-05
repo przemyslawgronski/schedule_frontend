@@ -85,15 +85,15 @@ const NewShiftPage = () => {
 
     {groups && constraints && empsInGroup &&
     <form>
-      <DropDown label={'Wybierz grupę'} name={"groupId"} options={groups} valueKey={'id'}
-      objKey={'id'} objText={'group_name'} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
+      <DropDown label="Wybierz grupę" name="groupId" options={groups} valueKey="id"
+      objKey="id" objText="group_name" onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
       <LinkEmployees employees={empsInGroup} />
 
-      <DropDown label={'Wybierz rok'} name={'date.year'} defaultVal={dateUtils.nextMonthsYear}
+      <DropDown label="Wybierz rok" name="date.year" defaultVal={dateUtils.nextMonthsYear}
       options={dateUtils.yearsArr()} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
-      <DropDown label={'Wybierz miesiąc'} name={'date.month'} defaultVal={dateUtils.nextMonth} options={dateUtils.monthArr()}
+      <DropDown label="Wybierz miesiąc" name="date.month" defaultVal={dateUtils.nextMonth} options={dateUtils.monthArr()}
       objText={dateUtils.monthName} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
       <p>Dni w miesiącu: {daysCount}</p>
