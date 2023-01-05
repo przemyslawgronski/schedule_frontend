@@ -2,21 +2,18 @@ import React from "react"
 import CheckBox from "./form/CheckBox"
 
 const ChooseConstraints = ({constraints, handleConstraints}) => {
+  return (
+    <>
+        <p>Wybierz ograniczenia:</p>
 
-  if(constraints){
-    return (
-      <>
-          <p>Wybierz ograniczenia:</p>
-
-          {Object.keys(constraints).map((item)=>
-          <React.Fragment key={item}>
-              <span>{item}</span>
-              <CheckBox isChecked={constraints[item]} changeFunc={()=>handleConstraints(item)} />
-          </React.Fragment>
-          )}
-      </>
-    )
-  }
+        {Object.keys(constraints).map((item)=>
+        <React.Fragment key={item}>
+            <span>{item}</span>
+            <CheckBox isChecked={constraints[item]} changeFunc={()=>handleConstraints(item)} />
+        </React.Fragment>
+        )}
+    </>
+  )
 }
 
 export default ChooseConstraints

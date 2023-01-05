@@ -102,7 +102,7 @@ const NewShiftPage = () => {
 
       <p>Dni w miesiącu: {daysCount}</p>
 
-      <ChooseConstraints constraints={constraints} handleConstraints={(key)=>setConstraints({...constraints, [key]: !constraints[key]})} />
+      {constraints && <ChooseConstraints constraints={constraints} handleConstraints={(key)=>setConstraints({...constraints, [key]: !constraints[key]})} />}
 
       <ChooseDaysOff employees={empsInGroup} daysOff={form.daysOff}
       handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, form.daysOff)} />
