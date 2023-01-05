@@ -28,14 +28,11 @@ const GroupPage = () => {
         {setData: setAllEmployees, getData: getAllEmployees}
     ] = useGetAndChange({url: '/api/schedule/employees'});
 
-    if(group.error || groupEmployees.error || batchError || allEmployees.error){
-        return <ErrorList 
-        errors={[
-            group?.error?.message,
-            groupEmployees?.error?.message,
-            batchError?.message,
-            allEmployees?.error?.message
-        ]} />
+
+    const errors = [group.error, groupEmployees.error, batchError, allEmployees.error].filter(Boolean);
+
+    if (errors.length) {
+        return <ErrorList errors={errors.map(({ message }) => message)} />;
     }
 
     return (

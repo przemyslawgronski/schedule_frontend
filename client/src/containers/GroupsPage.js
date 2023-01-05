@@ -13,8 +13,10 @@ const GroupsPage = () => {
   const [removeError, remove] = useRemoveItem({refreshList:getGroups});
   const [createdGroup, create] = useCreateData({url:"/api/schedule/groups", refreshList:getGroups});
 
-  if(removeError || groups?.error || createdGroup?.error){
-    return <ErrorList errors={[removeError?.message, groups?.error?.message, createdGroup?.error?.message]} />
+  const errors = [removeError, groups.error, createdGroup.error].filter(Boolean);
+
+  if (errors.length) {
+      return <ErrorList errors={errors.map(({ message }) => message)} />;
   }
 
   return (

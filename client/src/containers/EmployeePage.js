@@ -11,10 +11,12 @@ const EmployeePage = () => {
     const { id } = useParams();
 
     const [groupsState] = useGetAndChange({url:"/api/schedule/groups"});
-    const [employeeState, {getData: getEmp, changeData:changeEmp, setData: setEmp}] = useGetAndChange({url:`/api/schedule/employees/${id}`})
-    
-    if(groupsState.error || employeeState.error){
-        return <ErrorList errors={[groupsState?.error?.message, employeeState?.error?.message]} />
+    const [employeeState, {getData: getEmp, changeData:changeEmp, setData: setEmp}] = useGetAndChange({url:`/api/schedule/employees/${id}`});
+
+    const errors = [groupsState.error, employeeState.error].filter(Boolean);
+
+    if (errors.length) {
+        return <ErrorList errors={errors.map(({ message }) => message)} />;
     }
 
     return (

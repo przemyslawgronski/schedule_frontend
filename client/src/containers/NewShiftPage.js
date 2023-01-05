@@ -74,14 +74,10 @@ const NewShiftPage = () => {
     resetSave();
   },[form, constraints, resetSave, resetSolution])
 
-  if(groupsErrors || constraintsError || empsInGroupError){
-    return <ErrorList errors={[
-      groupsErrors?.message,
-      constraintsError?.message,
-      empsInGroupError?.message,
-      solutionError?.message,
-      saveError?.message,
-    ]} />
+  const errors = [groupsErrors, constraintsError, empsInGroupError, solutionError, saveError].filter(Boolean);
+
+  if (errors.length) {
+      return <ErrorList errors={errors.map(({ message }) => message)} />;
   }
 
   return (

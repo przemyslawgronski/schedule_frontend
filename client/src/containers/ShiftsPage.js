@@ -6,7 +6,7 @@ const ShiftsPage = () => {
 
   const [yearsMonths] = useGetAndChange({url: 'api/schedule/years-months-with-shifts'})
 
-  if (yearsMonths?.error) return <ErrorList errors={[yearsMonths.error.message]} />
+  if (yearsMonths.error) return <ErrorList errors={[yearsMonths.error.message]} />
   
   return (
     <>

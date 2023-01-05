@@ -40,8 +40,10 @@ const EmployeesPage = () => {
     return groupNames;
   }
 
-  if(empsState.error || empState.error || groupsState.error){
-    return <ErrorList errors={[empsState.error?.message, empState.error?.message, groupsState.error?.message]} />
+  const errors = [empsState.error, empState.error, groupsState.error].filter(Boolean);
+
+  if (errors.length) {
+      return <ErrorList errors={errors.map(({ message }) => message)} />;
   }
 
   return (
