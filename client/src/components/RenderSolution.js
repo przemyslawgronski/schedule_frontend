@@ -1,5 +1,4 @@
-const RenderSolution = ({employees, solution, saveSolution}) => {
-  return (
+const RenderSolution = ({employees, solution, saveSolution}) => (
     <>
         {Object.keys(solution)?.map((dayIndex)=>
           <p key={dayIndex}>
@@ -14,6 +13,5 @@ const RenderSolution = ({employees, solution, saveSolution}) => {
         {solution && <button onClick={saveSolution}>Zapisz</button>}
     </>
   )
-}
 
 export default RenderSolution

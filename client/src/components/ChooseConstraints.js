@@ -1,8 +1,7 @@
 import React from "react"
 import CheckBox from "./form/CheckBox"
 
-const ChooseConstraints = ({constraints, handleConstraints}) => {
-  return (
+const ChooseConstraints = ({constraints, handleConstraints}) => (
     <>
         <p>Wybierz ograniczenia:</p>
 
@@ -14,6 +13,5 @@ const ChooseConstraints = ({constraints, handleConstraints}) => {
         )}
     </>
   )
-}
 
 export default ChooseConstraints

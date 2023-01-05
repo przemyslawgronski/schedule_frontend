@@ -1,7 +1,6 @@
 import CheckBox from "./form/CheckBox"
 
-const ChooseDaysOff = ({employees, daysOff, handleDaysOff, chosenDaysOff}) => {
-  return (
+const ChooseDaysOff = ({employees, daysOff, handleDaysOff, chosenDaysOff}) => (
     <>
         <p>Wybierz dni wolne:</p>
 
@@ -34,6 +33,5 @@ const ChooseDaysOff = ({employees, daysOff, handleDaysOff, chosenDaysOff}) => {
           </p>)}
     </>
   )
-}
 
 export default ChooseDaysOff

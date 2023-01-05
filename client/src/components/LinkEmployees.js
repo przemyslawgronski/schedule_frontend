@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 
-const LinkEmployees = ({employees}) => {
-  return (
+const LinkEmployees = ({employees}) => (
     <>
         {Array.isArray(employees) && employees.map((employee) =>(
         <p key={employee.id}>
@@ -10,6 +9,5 @@ const LinkEmployees = ({employees}) => {
         ))}
     </>
   )
-}
 
 export default LinkEmployees
