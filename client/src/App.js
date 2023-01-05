@@ -34,7 +34,6 @@ const App = ()=>{
   },[dispatch]);
 
   return (
-    <>    
       <BrowserRouter>
         <Navbar />
         
@@ -57,7 +56,6 @@ const App = ()=>{
           <Route path="*" element={<PageNotFound/>} />
         </Routes>
       </BrowserRouter>
-    </>
   );
 };
 
