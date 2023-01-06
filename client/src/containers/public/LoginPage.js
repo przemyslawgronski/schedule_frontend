@@ -10,7 +10,7 @@ const LoginPage = () => {
     const formRef = {
       email: useRef(null),
       password: useRef(null)
-    }
+    };
 
     useEffect(()=>{
       if(registered) dispatch(resetRegistered());
@@ -20,7 +20,10 @@ const LoginPage = () => {
   
     const onSubmit = e => {
       e.preventDefault();
-      dispatch(login({email: formRef.email.current.value, password: formRef.password.current.value}));
+      dispatch(login({
+        email: formRef.email.current.value,
+        password: formRef.password.current.value
+      }));
     }
 
     return (
