@@ -78,6 +78,15 @@ const useGetAndChange = ({ url, test, modify }) => {
 
 
 
+  const setData = (argData) => {
+    dispatchState({
+      type: ACTION.CHANGE_DATA,
+      payload: { data: argData, modify: modify },
+    });
+  };
+
+
+
   const changeData = async (body) => {
 
     if ((typeof test !== "undefined") && !test) return;
@@ -100,28 +109,20 @@ const useGetAndChange = ({ url, test, modify }) => {
 
       const jsonData = await fetchResponse.json();
 
-      dispatchState({
-        type: ACTION.CHANGE_DATA,
-        payload: { data: jsonData, modify: modify },
-      });
-
+      setData(jsonData);
+      
     } catch (error) {
       dispatchState({ type: ACTION.FETCH_ERROR, payload: error });
     }
   };
 
-  const setData = (argData) => {
-    dispatchState({
-      type: ACTION.CHANGE_DATA,
-      payload: { data: argData, modify: modify },
-    });
-  };
 
   // Get data on first render
   useEffect(() => {
     getData();
   }, [getData]);
 
+  
   return [state, {getData, changeData, setData}];
 };
 
