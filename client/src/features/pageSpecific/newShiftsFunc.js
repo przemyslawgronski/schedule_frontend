@@ -1,6 +1,4 @@
 import { findIndexes } from "../utils/arrayUtils";
-import { toValuesArr } from "../utils/arrOfObjUtils";
-import { indexToVal } from "../utils/arrOfObjUtils";
 
 // generate result object: keys: employee ids, values: days indexes
 //
@@ -8,8 +6,8 @@ import { indexToVal } from "../utils/arrOfObjUtils";
 // keysArr - ids of employees
 // convDict - Object: keys - index of colum, values - id of employee
 export function workDaysByEmpID(keysArr, daysOffArr, convDict){
-    if (!keysArr || !daysOffArr || !convDict) return -1;
-    if (keysArr.length === 0 || daysOffArr.length === 0 || Object.keys(convDict).length === 0) return -1;
+    if (!keysArr || !daysOffArr || !convDict) return {};
+    if (keysArr.length === 0 || daysOffArr.length === 0 || Object.keys(convDict).length === 0) return {};
 
     // Initialize result e.g. {1: [], 2: [], 3: [], 5: [], 6: []}
     const result = {};
@@ -28,11 +26,11 @@ export function workDaysByEmpID(keysArr, daysOffArr, convDict){
 
 export function mapEmpIdToFreeDays(employees, daysOff){
 
-    if (!employees || !daysOff) return;
+    if (!employees || !daysOff) return {};
     
-    const keysArr = toValuesArr(employees, 'id');
-    const empIndxToVal = indexToVal(employees, 'id')
+    const keysArr = employees.map(({id})=>id);
+    const empIndxToVal = Object.fromEntries(employees.map(({ id }, index) => [index, id]))
 
     // generate object: keys: employee ids, values: days indexes
-    return workDaysByEmpID(keysArr, daysOff,empIndxToVal)
+    return workDaysByEmpID(keysArr, daysOff, empIndxToVal);
 }
