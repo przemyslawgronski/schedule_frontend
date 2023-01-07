@@ -1,8 +1,7 @@
 import { numArray } from "./arrayUtils";
 
 export const dateUtils = {
-    currYear: new Date().getFullYear(),
-    yearsArr: () => numArray(new Date().getFullYear()-5, new Date().getFullYear()+5),
+    yearsArray(radius){ return numArray(new Date().getFullYear()-radius, new Date().getFullYear()+radius)},
     currMonth: new Date().getMonth(),
     nextMonth: new Date().getMonth() === 11 ? 0 : new Date().getMonth()+1,
     nextMonthsYear: new Date().getMonth() === 11 ? new Date().getFullYear()+1 : new Date().getFullYear(),

@@ -91,7 +91,7 @@ const NewShiftPage = () => {
       <LinkEmployees employees={empsInGroup} />
 
       <DropDown label="Wybierz rok" name="date.year" defaultVal={dateUtils.nextMonthsYear}
-      options={dateUtils.yearsArr()} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
+      options={dateUtils.yearsArray(5)} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
       <DropDown label="Wybierz miesiąc" name="date.month" defaultVal={dateUtils.nextMonth} options={dateUtils.monthArr()}
       objText={dateUtils.monthName} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
