@@ -1,6 +1,6 @@
 const express = require('express');
 const cookie = require('cookie');
-fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const router = express.Router();
 

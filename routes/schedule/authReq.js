@@ -1,5 +1,5 @@
 const express = require('express')
-fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const router = express.Router()
 
