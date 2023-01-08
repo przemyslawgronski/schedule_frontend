@@ -17,8 +17,8 @@ const NewShiftPage = () => {
 
   const [form, setForm] = useState({
     date: {
-      year: dateUtils.nextMonthsYear,
-      month: dateUtils.nextMonth,
+      year: dateUtils.nextMonthsYear(),
+      month: dateUtils.nextMonth(),
     },
     groupId: null,
     daysOff: [],
@@ -82,18 +82,18 @@ const NewShiftPage = () => {
 
   return (
     <>
-
     {groups && constraints && empsInGroup &&
+    
     <form>
       <DropDown label="Wybierz grupę" name="groupId" options={groups} valueKey="id"
       objKey="id" objText="group_name" onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
       <LinkEmployees employees={empsInGroup} />
 
-      <DropDown label="Wybierz rok" name="date.year" defaultVal={dateUtils.nextMonthsYear}
+      <DropDown label="Wybierz rok" name="date.year" defaultVal={dateUtils.nextMonthsYear()}
       options={dateUtils.yearsArray(5)} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
-      <DropDown label="Wybierz miesiąc" name="date.month" defaultVal={dateUtils.nextMonth} options={dateUtils.monthArr()}
+      <DropDown label="Wybierz miesiąc" name="date.month" defaultVal={dateUtils.nextMonth()} options={dateUtils.monthArray}
       objText={dateUtils.monthName} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
       <p>Dni w miesiącu: {daysCount}</p>

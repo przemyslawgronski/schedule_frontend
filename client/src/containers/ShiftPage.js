@@ -11,7 +11,7 @@ const ShiftPage = () => {
 
   const [mangledShifts, empsInGroup] = shiftMangle(shifts);
 
-  const datesArr = dateUtils.datesArr(year, month);
+  const datesArr = dateUtils.datesArray(year, month);
 
   if (shiftsErr) return <ErrorList errors={[shiftsErr.message]} />
 
