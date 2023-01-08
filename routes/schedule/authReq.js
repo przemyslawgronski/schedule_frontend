@@ -1,7 +1,7 @@
-const express = require('express')
+const express = require('express');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-const router = express.Router()
+const router = express.Router();
 
 // post, get, delete... requests with authentication
 router.all('/api/schedule*', async (req, res)=>{

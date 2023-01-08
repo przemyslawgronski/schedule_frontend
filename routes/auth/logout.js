@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const cookie = require('cookie');
 
 const router = express.Router();
