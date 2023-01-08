@@ -1,9 +1,11 @@
 export const handleOnChange = (event, setterFunc) => {
+    
     const {name, value, type, checked} = event.target;
-    setterFunc((prev)=>{return {
+
+    setterFunc((prev)=>({
         ...prev,
         [name]: type==="checkbox" ? checked : value
-    }});
+    }));
 }
 
 export function parseAndSetObj(event, state = {}) {
