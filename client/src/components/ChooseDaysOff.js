@@ -1,4 +1,4 @@
-import CheckBox from "./form/CheckBox"
+import { CheckBox } from "./form/Inputs"
 
 const ChooseDaysOff = ({employees, daysOff, handleDaysOff, chosenDaysOff}) => (
     <>

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 import { resetRegistered, login } from "../../features/user";
 import { Navigate } from "react-router-dom";
+import { Email, Password } from "../../components/form/Inputs";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -30,12 +31,8 @@ const LoginPage = () => {
       <>
           <h1>Log into your account</h1>
           <form onSubmit={onSubmit}>
-            <div>
-              <label htmlFor='email'>Email</label>
-              <input ref={formRef.email} type='email' name='email' required />
-              <label htmlFor='password'>Password</label>
-              <input ref={formRef.password} type='password' name='password' required />
-            </div>
+            <Email ref={formRef.email}/>
+            <Password ref={formRef.password}/>
             { loading ? ("loading") : (<button> Login </button>) }
           </form>
       </>

@@ -1,5 +1,5 @@
 import React from "react"
-import CheckBox from "./form/CheckBox"
+import { CheckBox } from "./form/Inputs"
 
 const ChooseConstraints = ({constraints, handleConstraints}) => (
     <>
