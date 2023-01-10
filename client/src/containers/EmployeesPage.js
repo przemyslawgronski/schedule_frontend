@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import useCreateData from '../features/customHooks/useCreateData';
 import ErrorList from '../components/ErrorList';
+import { CheckBox } from '../components/form/Inputs';
 
 // TODO: Info, że pracownicy bez grup nie będą uwzględniani w nowych grafikach
 
@@ -13,6 +14,12 @@ const EmployeesPage = () => {
   const [groupsState] = useGetAndChange({url: "/api/schedule/groups"})
   const [newEmployee, setNewEmployee] = useState({firstName:"", lastName:"", groups:[]});
   const [empState, createEmployee] = useCreateData({url: "/api/schedule/employees", refresh: getEmployees});
+
+  const errors = [empsState.error, empState.error, groupsState.error].filter(Boolean);
+
+  if (errors.length) {
+      return <ErrorList errors={errors.map(({ message }) => message)} />;
+  }
 
   // Adds selected group to groups list
   // or removes if unselected
@@ -38,12 +45,6 @@ const EmployeesPage = () => {
     })
 
     return groupNames;
-  }
-
-  const errors = [empsState.error, empState.error, groupsState.error].filter(Boolean);
-
-  if (errors.length) {
-      return <ErrorList errors={errors.map(({ message }) => message)} />;
   }
 
   return (
@@ -90,18 +91,15 @@ const EmployeesPage = () => {
   />
 
   <fieldset>
-    {groupsState.data?.map((group, index) =>
-      <React.Fragment key={index}>
-        <input
-          type="checkbox"
-          id={`custom-checkbox-${index}`}
+    {groupsState.data?.map((group) =>
+        <CheckBox
+          key={group.id}
+          isChecked={newEmployee.groups.includes(group.id)}
+          changeFunc={() => handleOnChangeGroup(group.id)}
           name={group.group_name}
           value={group.id}
-          checked={ newEmployee.groups.includes(group.id)}
-          onChange={() => handleOnChangeGroup(group.id)}
-        />
-        <label htmlFor={group.group_name}>{group.group_name}</label>
-      </React.Fragment>
+          labelText={group.group_name}
+          />
     )}
     </fieldset>
 </label>
