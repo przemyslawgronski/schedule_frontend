@@ -11,21 +11,15 @@ const GroupPage = () => {
 
     const { id } = useParams();
 
-    const [
-        group,
-        {setData: setGroup, getData: getGroup, changeData: changeGroup}
+    const [ group, {setData: setGroup, getData: getGroup, changeData: changeGroup}
     ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
     
-    const [
-        groupEmployees,
-        {setData: setGroupEmployees, getData: getGroupEmployees}
+    const [ groupEmployees, {setData: setGroupEmployees, getData: getGroupEmployees}
     ] = useGetAndChange({url:`/api/schedule/groups/${id}/employees`});
     
     const [batchError, batchChange] = useBatchChange({url: (emp)=>`/api/schedule/employees/${emp.id}`})
     
-    const [
-        allEmployees,
-        {setData: setAllEmployees, getData: getAllEmployees}
+    const [ allEmployees, {setData: setAllEmployees, getData: getAllEmployees}
     ] = useGetAndChange({url: '/api/schedule/employees'});
 
 

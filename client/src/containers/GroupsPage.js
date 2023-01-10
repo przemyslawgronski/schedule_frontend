@@ -25,8 +25,10 @@ const GroupsPage = () => {
       <ul>
         {groups.data?.map(group =>(
           <li key={group.id}>
+            
             <p>Grupa: {group.group_name}</p>
             <p>Ilość zmian: {group.num_of_shifts}</p>
+
             <button onClick={()=>remove({
               name:group.group_name,
               url: `/api/schedule/groups/${group.id}`
