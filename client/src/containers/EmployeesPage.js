@@ -64,49 +64,45 @@ const EmployeesPage = () => {
             </li>
         ))}
       </ol>
-
-
       
       {empState.data && <p> Utworzono: {JSON.stringify(empState.data)}</p>}
 
       <form onSubmit={(e)=>{
-        e.preventDefault();
+          e.preventDefault();
 
-        createEmployee({
-          first_name: newEmployee.firstName,
-          last_name: newEmployee.lastName,
-          groups: newEmployee.groups
-        });
-      }}>
-<label>Dodaj pracownika: 
-  <input 
-    type="text" 
-    value={newEmployee.firstName}
-    onChange={(e) => setNewEmployee((prev)=>{return {...prev, firstName:e.target.value }})}
-  />
-  <input 
-    type="text" 
-    value={newEmployee.lastName}
-    onChange={(e) => setNewEmployee((prev)=>{return {...prev, lastName:e.target.value }})}
-  />
-
-  <fieldset>
-    {groupsState.data?.map((group) =>
-        <CheckBox
-          key={group.id}
-          isChecked={newEmployee.groups.includes(group.id)}
-          changeFunc={() => handleOnChangeGroup(group.id)}
-          name={group.group_name}
-          value={group.id}
-          labelText={group.group_name}
+          createEmployee({
+            first_name: newEmployee.firstName,
+            last_name: newEmployee.lastName,
+            groups: newEmployee.groups
+          });
+        }}>
+        <label>Dodaj pracownika: 
+          <input 
+            type="text" 
+            value={newEmployee.firstName}
+            onChange={(e) => setNewEmployee((prev)=>{return {...prev, firstName:e.target.value }})}
           />
-    )}
-    </fieldset>
-</label>
-<input type="submit" />
-</form>
+          <input 
+            type="text" 
+            value={newEmployee.lastName}
+            onChange={(e) => setNewEmployee((prev)=>{return {...prev, lastName:e.target.value }})}
+          />
 
-
+          <fieldset>
+            {groupsState.data?.map((group) =>
+                <CheckBox
+                  key={group.id}
+                  isChecked={newEmployee.groups.includes(group.id)}
+                  changeFunc={() => handleOnChangeGroup(group.id)}
+                  name={group.group_name}
+                  value={group.id}
+                  labelText={group.group_name}
+                  />
+            )}
+          </fieldset>
+        </label>
+        <input type="submit" />
+      </form>
   </div>
   )
 };
