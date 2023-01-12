@@ -18,8 +18,8 @@ router.all('/api/schedule*', async (req, res)=>{
         },
     }
 
-    // If it's a GET method than add body
-    if(method !== "GET"){ // Działa, ale czy dobrze ?
+    // If its a PUT or POST method than add body
+    if(["PUT", "POST"].includes(method)){
         requestParam.body = JSON.stringify(body);
     }
 
