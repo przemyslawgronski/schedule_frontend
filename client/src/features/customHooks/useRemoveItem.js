@@ -22,7 +22,9 @@ const useRemoveItem = ({refreshList}) => {
 
         if (!res.ok) {
           if (res.status === 401) reduxDispatch(logout());
-          throw new Error(`Błąd: ${res.status} ${res.statusText}`);
+
+          const resData = await res.json(); // get error message from server
+          throw new Error(`Błąd: ${res.status} ${res.statusText} ${resData}`);
         }
 
       } catch (error) {
