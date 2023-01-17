@@ -5,6 +5,7 @@ import useCreateData from '../features/customHooks/useCreateData';
 import ErrorList from '../components/ErrorList';
 import { CheckBox } from '../components/form/Inputs';
 import useRemoveItem from '../features/customHooks/useRemoveItem';
+import EmployeeData from '../components/employee/EmployeeData';
 
 // TODO: Info, że pracownicy bez grup nie będą uwzględniani w nowych grafikach
 
@@ -31,41 +32,21 @@ const EmployeesPage = () => {
     }
   };
 
-  // convert groups ids to its names
-  const getGroupsNamesByIds = (groupsIdsArr)=>{
-    console.log({groupsIdsArr});
-    if(groupsIdsArr?.length===0) return [];
-    const groupNames = [];
-
-    groupsIdsArr?.forEach((id) => {
-      const foundGroup = groupsState.data?.find((group) => group.id === id);
-      if(foundGroup){
-        groupNames?.push(foundGroup.group_name);
-      }
-    })
-
-    console.log({groupNames});
-    return groupNames;
-  }
-
   return (
   <div>
       <p>Pracownicy:</p>
 
       <ol>
         {empsState.data?.map(employee =>(
-            <li key={employee.id}>{Object.keys(employee).filter((item)=>{return item!=="id" && item!=="user"}).map(objKey =>
-                <span key={objKey}>
-                  , {objKey} - {objKey === "groups" ? getGroupsNamesByIds(employee[objKey]).map((groupName,index)=>(<span key={index}> {groupName} </span>)) : employee[objKey]}
-                </span>
-              )}
-            <button onClick={()=>{remove({
-              name: `${employee.first_name} ${employee.last_name}`,
-              url: `/api/schedule/employees/${employee.id}`
-              });
-              }}>Usuń</button>
+            <li key={employee.id}>
+              <EmployeeData employee={employee} groups={groupsState.data} spanTag={true}/>
+              <button onClick={()=>{remove({
+                  name: `${employee.first_name} ${employee.last_name}`,
+                  url: `/api/schedule/employees/${employee.id}`
+                  })
+                }}>Usuń</button>
 
-            <Link to={`/employees/${employee.id}`}>Więcej</Link>
+              <Link to={`/employees/${employee.id}`}>Więcej</Link>
             </li>
         ))}
       </ol>
