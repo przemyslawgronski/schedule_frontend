@@ -15,9 +15,7 @@ const GroupsPage = () => {
 
   const errors = [removeError, groups.error, createdGroup.error].filter(err => Boolean(err) && err.name !== "ProtectedError");
 
-  if (errors.length) {
-      return <ErrorList errors={errors.map(({ message }) => message)} />;
-  }
+  if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
   return (
   <div>
@@ -26,7 +24,6 @@ const GroupsPage = () => {
       <ul>
         {groups.data?.map(group =>(
           <li key={group.id}>
-            
             <p>Grupa: {group.group_name}</p>
             <p>Ilość zmian: {group.num_of_shifts}</p>
 

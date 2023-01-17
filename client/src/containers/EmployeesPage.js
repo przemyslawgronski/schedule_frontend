@@ -18,9 +18,7 @@ const EmployeesPage = () => {
 
   const errors = [empsState.error, empState.error, groupsState.error, removeError].filter(Boolean);
 
-  if (errors.length) {
-      return <ErrorList errors={errors.map(({ message }) => message)} />;
-  }
+  if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
   // Adds selected group to groups list
   // or removes if unselected
@@ -35,6 +33,7 @@ const EmployeesPage = () => {
 
   // convert groups ids to its names
   const getGroupsNamesByIds = (groupsIdsArr)=>{
+    console.log({groupsIdsArr});
     if(groupsIdsArr?.length===0) return [];
     const groupNames = [];
 
@@ -45,6 +44,7 @@ const EmployeesPage = () => {
       }
     })
 
+    console.log({groupNames});
     return groupNames;
   }
 
