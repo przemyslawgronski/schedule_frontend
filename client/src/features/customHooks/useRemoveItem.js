@@ -4,6 +4,13 @@ import { logout } from '../user';
 
 const useRemoveItem = ({refreshList}) => {
 
+  class ProtectedError extends Error {
+    constructor(message) {
+      super(message);
+      this.name = "ProtectedError";
+    }
+  }
+
   const reduxDispatch = useDispatch();
 
   const [removeError, setRemoveError] = useState(null);
@@ -23,6 +30,11 @@ const useRemoveItem = ({refreshList}) => {
         if (!res.ok) {
           if (res.status === 401) reduxDispatch(logout());
           const resData = await res.json(); // get error message from server
+          
+          if (resData.error === "ProtectedError"){
+            throw new ProtectedError(`Poszę najpierw usunąć powiązane obiekty: ${resData.message}`);
+          }
+          
           throw new Error(`Błąd: ${res.status} ${res.statusText} ${resData.error} ${resData.message}`);
         }
 

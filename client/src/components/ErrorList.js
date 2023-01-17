@@ -12,6 +12,7 @@ const ErrorList = ({errors}) => {
             <ul>
                 {errors.map((err, idx) => <li key={idx}>{err}</li>)}
             </ul>
+            <button onClick={() => window.location.reload()}>Odśwież stronę</button>
         </>
     )
 }

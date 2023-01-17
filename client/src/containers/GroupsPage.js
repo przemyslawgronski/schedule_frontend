@@ -13,7 +13,7 @@ const GroupsPage = () => {
   const [removeError, remove] = useRemoveItem({refreshList:getGroups});
   const [createdGroup, create] = useCreateData({url:"/api/schedule/groups", refreshList:getGroups});
 
-  const errors = [removeError, groups.error, createdGroup.error].filter(Boolean);
+  const errors = [removeError, groups.error, createdGroup.error].filter(err => Boolean(err) && err.name !== "ProtectedError");
 
   if (errors.length) {
       return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -22,6 +22,7 @@ const GroupsPage = () => {
   return (
   <div>
     <p>Group Page</p>
+    {removeError?.name === "ProtectedError" && <p>{removeError.message}</p>}
       <ul>
         {groups.data?.map(group =>(
           <li key={group.id}>
