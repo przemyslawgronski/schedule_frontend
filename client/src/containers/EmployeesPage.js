@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import RemoveItem from '../components/RemoveItem';
 import { Link } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import useCreateData from '../features/customHooks/useCreateData';
 import ErrorList from '../components/ErrorList';
 import { CheckBox } from '../components/form/Inputs';
+import useRemoveItem from '../features/customHooks/useRemoveItem';
 
 // TODO: Info, że pracownicy bez grup nie będą uwzględniani w nowych grafikach
 
@@ -14,8 +14,9 @@ const EmployeesPage = () => {
   const [groupsState] = useGetAndChange({url: "/api/schedule/groups"})
   const [newEmployee, setNewEmployee] = useState({firstName:"", lastName:"", groups:[]});
   const [empState, createEmployee] = useCreateData({url: "/api/schedule/employees", refresh: getEmployees});
+  const [removeError, remove] = useRemoveItem({refreshList:getEmployees});
 
-  const errors = [empsState.error, empState.error, groupsState.error].filter(Boolean);
+  const errors = [empsState.error, empState.error, groupsState.error, removeError].filter(Boolean);
 
   if (errors.length) {
       return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -51,7 +52,6 @@ const EmployeesPage = () => {
   <div>
       <p>Pracownicy:</p>
 
-      {/* Nie pokazuj id pracownika i id użytkownika */}
       <ol>
         {empsState.data?.map(employee =>(
             <li key={employee.id}>{Object.keys(employee).filter((item)=>{return item!=="id" && item!=="user"}).map(objKey =>
@@ -59,7 +59,12 @@ const EmployeesPage = () => {
                   , {objKey} - {objKey === "groups" ? getGroupsNamesByIds(employee[objKey]).map((groupName,index)=>(<span key={index}> {groupName} </span>)) : employee[objKey]}
                 </span>
               )}
-            <RemoveItem name={employee.first_name} url={`/api/schedule/employees/${employee.id}`} refreshList={getEmployees} />
+            <button onClick={()=>{remove({
+              name: `${employee.first_name} ${employee.last_name}`,
+              url: `/api/schedule/employees/${employee.id}`
+              });
+              }}>Usuń</button>
+
             <Link to={`/employees/${employee.id}`}>Więcej</Link>
             </li>
         ))}
