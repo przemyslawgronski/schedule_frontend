@@ -14,12 +14,12 @@ const GroupDataExtended = ({group, groupEmployees, getGroupEmployees, getGroup})
         <GroupDataBasic group={group}/>
         <p>Pracownicy przypisanin do grupy:</p>
         <ul>
-            {groupEmployees?.map((employee, index) =>(
-                <p key={index}>
-                    <Link to={`/employees/${employee?.id}`}>
-                        {employee?.id}, {employee?.first_name}, {employee?.last_name}
+            {groupEmployees?.map((employee) =>(
+                <li key={employee.id}>
+                    <Link to={`/employees/${employee.id}`}>
+                        {employee.id}, {employee.first_name}, {employee.last_name}
                     </Link>
-                </p> ))}
+                </li> ))}
         </ul>
     </div>
   )
