@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import GroupData from '../components/group/GroupData';
+import GroupDataExtended from '../components/group/GroupDataExtended';
 import GroupForm from '../components/group/GroupForm';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ToggleComponents from '../components/ToggleComponents';
@@ -45,7 +45,7 @@ const GroupPage = () => {
                         setAllEmployees,
                         getAllEmployees
                     }}
-                    Component2={GroupData}
+                    Component2={GroupDataExtended}
                     component2Props={{
                         groupEmployees: groupEmployees.data,
                         getGroupEmployees,

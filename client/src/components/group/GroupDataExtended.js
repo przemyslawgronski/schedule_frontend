@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import GroupDataBasic from './GroupDataBasic'
 
-const GroupData = ({group, groupEmployees, getGroupEmployees, getGroup}) => {
+const GroupDataExtended = ({group, groupEmployees, getGroupEmployees, getGroup}) => {
 
   useEffect(()=>{
     getGroup?.();
@@ -10,9 +11,7 @@ const GroupData = ({group, groupEmployees, getGroupEmployees, getGroup}) => {
 
   return (
     <div>
-        <p>Nazwa: {group?.group_name}</p>
-        <p>Liczba zmian: {group?.num_of_shifts}</p>
-        <p>Ostatnia zmiana: {group?.updated}</p>
+        <GroupDataBasic group={group}/>
         <p>Pracownicy przypisanin do grupy:</p>
         <ul>
             {groupEmployees?.map((employee, index) =>(
@@ -26,4 +25,4 @@ const GroupData = ({group, groupEmployees, getGroupEmployees, getGroup}) => {
   )
 }
 
-export default GroupData
+export default GroupDataExtended

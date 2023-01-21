@@ -5,6 +5,7 @@ import { handleOnChange } from '../features/utils/formUtils'
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
+import GroupDataBasic from '../components/group/GroupDataBasic';
 
 const GroupsPage = () => {
 
@@ -24,8 +25,7 @@ const GroupsPage = () => {
       <ul>
         {groups.data?.map(group =>(
           <li key={group.id}>
-            <p>Grupa: {group.group_name}</p>
-            <p>Ilość zmian: {group.num_of_shifts}</p>
+            <GroupDataBasic group={group} spanTag={true}/>
 
             <button onClick={()=>remove({
               name:group.group_name,
