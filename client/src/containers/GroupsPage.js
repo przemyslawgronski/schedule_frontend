@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import useRemoveItem from '../features/customHooks/useRemoveItem';
-import { handleOnChange } from '../features/utils/formUtils'
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
@@ -10,9 +9,13 @@ import GroupDataBasic from '../components/group/GroupDataBasic';
 const GroupsPage = () => {
 
   const [groups, {getData: getGroups}] = useGetAndChange({url: "/api/schedule/groups"});
-  const [newGroup, setNewGroup] = useState({group_name:"", num_of_shifts:0});
   const [removeError, remove] = useRemoveItem({refreshList:getGroups});
   const [createdGroup, create] = useCreateData({url:"/api/schedule/groups", refreshList:getGroups});
+
+  const formRef = {
+    group_name: useRef(null),
+    num_of_shifts: useRef(null)
+  };
 
   const errors = [removeError, groups.error, createdGroup.error].filter(err => Boolean(err) && err.name !== "ProtectedError");
 
@@ -40,21 +43,24 @@ const GroupsPage = () => {
 
       <form onSubmit={(e)=>{
         e.preventDefault();
-        create(newGroup);
+        create({
+          group_name: formRef.group_name.current.value,
+          num_of_shifts: formRef.num_of_shifts.current.value
+        });
         getGroups();
       }}>
         <label>Dodaj nową grupę: 
           <input 
             type="text" 
-            value={newGroup.group_name}
             name = "group_name"
-            onChange={(e) => handleOnChange(e, setNewGroup)}
+            ref={formRef.group_name}
+            required
           />
           <input 
             type="number" 
-            value={newGroup.groupShifts}
             name = "num_of_shifts"
-            onChange={(e) => handleOnChange(e, setNewGroup)}
+            ref={formRef.num_of_shifts}
+            required
           />
         </label>
         <input type="submit" />
