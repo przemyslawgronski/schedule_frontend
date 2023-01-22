@@ -5,6 +5,7 @@ import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
 import GroupDataBasic from '../components/group/GroupDataBasic';
+import { Text, ShiftsNum } from '../components/form/Inputs';
 
 const GroupsPage = () => {
 
@@ -49,20 +50,9 @@ const GroupsPage = () => {
         });
         getGroups();
       }}>
-        <label>Dodaj nową grupę: 
-          <input 
-            type="text" 
-            name = "group_name"
-            ref={formRef.group_name}
-            required
-          />
-          <input 
-            type="number" 
-            name = "num_of_shifts"
-            ref={formRef.num_of_shifts}
-            required
-          />
-        </label>
+        <span>Dodaj nową grupę: </span>
+        <Text label="Nazwa" ref={formRef.group_name} />
+        <ShiftsNum ref={formRef.num_of_shifts} />
         <input type="submit" />
       </form>
   </div>
