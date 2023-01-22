@@ -10,12 +10,12 @@ const toCamelCase = (str) => {
 
 export const CheckBox = ({isChecked, changeFunc, name, value, labelText}) => {
 
-  const id = useId();
+  const id = useId()+'checkbox';
 
   return (
     <span>
         <input
-        id={id}
+          id={id}
           type="checkbox"
           name={name || "checkbox"} // Optional
           value={value || "checkbox"} // Optional
@@ -30,7 +30,7 @@ export const CheckBox = ({isChecked, changeFunc, name, value, labelText}) => {
 
 export const Email = React.forwardRef((_, ref) => {
 
-  const id = useId();
+  const id = useId()+'email';
 
   return (
     <>
@@ -43,7 +43,7 @@ export const Email = React.forwardRef((_, ref) => {
 
 export const Password = React.forwardRef((_, ref) => {
   
-  const id = useId();
+  const id = useId()+'password';
 
   return (
     <>
@@ -57,7 +57,7 @@ export const Password = React.forwardRef((_, ref) => {
 export const Text = React.forwardRef(({label}, ref) => {
 
   const name = toCamelCase(label);
-  const id = useId(); 
+  const id = useId()+name;
 
   return (
     <>
@@ -69,7 +69,7 @@ export const Text = React.forwardRef(({label}, ref) => {
 
 export const ShiftsNum = React.forwardRef((_, ref) => {
   
-  const id = useId(); 
+  const id = useId()+'ShiftsNum'; 
   
   return (
     <>
