@@ -19,23 +19,23 @@ const GroupForm = ({group, changeGroup, batchChange, allEmployees, setAllEmploye
     // Adds selected group to groups list or removes if unselected
     const handleOnChangeGroup = (EmpID) => {
 
+        // This employee was changed - add to set
+        changedEmpsIDs.current.add(EmpID);
+
         // Deep copy of all employees
         const allEmps = JSON.parse(JSON.stringify(allEmployees.data));
 
-        // Index of clicked employees
-        const index = allEmps.findIndex((emp)=>emp.id === EmpID);
-
-        // Clicked Employees Ids
-        changedEmpsIDs.current.add(EmpID);
+        // clicked employee
+        const emp = allEmps.find((emp)=>emp.id === EmpID);
     
-        if (!allEmps[index].groups.includes(group.id)){
+        if (!emp.groups.includes(group.id)){
             // Add employee to group
-            allEmps[index].groups.push(group.id);
+            emp.groups.push(group.id);
         } else {
             // Filter out employee from group
-            allEmps[index].groups = allEmps[index].groups.filter(id => id !== group.id);
+            emp.groups = emp.groups.filter(id => id !== group.id);
         }
-        setAllEmployees(allEmps); // Update all employees but only locally
+        setAllEmployees(allEmps);
     };
 
     if (allEmployees?.error?.message){
