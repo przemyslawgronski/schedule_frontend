@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ErrorList from "../ErrorList";
-import { ShiftsNum, TextInput } from "../form/Inputs";
+import { CheckBox, ShiftsNum, TextInput } from "../form/Inputs";
 
 const GroupForm = ({group, changeGroup, batchChange, allEmployees, setAllEmployees, getAllEmployees, setToggle}) => {
 
@@ -63,16 +63,13 @@ const GroupForm = ({group, changeGroup, batchChange, allEmployees, setAllEmploye
         <ShiftsNum ref={formRef.num_of_shifts} defaultValue={group.num_of_shifts} />
         
         <fieldset>
-            {allEmployees?.data?.map((employee) =>
-            <React.Fragment key={employee.id}>
-                <input
-                type="checkbox"
-                name={employee.id}
-                checked={ employee.groups.includes(group?.id)}
-                onChange={()=>handleOnChangeGroup(employee.id)}
+            {allEmployees?.data?.map((emp) =>
+            <CheckBox
+                key={emp.id}
+                isChecked={emp.groups.includes(group?.id)}
+                changeFunc={()=>handleOnChangeGroup(emp.id)}
+                labelText={emp.id + ". " + emp.first_name + " " + emp.last_name}
                 />
-                <label htmlFor={employee.id}>{employee.first_name + " " + employee.last_name}</label>
-            </React.Fragment>
             )}
         </fieldset>
 
