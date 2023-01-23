@@ -54,7 +54,7 @@ export const Password = React.forwardRef((_, ref) => {
 })
 
 
-export const TextInput = React.forwardRef(({label}, ref) => {
+export const TextInput = React.forwardRef(({label, defaultValue}, ref) => {
 
   const name = toCamelCase(label);
   const id = useId()+name;
@@ -62,19 +62,34 @@ export const TextInput = React.forwardRef(({label}, ref) => {
   return (
     <>
       <label htmlFor={id}>{label}</label>
-      <input ref={ref} type='text' id={id} name={name} required />
+      <input
+        ref={ref}
+        type='text'
+        id={id}
+        name={name}
+        defaultValue={defaultValue || undefined}
+        required
+        />
     </>
   )
 })
 
-export const ShiftsNum = React.forwardRef((_, ref) => {
+export const ShiftsNum = React.forwardRef(({defaultValue}, ref) => {
   
   const id = useId()+'ShiftsNum'; 
   
   return (
     <>
       <label htmlFor={id}>Ilość zmian</label>
-      <input ref={ref} type='number' id={id} min="0" max="100" required />
+      <input
+        ref={ref}
+        type='number'
+        id={id}
+        min="0"
+        max="100"
+        defaultValue={defaultValue || undefined}
+        required
+      />
     </>
   )
 })

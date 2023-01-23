@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import ErrorList from "../ErrorList";
+import { ShiftsNum, TextInput } from "../form/Inputs";
 
-const GroupForm = ({group, setGroup, changeGroup, batchChange, allEmployees, setAllEmployees, getAllEmployees, setToggle}) => {
+const GroupForm = ({group, changeGroup, batchChange, allEmployees, setAllEmployees, getAllEmployees, setToggle}) => {
+
+    const formRef = {
+        group_name: useRef(),
+        num_of_shifts: useRef()
+    }
 
     useEffect(() => {
         getAllEmployees(); // Restore actual state of employees groups
@@ -40,7 +46,11 @@ const GroupForm = ({group, setGroup, changeGroup, batchChange, allEmployees, set
     <form onSubmit={(e)=>{
         e.preventDefault();
         
-        changeGroup({...group}); // Update group
+        // Update group
+        changeGroup({
+            group_name: formRef.group_name.current.value,
+            num_of_shifts: formRef.num_of_shifts.current.value
+        });
         
         // Update changed employees to contain group (on backend)
         batchChange(allEmployees.data.filter((emp)=> changedEmpsIDs.current.has(emp.id)));
@@ -48,19 +58,9 @@ const GroupForm = ({group, setGroup, changeGroup, batchChange, allEmployees, set
         //change view from 'form' to 'data viewer'
         setToggle && setToggle((prev)=>!prev);
         }}>
-        <label>Zmień:
-        <input
-            type="text"
-            value={group?.group_name}
-            onChange={(e)=>setGroup({...group, group_name:e.target.value})}
-            name="group_name"
-        /><br/>
-        <input
-            type="number"
-            value={group?.num_of_shifts}
-            onChange={(e)=>setGroup({...group, num_of_shifts:e.target.value})}
-            name="num_of_shifts"
-        />
+
+        <TextInput label="Nazwa:" ref={formRef.group_name} defaultValue={group.group_name}/>
+        <ShiftsNum ref={formRef.num_of_shifts} defaultValue={group.num_of_shifts} />
         
         <fieldset>
             {allEmployees?.data?.map((employee) =>
@@ -68,7 +68,6 @@ const GroupForm = ({group, setGroup, changeGroup, batchChange, allEmployees, set
                 <input
                 type="checkbox"
                 name={employee.id}
-                //value={employee.id}
                 checked={ employee.groups.includes(group?.id)}
                 onChange={()=>handleOnChangeGroup(employee.id)}
                 />
@@ -78,7 +77,6 @@ const GroupForm = ({group, setGroup, changeGroup, batchChange, allEmployees, set
         </fieldset>
 
         <button>Zapisz</button>
-        </label>
     </form>
   )
 }
