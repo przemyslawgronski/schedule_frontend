@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Navigate } from "react-router-dom"; // TODO: Should be useNavigate ??? !!!
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../features/user";
-import { Email, Password, Text } from "../../components/form/Inputs";
+import { Email, Password, TextInput } from "../../components/form/Inputs";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -31,8 +31,8 @@ const RegisterPage = () => {
     <>
         <h1>RegisterPage</h1>
         <form onSubmit={onSubmit}>
-          <Text ref={formRef.firstName} label='First Name' />
-          <Text ref={formRef.lastName} label='Last Name' />
+          <TextInput ref={formRef.firstName} label='First Name' />
+          <TextInput ref={formRef.lastName} label='Last Name' />
           <Email ref={formRef.email} />
           <Password ref={formRef.password} />
           { loading ? ("loading") : (<button> Register </button>) }

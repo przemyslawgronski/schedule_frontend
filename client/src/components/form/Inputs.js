@@ -54,7 +54,7 @@ export const Password = React.forwardRef((_, ref) => {
 })
 
 
-export const Text = React.forwardRef(({label}, ref) => {
+export const TextInput = React.forwardRef(({label}, ref) => {
 
   const name = toCamelCase(label);
   const id = useId()+name;
