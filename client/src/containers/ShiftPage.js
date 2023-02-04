@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
-import { dateUtils } from '../features/utils/dateUtils';
 import shiftMangle from '../features/pageSpecific/shiftMangle';
 
 const ShiftPage = () => {
@@ -10,8 +9,6 @@ const ShiftPage = () => {
   const [{data:shifts, error:shiftsErr}] = useGetAndChange({url: `/api/schedule/shifts/${year}/${month}`});
 
   const [mangledShifts, empsInGroup] = shiftMangle(shifts);
-
-  const datesArr = dateUtils.datesArray(year, month);
 
   if (shiftsErr) return <ErrorList errors={[shiftsErr.message]} />
 
@@ -27,7 +24,7 @@ const ShiftPage = () => {
       { Object.keys(mangledShifts).map((grID)=>(
         <div key={grID}>
           {grID} :
-          {datesArr.map( (day)=>(
+          {Object.keys(mangledShifts[grID]).map( (day)=>(
             <p key={day}>
               {day}
               {empsInGroup[grID].map((emp)=>(
