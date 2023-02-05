@@ -33,7 +33,8 @@ const GroupsPage = () => {
 
             <button onClick={()=>remove({
               name:group.group_name,
-              url: `/api/schedule/groups/${group.id}`
+              url: `/api/schedule/groups/${group.id}`,
+              msg: "Ostrożnie! Usunięcie grupy spowoduje usunięcie wszystkich zwiazanych z nią zmian. Zamiast tego można ją ukryć."
               })}>Usuń</button>
             <Link to={`/groups/${group.id}`}>Więcej</Link>
           </li>
@@ -46,7 +47,7 @@ const GroupsPage = () => {
         e.preventDefault();
         create({
           group_name: formRef.group_name.current.value,
-          num_of_shifts: formRef.num_of_shifts.current.value
+          num_of_shifts: formRef.num_of_shifts.current.value,
         });
         getGroups();
       }}>

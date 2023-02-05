@@ -42,7 +42,8 @@ const EmployeesPage = () => {
               <EmployeeData employee={employee} groups={groupsState.data} spanTag={true}/>
               <button onClick={()=>{remove({
                   name: `${employee.first_name} ${employee.last_name}`,
-                  url: `/api/schedule/employees/${employee.id}`
+                  url: `/api/schedule/employees/${employee.id}`,
+                  msg: "Ostrożnie! Usunięcie pracownika spowoduje usunięcie wszystkich zwiazanych z nim zmian. Zmiast tego możesz go ukryć."
                   })
                 }}>Usuń</button>
 

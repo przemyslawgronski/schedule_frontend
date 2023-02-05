@@ -15,9 +15,13 @@ const useRemoveItem = ({refreshList}) => {
 
   const [removeError, setRemoveError] = useState(null);
 
-    const remove = async ({name, url}) => {
+    const remove = async ({name, url, msg}) => {
 
-      if (window.confirm(`Czy na pewno usunąć: ${name} ?`) === false) return;
+      console.log({name, url, msg});
+
+      const message = msg ? `${msg}\nCzy na pewno usunąć: ${name} ?` : `Czy na pewno usunąć: ${name} ?`;
+
+      if (window.confirm(message) === false) return;
 
       try{
         const res = await fetch(`${url}`, {
