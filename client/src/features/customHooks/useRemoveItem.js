@@ -17,8 +17,6 @@ const useRemoveItem = ({refreshList}) => {
 
     const remove = async ({name, url, msg}) => {
 
-      console.log({name, url, msg});
-
       const message = msg ? `${msg}\nCzy na pewno usunąć: ${name} ?` : `Czy na pewno usunąć: ${name} ?`;
 
       if (window.confirm(message) === false) return;

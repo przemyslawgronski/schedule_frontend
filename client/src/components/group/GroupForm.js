@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import ErrorList from "../ErrorList";
-import { CheckBox, ShiftsNum, TextInput } from "../form/Inputs";
+import { CheckBox, ShiftsNum, TextInput, CheckBoxRef } from "../form/Inputs";
 
-const GroupForm = ({group, changeGroup, batchChange, allEmployees, setAllEmployees, getAllEmployees, setToggle}) => {
+const GroupForm = ({group, changeGroup, batchChange, allEmployees, setAllEmployees, getAllEmployees, setToggle, remove}) => {
 
     const formRef = {
         group_name: useRef(),
-        num_of_shifts: useRef()
+        num_of_shifts: useRef(),
+        hide: useRef()
     }
 
     useEffect(() => {
@@ -43,13 +44,15 @@ const GroupForm = ({group, changeGroup, batchChange, allEmployees, setAllEmploye
     }
 
   return (
+    <div>
     <form onSubmit={(e)=>{
         e.preventDefault();
         
         // Update group
         changeGroup({
             group_name: formRef.group_name.current.value,
-            num_of_shifts: formRef.num_of_shifts.current.value
+            num_of_shifts: formRef.num_of_shifts.current.value,
+            hide: formRef.hide.current.checked,
         });
         
         // Update changed employees to contain group (on backend)
@@ -59,9 +62,10 @@ const GroupForm = ({group, changeGroup, batchChange, allEmployees, setAllEmploye
         setToggle && setToggle((prev)=>!prev);
         }}>
 
-        <TextInput label="Nazwa:" ref={formRef.group_name} defaultValue={group.group_name}/>
+        <TextInput ref={formRef.group_name} label="Nazwa:" defaultValue={group.group_name}/>
         <ShiftsNum ref={formRef.num_of_shifts} defaultValue={group.num_of_shifts} />
-        
+        <CheckBoxRef ref={formRef.hide} labelText="Ukryj:" defaultValue={group.hide} />
+
         <fieldset>
             {allEmployees?.data?.map((emp) =>
             <CheckBox
@@ -75,6 +79,14 @@ const GroupForm = ({group, changeGroup, batchChange, allEmployees, setAllEmploye
 
         <button>Zapisz</button>
     </form>
+
+    <button onClick={()=>remove({
+        name:group.group_name,
+        url: `/api/schedule/groups/${group.id}`,
+        msg: "Ostrożnie! Usunięcie grupy spowoduje usunięcie wszystkich zwiazanych z nią zmian. Zamiast tego można ją ukryć."
+        })}>Usuń</button>
+
+    </div>
   )
 }
 

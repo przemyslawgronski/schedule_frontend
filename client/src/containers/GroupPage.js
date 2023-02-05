@@ -1,15 +1,18 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import GroupDataExtended from '../components/group/GroupDataExtended';
 import GroupForm from '../components/group/GroupForm';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ToggleComponents from '../components/ToggleComponents';
 import ErrorList from '../components/ErrorList';
 import useBatchChange from '../features/customHooks/useBatchChange';
+import useRemoveItem from '../features/customHooks/useRemoveItem';
+
 
 const GroupPage = () => {
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [ group, {setData: setGroup, getData: getGroup, changeData: changeGroup}
     ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
@@ -22,8 +25,10 @@ const GroupPage = () => {
     const [ allEmployees, {setData: setAllEmployees, getData: getAllEmployees}
     ] = useGetAndChange({url: '/api/schedule/employees'});
 
+    const [removeError, remove] = useRemoveItem({refreshList: ()=>navigate('/groups')});
 
-    const errors = [group.error, groupEmployees.error, batchError, allEmployees.error].filter(Boolean);
+
+    const errors = [removeError, group.error, groupEmployees.error, batchError, allEmployees.error].filter(Boolean);
 
     if (errors.length) {
         return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -43,7 +48,8 @@ const GroupPage = () => {
                         setGroupEmployees,
                         allEmployees,
                         setAllEmployees,
-                        getAllEmployees
+                        getAllEmployees,
+                        remove
                     }}
                     Component2={GroupDataExtended}
                     component2Props={{

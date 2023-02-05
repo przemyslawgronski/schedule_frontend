@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import useRemoveItem from '../features/customHooks/useRemoveItem';
+
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
@@ -10,7 +10,6 @@ import { TextInput, ShiftsNum } from '../components/form/Inputs';
 const GroupsPage = () => {
 
   const [groups, {getData: getGroups}] = useGetAndChange({url: "/api/schedule/groups"});
-  const [removeError, remove] = useRemoveItem({refreshList:getGroups});
   const [createdGroup, create] = useCreateData({url:"/api/schedule/groups", refreshList:getGroups});
 
   const formRef = {
@@ -18,24 +17,20 @@ const GroupsPage = () => {
     num_of_shifts: useRef(null)
   };
 
-  const errors = [removeError, groups.error, createdGroup.error].filter(err => Boolean(err) && err.name !== "ProtectedError");
+  const errors = [groups.error, createdGroup.error].filter(Boolean);
 
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
+
+  const visibleGroups = groups.data?.filter(group => !group.hide);
+  const hiddenGroups = groups.data?.filter(group => group.hide);
 
   return (
   <div>
     <p>Group Page</p>
-    {removeError?.name === "ProtectedError" && <p>{removeError.message}</p>}
       <ul>
-        {groups.data?.map(group =>(
+        {visibleGroups?.map(group =>(
           <li key={group.id}>
             <GroupDataBasic group={group} spanTag={true}/>
-
-            <button onClick={()=>remove({
-              name:group.group_name,
-              url: `/api/schedule/groups/${group.id}`,
-              msg: "Ostrożnie! Usunięcie grupy spowoduje usunięcie wszystkich zwiazanych z nią zmian. Zamiast tego można ją ukryć."
-              })}>Usuń</button>
             <Link to={`/groups/${group.id}`}>Więcej</Link>
           </li>
         ))}
@@ -56,6 +51,9 @@ const GroupsPage = () => {
         <ShiftsNum ref={formRef.num_of_shifts} />
         <input type="submit" />
       </form>
+      <div>
+        {hiddenGroups?.filter(group => group.hide).map(group => <p key={group.id}>Ukryte: {group.group_name}</p>)}
+      </div>
   </div>
   )
 };

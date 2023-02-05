@@ -27,6 +27,23 @@ export const CheckBox = ({isChecked, changeFunc, name, value, labelText}) => {
   )
 }
 
+export const CheckBoxRef = React.forwardRef(({labelText, defaultValue}, ref) => {
+  
+  const id = useId()+'checkbox';
+
+  return (
+    <>
+      <input
+        ref={ref}
+        id={id}
+        type="checkbox"
+        defaultChecked = {defaultValue || false}
+      />
+      { labelText && <label htmlFor={id}>{labelText}</label>} {/* Optional */}
+    </>
+  )
+})
+
 
 export const Email = React.forwardRef((_, ref) => {
 
