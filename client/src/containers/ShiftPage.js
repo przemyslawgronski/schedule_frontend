@@ -22,53 +22,21 @@ const ShiftPage = () => {
   const removedEmpName = "Pracownicy usunięci";
 
   const cellsGen = (grID, day, emp)=>{
-  //  emp === 'Dzień' ? day : 
-  //mangledShifts[grID][day][emp]?.map((shift)=><span key={shift}> {shift} </span>) ?? mangledShifts[grID][day][emp]
-  if (emp === 'Dzień') return day
-  if (emp === removedEmpName) return mangledShifts[grID][day][null]
-  console.log({grID, day, emp})
-
-  console.log(mangledShifts[grID][day][emp])
-  return "Elo"
+    if (emp === 'Dzień') return day
+    if (emp === removedEmpName) return mangledShifts[grID][day][null]
+    return mangledShifts[grID][day][emp]
   }
 
   return (
     <div>ShiftPage {year} / {month} /
-
-      { Object.keys(mangledShifts).map((grID)=>(
-        <table key={grID}>
-          <caption>Grupa {grID !== 'null' ? grID : "usunięta"}</caption>
-          <thead>
-            <tr>
-              <th key='day'>Dzień</th>
-              {empsInGroup[grID].map((emp)=>(
-                <th key={emp}>{emp ? emp : "Pracownicy usunięci"}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-          {Object.keys(mangledShifts[grID]).map( (day)=>(
-            <tr key={day}>
-              <td>{day}</td>
-              {empsInGroup[grID].map((emp)=>(
-                <>
-                {console.log({grID, day, emp})}
-                <td key={emp}>{mangledShifts[grID][day][emp]?.map((shift)=><span key={shift}> {shift} </span>) ?? "X"}</td>
-                </>
-              ))}
-            </tr>
-          ) )}
-          </tbody>
-        </table>
-      ))}
       <div>
         <Tables
-          tables={Object.keys(mangledShifts)}
-          captions={(grID)=>grID !== 'null' ? grID : "Grupa usunięta"}
+          tables={Object.keys(mangledShifts)} // array of table keys
+          captions={(grID)=>grID !== 'null' ? grID : "Grupa usunięta"} // caption for a given table key
+          // array of headers for a given table key
           headers={(grID)=>['Dzień', ...(empsInGroup[grID].map((emp)=>emp ? emp : removedEmpName))]}
-          rows={(grID)=>Object.keys(mangledShifts[grID])} // asd
-          cells={cellsGen}
-            //'grid:'+grID+' day:' + day + 'emp' + emp}//mangledShifts[grID][day][emp] ?? "X"}
+          rows={(grID)=>Object.keys(mangledShifts[grID])} // array of row keys for a given table key
+          cells={cellsGen} // cell value for a given table key, row key and column key
         />
       </div>
     </div>

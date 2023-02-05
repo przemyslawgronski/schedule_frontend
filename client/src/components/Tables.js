@@ -5,13 +5,11 @@ const Tables = ({tables, captions, headers, rows, cells}) => {
   // captions, headers, rows - functions that return arrays of values for a given table key
   // cells - function that returns a value for a given table key, row key and column key
 
-  // console.log({tables});
-  // console.log('headers')
-  // console.log(tables.map((table)=>headers(table)));
-  // console.log('rows')
-  // console.log(tables.map((table)=>rows(table)));
-  // console.log('cells')
-  // console.log(tables.map((table)=>rows(table).map((row)=>headers(table).map((header)=>cells(table, row, header)))));
+  const spanIfArray = (item) => {
+    if(Array.isArray(item))
+      return item.map((val, indx)=><span key={indx}> {val} </span>)
+    return item
+  }
 
   return (
     <>
@@ -27,7 +25,7 @@ const Tables = ({tables, captions, headers, rows, cells}) => {
         {rows(table).map((row)=>(
           <tr key={row}>
             {headers(table).map((header)=>(
-              <td key={header}>{cells(table, row, header)}</td>
+              <td key={header}>{spanIfArray(cells(table, row, header))}</td>
             ))}
           </tr>
         ) )}
@@ -37,7 +35,5 @@ const Tables = ({tables, captions, headers, rows, cells}) => {
   </>
   )
 }
-
-// Object.keys(mangledShifts[grID])
 
 export default Tables
