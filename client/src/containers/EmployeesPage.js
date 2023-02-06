@@ -4,10 +4,7 @@ import useGetAndChange from '../features/customHooks/useGetAndChange';
 import useCreateData from '../features/customHooks/useCreateData';
 import ErrorList from '../components/ErrorList';
 import { CheckBox } from '../components/form/Inputs';
-import useRemoveItem from '../features/customHooks/useRemoveItem';
 import EmployeeData from '../components/employee/EmployeeData';
-
-// TODO: Info, że pracownicy bez grup nie będą uwzględniani w nowych grafikach
 
 const EmployeesPage = () => {
 
@@ -15,9 +12,8 @@ const EmployeesPage = () => {
   const [groupsState] = useGetAndChange({url: "/api/schedule/groups"})
   const [newEmployee, setNewEmployee] = useState({firstName:"", lastName:"", groups:[]});
   const [empState, createEmployee] = useCreateData({url: "/api/schedule/employees", refresh: getEmployees});
-  const [removeError, remove] = useRemoveItem({refreshList:getEmployees});
 
-  const errors = [empsState.error, empState.error, groupsState.error, removeError].filter(Boolean);
+  const errors = [empsState.error, empState.error, groupsState.error].filter(Boolean);
 
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
@@ -32,25 +28,21 @@ const EmployeesPage = () => {
     }
   };
 
+  const visibleEmployees = empsState.data?.filter(employee => !employee.hide);
+  const hiddenEmployees = empsState.data?.filter(employee => employee.hide);
+
   return (
   <div>
       <p>Pracownicy:</p>
 
-      <ol>
-        {empsState.data?.map(employee =>(
+      <ul>
+        {visibleEmployees?.map(employee =>(
             <li key={employee.id}>
               <EmployeeData employee={employee} groups={groupsState.data} spanTag={true}/>
-              <button onClick={()=>{remove({
-                  name: `${employee.first_name} ${employee.last_name}`,
-                  url: `/api/schedule/employees/${employee.id}`,
-                  msg: "Ostrożnie! Usunięcie pracownika spowoduje usunięcie wszystkich zwiazanych z nim zmian. Zmiast tego możesz go ukryć."
-                  })
-                }}>Usuń</button>
-
               <Link to={`/employees/${employee.id}`}>Więcej</Link>
             </li>
         ))}
-      </ol>
+      </ul>
       
       {empState.data && <p> Utworzono: {JSON.stringify(empState.data)}</p>}
 
@@ -90,6 +82,11 @@ const EmployeesPage = () => {
         </label>
         <input type="submit" />
       </form>
+      <div>
+        {hiddenEmployees?.map(employee =>(
+          <p key={employee.id}>Ukryte: {employee.first_name}</p>      
+        ))}
+      </div>
   </div>
   )
 };

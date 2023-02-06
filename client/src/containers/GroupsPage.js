@@ -51,7 +51,7 @@ const GroupsPage = () => {
         <input type="submit" />
       </form>
       <div>
-        {hiddenGroups?.filter(group => group.hide).map(group => <p key={group.id}>Ukryte: {group.group_name}</p>)}
+        {hiddenGroups?.map(group => <p key={group.id}>Ukryte: {group.group_name}</p>)}
       </div>
   </div>
   )
