@@ -1,20 +1,15 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
 import GroupDataBasic from '../components/group/GroupDataBasic';
-import { TextInput, ShiftsNum } from '../components/form/Inputs';
+import CreateGroupForm from '../components/group/CreateGroupForm';
 
 const GroupsPage = () => {
 
   const [groups, {getData: getGroups}] = useGetAndChange({url: "/api/schedule/groups"});
   const [createdGroup, create] = useCreateData({url:"/api/schedule/groups", refreshList:getGroups});
-
-  const formRef = {
-    group_name: useRef(null),
-    num_of_shifts: useRef(null)
-  };
 
   const errors = [groups.error, createdGroup.error].filter(Boolean);
 
@@ -37,20 +32,8 @@ const GroupsPage = () => {
 
       {createdGroup.data && <p> Utworzono: {JSON.stringify(createdGroup.data)}</p>}
 
-      <form onSubmit={(e)=>{
-        e.preventDefault();
-        create({
-          group_name: formRef.group_name.current.value,
-          num_of_shifts: formRef.num_of_shifts.current.value,
-        });
-        getGroups();
-      }}>
-        <span>Dodaj nową grupę: </span>
-        <TextInput label="Nazwa" ref={formRef.group_name} />
-        <ShiftsNum ref={formRef.num_of_shifts} />
-        <input type="submit" />
-      </form>
-  
+      <CreateGroupForm create={create} refresh={getGroups} />
+
       <p>Ukryte grupy:</p>
       <ul>
         {hiddenGroups?.map(group => 
