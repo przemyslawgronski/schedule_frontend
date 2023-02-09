@@ -38,7 +38,7 @@ const EmployeesPage = () => {
       <ul>
         {visibleEmployees?.map(employee =>(
             <li key={employee.id}>
-              <EmployeeData employee={employee} groups={groupsState.data} spanTag={true}/>
+              <EmployeeData employee={employee} groups={groupsState.data} spanTag={true} removeInfo={['Ukryty']}/>
               <Link to={`/employees/${employee.id}`}>Więcej</Link>
             </li>
         ))}
@@ -83,12 +83,15 @@ const EmployeesPage = () => {
         <input type="submit" />
       </form>
       <div>
+        <p>Ukryci pracownicy:</p>
+        <ul>
         {hiddenEmployees?.map(employee =>(
-          <div key={employee.id}>
-            <p key={employee.id}>Ukryte: {employee.first_name}</p>
+          <li key={employee.id}>
+            <span key={employee.id}>{employee.first_name}</span>
             <Link to={`/employees/${employee.id}`}>Więcej</Link>
-          </div>
+          </li>
         ))}
+        </ul>
       </div>
   </div>
   )

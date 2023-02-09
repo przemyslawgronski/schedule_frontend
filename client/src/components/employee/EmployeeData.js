@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const EmployeeData = ({employee, groups, getEmp, spanTag}) => {
+const EmployeeData = ({employee, groups, getEmp, spanTag, removeInfo}) => {
 
   useEffect(()=>{
     getEmp?.(); // Refresh data
@@ -9,17 +9,21 @@ const EmployeeData = ({employee, groups, getEmp, spanTag}) => {
   const empData = {
     'Imię:': employee?.first_name,
     'Nazwisko:': employee?.last_name,
-    'Grupy:': employee?.groups?.map?.((group_id)=>
+    'Grupy': employee?.groups?.map?.((group_id)=>
         <span key={group_id}>{groups?.find(group=>group.id===group_id)?.group_name} </span>
     ),
-    'Ostatnia zmiana:': employee?.updated,
-    'ukryty:': employee?.hide ? 'tak' : 'nie'
+    'Ostatnia zmiana': employee?.updated,
+    'Ukryty': employee?.hide ? 'tak' : 'nie'
     }
-  
+
+    if(removeInfo && Array.isArray(removeInfo) && removeInfo.length > 0){
+      removeInfo.forEach((key)=>delete empData[key]);
+    }
+
   return (
     <div>
       {Object.keys(empData).map((key)=>(
-        spanTag ? <span key={key}>&nbsp;{empData[key]}&nbsp;</span> : <p key={key}>{key} {empData[key]}</p>
+        spanTag ? <span key={key}>&nbsp;{empData[key]}&nbsp;</span> : <p key={key}>{key} : {empData[key]}</p>
       ))}
     </div>
   )
