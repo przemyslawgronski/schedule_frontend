@@ -84,7 +84,10 @@ const EmployeesPage = () => {
       </form>
       <div>
         {hiddenEmployees?.map(employee =>(
-          <p key={employee.id}>Ukryte: {employee.first_name}</p>      
+          <div key={employee.id}>
+            <p key={employee.id}>Ukryte: {employee.first_name}</p>
+            <Link to={`/employees/${employee.id}`}>Więcej</Link>
+          </div>
         ))}
       </div>
   </div>

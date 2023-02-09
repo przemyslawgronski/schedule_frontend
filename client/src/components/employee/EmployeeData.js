@@ -7,12 +7,13 @@ const EmployeeData = ({employee, groups, getEmp, spanTag}) => {
   },[getEmp])
 
   const empData = {
-    'Imię': employee?.first_name,
-    'Nazwisko': employee?.last_name,
-    'Grupy': employee?.groups?.map?.((group_id)=>
+    'Imię:': employee?.first_name,
+    'Nazwisko:': employee?.last_name,
+    'Grupy:': employee?.groups?.map?.((group_id)=>
         <span key={group_id}>{groups?.find(group=>group.id===group_id)?.group_name} </span>
     ),
-    'Ostatnia zmiana': employee?.updated
+    'Ostatnia zmiana:': employee?.updated,
+    'ukryty:': employee?.hide ? 'tak' : 'nie'
     }
   
   return (

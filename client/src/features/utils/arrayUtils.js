@@ -71,3 +71,14 @@ export function toObj(keysArr, initValue){
         return keysArr
     }
 }
+
+
+// Pushes element to array if it's not there or removes it if it's there
+// modifys original array, returns nothing
+export function pushOrFilter(arr, item){
+    if(!arr.includes(item)){
+        arr.push(item);
+    } else {
+        arr.filter((el)=>el!==item);
+    }
+}

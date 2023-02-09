@@ -1,31 +1,16 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import {CheckBoxRef, TextInput} from "../form/Inputs";
+import { pushOrFilter } from "../../features/utils/arrayUtils";
 
 const EmployeeForm = ({employee, groups, changeEmp, remove, setToggle}) => {
 
     const formRef = {
         first_name: useRef(),
         last_name: useRef(),
-        groups: [...employee.groups],
         hide: useRef()
     };
-    
-    // Adds selected group to groups list or removes if unselected
-    const handleOnChangeGroup = (GrID) => {
-        if (!employee.groups.includes(GrID)){
-            formRef.groups.push(GrID);
-        } else {
-            formRef.groups = formRef.groups.filter(group => group !== GrID);
-        }
-    };
 
-
-                //setEmp({...employee, groups:[...employee.groups, GrID]});
-
-                // Filter out GrID form array
-
-                //const filteredGroups = employee.groups.filter(group => group !== GrID);
-                //setEmp({...employee, groups:filteredGroups});
+    const [empsGroups, setEmpsGroups] = useState([...employee.groups]);
 
   return (
     <div>
@@ -34,7 +19,7 @@ const EmployeeForm = ({employee, groups, changeEmp, remove, setToggle}) => {
             changeEmp({
                 first_name: formRef.first_name.current.value,
                 last_name: formRef.last_name.current.value,
-                groups: formRef.groups,
+                groups: empsGroups,
                 hide: formRef.hide.current.checked
             });
             setToggle && setToggle((prev)=>!prev);}
@@ -47,13 +32,12 @@ const EmployeeForm = ({employee, groups, changeEmp, remove, setToggle}) => {
         <fieldset>
             {groups?.map((group) =>
             <React.Fragment key={group.id}>
-                
                 <input
                 type="checkbox"
                 name={group.group_name}
                 value={group.id}
-                defaultChecked={ formRef.groups.includes(group.id)}
-                onChange={()=>handleOnChangeGroup(group.id)}
+                defaultChecked={ empsGroups.includes(group.id)}
+                onChange={()=>setEmpsGroups((prev)=>pushOrFilter(prev, group.id))}
                 />
                 <label htmlFor={group.group_name}>{group.group_name}</label>
             </React.Fragment>
