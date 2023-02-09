@@ -27,7 +27,7 @@ const EmployeeForm = ({employee, groups, changeEmp, remove, setToggle}) => {
         <label>Zmień:
         <TextInput ref={formRef.first_name} label="Imię:" defaultValue={employee.first_name} />
         <TextInput ref={formRef.last_name} label="Nazwisko:" defaultValue={employee.last_name} />
-        <CheckBoxRef ref={formRef.hide} labelText="Ukryj:" defaultChecked={employee.hide} />
+        <CheckBoxRef ref={formRef.hide} labelText="Ukryj:" defaultValue={employee.hide} />
 
         <fieldset>
             {groups?.map((group) =>
