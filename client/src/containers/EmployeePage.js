@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import EmployeeData from '../components/employee/EmployeeData'
 import EmployeeForm from '../components/employee/EmployeeForm'
@@ -12,7 +12,10 @@ const EmployeePage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [groupsState] = useGetAndChange({url:"/api/schedule/groups"});
+    const [groupsState] = useGetAndChange({
+        url:"/api/schedule/groups",
+        modify: useCallback((arr)=>arr.filter(gr=>!gr.hide),[]) // filter out hidden groups
+    });
     const [employeeState, {getData: getEmp, changeData:changeEmp}] = useGetAndChange({url:`/api/schedule/employees/${id}`});
     const [removeError, remove] = useRemoveItem({refreshList: () => navigate('/employees')});
 
