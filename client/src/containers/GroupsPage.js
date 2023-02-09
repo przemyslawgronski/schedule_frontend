@@ -50,9 +50,16 @@ const GroupsPage = () => {
         <ShiftsNum ref={formRef.num_of_shifts} />
         <input type="submit" />
       </form>
-      <div>
-        {hiddenGroups?.map(group => <p key={group.id}>Ukryte: {group.group_name}</p>)}
-      </div>
+  
+      <p>Ukryte grupy:</p>
+      <ul>
+        {hiddenGroups?.map(group => 
+          <li key={group.id}>
+            <span>{group.group_name} </span>
+            <Link to={`/groups/${group.id}`}>Więcej</Link>
+          </li>
+        )}
+      </ul>
   </div>
   )
 };
