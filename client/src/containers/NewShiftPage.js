@@ -25,14 +25,19 @@ const NewShiftPage = () => {
   });
 
   // Data from django
-  const [{data: groups, error: groupsErrors}] = useGetAndChange({url:"/api/schedule/groups"});
+  const [{data: groups, error: groupsErrors}] = useGetAndChange({
+    url:"/api/schedule/groups",
+    modify:useCallback((arr)=>arr.filter(gr=>!gr.hide), []) // Filter out hidden groups
+  });
   const [{data: constraints, error: constraintsError}, {setData: setConstraints}] = useGetAndChange({
     url:"/api/schedule/constraints",
     modify:useCallback((arr)=>toObj(arr, false), [])
   });
-  const [{data: empsInGroup, error: empsInGroupError}] = useGetAndChange(
-    {url:`/api/schedule/groups/${form.groupId}/employees`, test:form.groupId}
-  );
+  const [{data: empsInGroup, error: empsInGroupError}] = useGetAndChange({
+    url:`/api/schedule/groups/${form.groupId}/employees`,
+    test: form.groupId,
+    modify:useCallback((arr)=>arr.filter(emp=>!emp.hide), []) // Filter out hidden employees
+  });
 
   const [{data: solution, error: solutionError}, createSolution, resetSolution] = useCreateData({url:"/api/schedule/render-solution"});
   const [{data: saveSuccess, error: saveError}, saveSolution, resetSave] = useCreateData({url:"/api/schedule/save-solution"});

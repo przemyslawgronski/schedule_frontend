@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import GroupDataExtended from '../components/group/GroupDataExtended';
 import GroupForm from '../components/group/GroupForm';
@@ -18,12 +18,18 @@ const GroupPage = () => {
     ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
     
     const [ groupEmployees, {setData: setGroupEmployees, getData: getGroupEmployees}
-    ] = useGetAndChange({url:`/api/schedule/groups/${id}/employees`});
+    ] = useGetAndChange({
+        url:`/api/schedule/groups/${id}/employees`,
+        modify: useCallback((arr=>arr.filter(gr=>!gr.hide)),[]) // Filter out hidden employees
+    });
     
     const [batchError, batchChange] = useBatchChange({url: (emp)=>`/api/schedule/employees/${emp.id}`})
     
     const [ allEmployees, {setData: setAllEmployees, getData: getAllEmployees}
-    ] = useGetAndChange({url: '/api/schedule/employees'});
+    ] = useGetAndChange({
+        url: '/api/schedule/employees',
+        modify: useCallback((arr=>arr.filter(gr=>!gr.hide)),[]) // Filter out hidden employees
+    });
 
     const [removeError, remove] = useRemoveItem({refreshList: ()=>navigate('/groups')});
 
