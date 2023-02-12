@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import useCreateData from '../features/customHooks/useCreateData';
 import ErrorList from '../components/ErrorList';
-import { CheckBox } from '../components/form/Inputs';
+import { CheckBox, TextInput } from '../components/form/Inputs';
 import EmployeeData from '../components/employee/EmployeeData';
 
 const EmployeesPage = () => {
@@ -35,13 +35,6 @@ const EmployeesPage = () => {
         return [...prev, GrID];
       }
     });
-    
-    // if (!newEmployee.groups.includes(GrID)){
-    //   setNewEmployee((prev)=>{return {...prev, groups:[...prev.groups, GrID]}})
-    // } else {
-    //   const filteredGroups = newEmployee.groups.filter(group => group !== GrID)
-    //   setNewEmployee((prev)=>{return {...prev, groups:filteredGroups}})
-    // }
   };
 
   const visibleEmployees = empsState.data?.filter(employee => !employee.hide);
@@ -72,18 +65,8 @@ const EmployeesPage = () => {
           });
         }}>
         <label>Dodaj pracownika: 
-          <input
-            ref={formRef.firstName}
-            type="text"
-            //value={newEmployee.firstName}
-            //onChange={(e) => setNewEmployee((prev)=>{return {...prev, firstName:e.target.value }})}
-          />
-          <input 
-            type="text"
-            ref={formRef.lastName}
-            // value={newEmployee.lastName}
-            // onChange={(e) => setNewEmployee((prev)=>{return {...prev, lastName:e.target.value }})}
-          />
+          <TextInput label="Imię" ref={formRef.firstName} />
+          <TextInput label="Nazwisko" ref={formRef.lastName} />
 
           <fieldset>
             {groupsState.data?.map((group) =>
