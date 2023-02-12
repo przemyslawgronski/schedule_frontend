@@ -29,10 +29,11 @@ const NewShiftPage = () => {
     url:"/api/schedule/groups",
     modify:useCallback((arr)=>arr.filter(gr=>!gr.hide), []) // Filter out hidden groups
   });
-  const [{data: constraints, error: constraintsError}, {setData: setConstraints}] = useGetAndChange({
-    url:"/api/schedule/constraints",
-    modify:useCallback((arr)=>toObj(arr, false), [])
+
+  const [{data: constraints, error: constraintsError}] = useGetAndChange({
+    url:"/api/schedule/avaible-constraints"
   });
+  
   const [{data: empsInGroup, error: empsInGroupError}] = useGetAndChange({
     url:`/api/schedule/groups/${form.groupId}/employees`,
     test: form.groupId,
@@ -42,13 +43,15 @@ const NewShiftPage = () => {
   const [{data: solution, error: solutionError}, createSolution, resetSolution] = useCreateData({url:"/api/schedule/render-solution"});
   const [{data: saveSuccess, error: saveError}, saveSolution, resetSave] = useCreateData({url:"/api/schedule/save-solution"});
 
+  const [checkedConstraints, setCheckedConstraints] = useState({});
+
   const daysCount = dateUtils.daysInMonth(form.date.year, form.date.month);
   const handleDaysOff = (pos1, pos2) => setForm( p=> ({ ...p, daysOff: safeInvertAtPos(p.daysOff, [pos1, pos2]) }) )
   
   const createSol = (event) => {
     event.preventDefault();
     createSolution({
-      constraints: constraints,
+      constraints: checkedConstraints,
       checkedBoxes: mapEmpIdToFreeDays(empsInGroup, form.daysOff),
       num_days: dateUtils.daysInMonth(form.date.year, form.date.month),
       num_shifts: groups.find(gr=>gr.id === form.groupId).num_of_shifts,
@@ -65,6 +68,10 @@ const NewShiftPage = () => {
     resetSolution(); // Reset generated schedule
   }
 
+  useEffect(()=>{ // Update checkedConstraints when constraints are loaded
+    if (constraints) setCheckedConstraints(toObj(constraints.map(({name})=>name), false));
+  }, [constraints])
+
   useEffect(()=>{ // First render - set default chosen group to groups[0]
     if (groups && groups[0] != null) setForm( p => ({ ...p, groupId: groups[0].id}) );
   }, [groups])
@@ -75,9 +82,9 @@ const NewShiftPage = () => {
   },[daysCount, empsInGroup?.length, form.groupId, form.date])
 
   useEffect(()=>{
-    resetSolution(); // Clear generated schedule and save info if something was changed
+    resetSolution(); // Clear generated schedule and clear save info if something was changed
     resetSave();
-  },[form, constraints, resetSave, resetSolution])
+  },[form, checkedConstraints, resetSave, resetSolution])
 
   const errors = [groupsErrors, constraintsError, empsInGroupError, solutionError, saveError].filter(Boolean);
 
@@ -87,7 +94,7 @@ const NewShiftPage = () => {
 
   return (
     <>
-    {groups && constraints && empsInGroup &&
+    {groups && checkedConstraints && empsInGroup &&
     
     <form>
       <DropDown label="Wybierz grupę" name="groupId" options={groups} valueKey="id"
@@ -103,7 +110,7 @@ const NewShiftPage = () => {
 
       <p>Dni w miesiącu: {daysCount}</p>
 
-      {constraints && <ChooseConstraints constraints={constraints} handleConstraints={(key)=>setConstraints({...constraints, [key]: !constraints[key]})} />}
+      {checkedConstraints && <ChooseConstraints constraints={checkedConstraints} handleConstraints={(key)=>setCheckedConstraints({...checkedConstraints, [key]: !checkedConstraints[key]})} />}
 
       <ChooseDaysOff employees={empsInGroup} daysOff={form.daysOff}
       handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, form.daysOff)} />
