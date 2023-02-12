@@ -58,21 +58,6 @@ export function findIndexes(arr, func){
   }
 
 
-
-// Reduce 'array' to 'object with {array element:initValue}' pairs
-// e.g. keysArr = [1,2,3,4], initValue = 'a' -> return {"1": "a", "2": "a", "3": "a", "4": "a"}
-export function toObj(keysArr, initValue){
-    if(Array.isArray(keysArr)){
-        return keysArr?.reduce((total, curr)=>{
-            total[curr] = initValue;
-            return total;
-        },{})
-    } else {
-        return keysArr
-    }
-}
-
-
 // Pushes element to array if it's not there or removes it if it's there
 // do not modifys original array, returns new one
 export function pushOrFilter(arr, item){

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { mapEmpIdToFreeDays } from '../features/pageSpecific/newShiftsFunc';
 import { parseAndSetObj } from '../features/utils/formUtils';
 import { safeInvertAtPos } from '../features/utils/objUtils';
-import { toObj, create2dArr } from '../features/utils/arrayUtils';
+import { create2dArr } from '../features/utils/arrayUtils';
 import DropDown from '../components/form/DropDown';
 import { dateUtils } from '../features/utils/dateUtils';
 import RenderSolution from '../components/RenderSolution';
@@ -69,7 +69,7 @@ const NewShiftPage = () => {
   }
 
   useEffect(()=>{ // Update checkedConstraints when constraints are loaded
-    if (constraints) setCheckedConstraints(toObj(constraints.map(({name})=>name), false));
+    if (constraints) setCheckedConstraints(constraints.reduce((acc, {name})=>({...acc, [name]: false}), {}));
   }, [constraints])
 
   useEffect(()=>{ // First render - set default chosen group to groups[0]
