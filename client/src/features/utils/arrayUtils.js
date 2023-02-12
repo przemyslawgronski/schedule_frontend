@@ -58,14 +58,12 @@ export function findIndexes(arr, func){
   }
 
 
-// Pushes element to array if it's not there or removes it if it's there
+// Adds element to array if it's not there or removes it if it's there
 // do not modifys original array, returns new one
-export function pushOrFilter(arr, item){
-    const copy_arr = [...arr];
-    if(!copy_arr.includes(item)){
-        copy_arr.push(item);
+export const addOrRemove = (array, item) => {
+    if (array.includes(item)) {
+      return array.filter((el) => el !== item);
     } else {
-        copy_arr.filter((el)=>el!==item);
+      return [...array, item];
     }
-    return copy_arr;
 }

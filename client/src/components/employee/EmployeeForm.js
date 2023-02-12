@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import {CheckBoxRef, TextInput} from "../form/Inputs";
-import { pushOrFilter } from "../../features/utils/arrayUtils";
+import { addOrRemove } from "../../features/utils/arrayUtils";
 
 const EmployeeForm = ({employee, groups, changeEmp, remove, setToggle}) => {
 
@@ -37,7 +37,7 @@ const EmployeeForm = ({employee, groups, changeEmp, remove, setToggle}) => {
                 name={group.group_name}
                 value={group.id}
                 defaultChecked={ empsGroups.includes(group.id)}
-                onChange={()=>setEmpsGroups((prev)=>pushOrFilter(prev, group.id))}
+                onChange={()=>setEmpsGroups((prev)=>addOrRemove(prev, group.id))}
                 />
                 <label htmlFor={group.group_name}>{group.group_name}</label>
             </React.Fragment>

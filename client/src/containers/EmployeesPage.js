@@ -5,6 +5,7 @@ import useCreateData from '../features/customHooks/useCreateData';
 import ErrorList from '../components/ErrorList';
 import EmployeeData from '../components/employee/EmployeeData';
 import CreateEmployeeForm from '../components/employee/CreateEmployeeForm';
+import { addOrRemove } from '../features/utils/arrayUtils';
 
 const EmployeesPage = () => {
 
@@ -19,18 +20,6 @@ const EmployeesPage = () => {
   const errors = [empsState.error, empState.error, groupsState.error].filter(Boolean);
 
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
-
-  // Adds selected group to groups list
-  // or removes if unselected
-  const handleOnChangeGroup = (GrID) => {
-    setCheckedGroups((prev) => {
-      if (prev.includes(GrID)) {
-        return prev.filter((group) => group !== GrID);
-      } else {
-        return [...prev, GrID];
-      }
-    });
-  };
 
   const visibleEmployees = empsState.data?.filter(employee => !employee.hide);
   const hiddenEmployees = empsState.data?.filter(employee => employee.hide);
@@ -54,7 +43,7 @@ const EmployeesPage = () => {
         createEmployee={createEmployee}
         checkedGroups={checkedGroups}
         groupsState={groupsState}
-        handleOnChangeGroup={handleOnChangeGroup}
+        handleOnChangeGroup={(id)=>setCheckedGroups((prev)=>addOrRemove(prev, id))}
         />
       
       <div>
