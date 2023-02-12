@@ -20,10 +20,12 @@ import EmployeePage from "./containers/EmployeePage"
 import ShiftsPage from "./containers/ShiftsPage"
 import NewShiftPage from "./containers/NewShiftPage"
 import ShiftPage from "./containers/ShiftPage"
+import ConstraintPage from "./containers/ConstraintPage"
 
 //components
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
+import ConstraintsPage from "./containers/ConstraintsPage";
 
 const App = ()=>{
   const dispatch = useDispatch();
@@ -43,13 +45,15 @@ const App = ()=>{
           <Route path="/register" element={<RegisterPage/>} />
 
           <Route element={<PrivateRoute />}>
-            <Route path="/dashboard"      element={<DashboardPage/>} />
-            <Route path="/groups"         element={<GroupsPage />} />
-            <Route path="/groups/:id"     element={<GroupPage />}/>
-            <Route path="/employees"      element={<EmployeesPage />} />
-            <Route path="/employees/:id"  element={<EmployeePage />} />
-            <Route path="/shifts"         element={<ShiftsPage />} />
-            <Route path="/shifts/new"     element={<NewShiftPage />} />
+            <Route path="/dashboard"       element={<DashboardPage/>} />
+            <Route path="/groups"          element={<GroupsPage />} />
+            <Route path="/groups/:id"      element={<GroupPage />}/>
+            <Route path="/employees"       element={<EmployeesPage />} />
+            <Route path="/employees/:id"   element={<EmployeePage />} />
+            <Route path="/constraints"     element={<ConstraintsPage />} />
+            <Route path="/constraints/:id" element={<ConstraintPage />} />
+            <Route path="/shifts"          element={<ShiftsPage />} />
+            <Route path="/shifts/new"      element={<NewShiftPage />} />
             <Route path="/shifts/:year/:month" element={<ShiftPage />}/>
           </Route>
           

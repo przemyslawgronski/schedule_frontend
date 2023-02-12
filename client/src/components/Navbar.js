@@ -13,6 +13,7 @@ const Navbar = () => {
             <NavLink to='/groups'> Groups </NavLink>
             <NavLink to='/employees'> Employees </NavLink>
             <NavLink to='/shifts'> Shifts </NavLink>
+            <NavLink to='/constraints'> Constraints </NavLink>
             <a href="#!" onClick={()=>dispatch(logout())}> Logout </a>
         </>
     );
