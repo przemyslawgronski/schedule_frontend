@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import useCreateData from '../features/customHooks/useCreateData';
@@ -13,8 +13,13 @@ const EmployeesPage = () => {
     url: "/api/schedule/groups",
     modify: (arr)=>arr.filter(group => !group.hide) // Hides groups that are hidden
   })
-  const [newEmployee, setNewEmployee] = useState({firstName:"", lastName:"", groups:[]});
+  const [checkedGroups, setCheckedGroups] = useState([]);
   const [empState, createEmployee] = useCreateData({url: "/api/schedule/employees", refresh: getEmployees});
+
+  const formRef = {
+    firstName: useRef(null),
+    lastName: useRef(null),
+  };
 
   const errors = [empsState.error, empState.error, groupsState.error].filter(Boolean);
 
@@ -23,12 +28,20 @@ const EmployeesPage = () => {
   // Adds selected group to groups list
   // or removes if unselected
   const handleOnChangeGroup = (GrID) => {
-    if (!newEmployee.groups.includes(GrID)){
-      setNewEmployee((prev)=>{return {...prev, groups:[...prev.groups, GrID]}})
-    } else {
-      const filteredGroups = newEmployee.groups.filter(group => group !== GrID)
-      setNewEmployee((prev)=>{return {...prev, groups:filteredGroups}})
-    }
+    setCheckedGroups((prev) => {
+      if (prev.includes(GrID)) {
+        return prev.filter((group) => group !== GrID);
+      } else {
+        return [...prev, GrID];
+      }
+    });
+    
+    // if (!newEmployee.groups.includes(GrID)){
+    //   setNewEmployee((prev)=>{return {...prev, groups:[...prev.groups, GrID]}})
+    // } else {
+    //   const filteredGroups = newEmployee.groups.filter(group => group !== GrID)
+    //   setNewEmployee((prev)=>{return {...prev, groups:filteredGroups}})
+    // }
   };
 
   const visibleEmployees = empsState.data?.filter(employee => !employee.hide);
@@ -53,28 +66,30 @@ const EmployeesPage = () => {
           e.preventDefault();
 
           createEmployee({
-            first_name: newEmployee.firstName,
-            last_name: newEmployee.lastName,
-            groups: newEmployee.groups
+            first_name: formRef.firstName.current.value,
+            last_name: formRef.lastName.current.value,
+            groups: checkedGroups
           });
         }}>
         <label>Dodaj pracownika: 
-          <input 
-            type="text" 
-            value={newEmployee.firstName}
-            onChange={(e) => setNewEmployee((prev)=>{return {...prev, firstName:e.target.value }})}
+          <input
+            ref={formRef.firstName}
+            type="text"
+            //value={newEmployee.firstName}
+            //onChange={(e) => setNewEmployee((prev)=>{return {...prev, firstName:e.target.value }})}
           />
           <input 
-            type="text" 
-            value={newEmployee.lastName}
-            onChange={(e) => setNewEmployee((prev)=>{return {...prev, lastName:e.target.value }})}
+            type="text"
+            ref={formRef.lastName}
+            // value={newEmployee.lastName}
+            // onChange={(e) => setNewEmployee((prev)=>{return {...prev, lastName:e.target.value }})}
           />
 
           <fieldset>
             {groupsState.data?.map((group) =>
                 <CheckBox
                   key={group.id}
-                  isChecked={newEmployee.groups.includes(group.id)}
+                  isChecked={checkedGroups.includes(group.id)}
                   changeFunc={() => handleOnChangeGroup(group.id)}
                   name={group.group_name}
                   value={group.id}
