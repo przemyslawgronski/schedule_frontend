@@ -9,7 +9,10 @@ import EmployeeData from '../components/employee/EmployeeData';
 const EmployeesPage = () => {
 
   const [empsState, {getData: getEmployees}] = useGetAndChange({url: "/api/schedule/employees"})
-  const [groupsState] = useGetAndChange({url: "/api/schedule/groups"})
+  const [groupsState] = useGetAndChange({
+    url: "/api/schedule/groups",
+    modify: (arr)=>arr.filter(group => !group.hide) // Hides groups that are hidden
+  })
   const [newEmployee, setNewEmployee] = useState({firstName:"", lastName:"", groups:[]});
   const [empState, createEmployee] = useCreateData({url: "/api/schedule/employees", refresh: getEmployees});
 
