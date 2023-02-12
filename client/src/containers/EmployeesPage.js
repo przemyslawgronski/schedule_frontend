@@ -1,25 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import useCreateData from '../features/customHooks/useCreateData';
 import ErrorList from '../components/ErrorList';
-import { CheckBox, TextInput } from '../components/form/Inputs';
 import EmployeeData from '../components/employee/EmployeeData';
+import CreateEmployeeForm from '../components/employee/CreateEmployeeForm';
 
 const EmployeesPage = () => {
 
   const [empsState, {getData: getEmployees}] = useGetAndChange({url: "/api/schedule/employees"})
   const [groupsState] = useGetAndChange({
     url: "/api/schedule/groups",
-    modify: (arr)=>arr.filter(group => !group.hide) // Hides groups that are hidden
+    modify: useCallback((arr)=>arr.filter(group => !group.hide),[]) // Hides groups that are hidden
   })
   const [checkedGroups, setCheckedGroups] = useState([]);
   const [empState, createEmployee] = useCreateData({url: "/api/schedule/employees", refresh: getEmployees});
-
-  const formRef = {
-    firstName: useRef(null),
-    lastName: useRef(null),
-  };
 
   const errors = [empsState.error, empState.error, groupsState.error].filter(Boolean);
 
@@ -55,34 +50,13 @@ const EmployeesPage = () => {
       
       {empState.data && <p> Utworzono: {JSON.stringify(empState.data)}</p>}
 
-      <form onSubmit={(e)=>{
-          e.preventDefault();
-
-          createEmployee({
-            first_name: formRef.firstName.current.value,
-            last_name: formRef.lastName.current.value,
-            groups: checkedGroups
-          });
-        }}>
-        <label>Dodaj pracownika: 
-          <TextInput label="Imię" ref={formRef.firstName} />
-          <TextInput label="Nazwisko" ref={formRef.lastName} />
-
-          <fieldset>
-            {groupsState.data?.map((group) =>
-                <CheckBox
-                  key={group.id}
-                  isChecked={checkedGroups.includes(group.id)}
-                  changeFunc={() => handleOnChangeGroup(group.id)}
-                  name={group.group_name}
-                  value={group.id}
-                  labelText={group.group_name}
-                  />
-            )}
-          </fieldset>
-        </label>
-        <input type="submit" />
-      </form>
+      <CreateEmployeeForm
+        createEmployee={createEmployee}
+        checkedGroups={checkedGroups}
+        groupsState={groupsState}
+        handleOnChangeGroup={handleOnChangeGroup}
+        />
+      
       <div>
         <p>Ukryci pracownicy:</p>
         <ul>
