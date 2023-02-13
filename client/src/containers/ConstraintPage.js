@@ -1,8 +1,49 @@
 import React from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import useGetAndChange from '../features/customHooks/useGetAndChange'
+import useRemoveItem from '../features/customHooks/useRemoveItem'
+import ErrorList from '../components/ErrorList'
+import ToggleComponents from '../components/ToggleComponents'
+import ConstraintData from '../components/constraints/ConstraintData'
 
 const ConstraintPage = () => {
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [ constraint, {setData: setConstraint, getData: getConstraint, changeData: changeConstraint}]
+  = useGetAndChange({url:`/api/schedule/constraints/${id}`});
+
+  const [ avaibleConstraint] = useGetAndChange({url:`/api/schedule/avaible-constraints`});
+
+  const [ group, {setData: setGroup, getData: getGroup, changeData: changeGroup}
+  ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
+
+  const [removeError, remove] = useRemoveItem({refreshList: ()=>navigate('/constraints')});
+
+  const errors = [removeError, group.error, constraint.error, avaibleConstraint.error].filter(Boolean);
+
+  if (errors.length) {
+      return <ErrorList errors={errors.map(({ message }) => message)} />;
+  }
+
   return (
-    <div>ConstraintPage</div>
+      <div>
+          <p>Grupa:</p>
+
+          <ToggleComponents
+              Component1={ConstraintData}
+              component1Props={{
+                constraint: constraint.data,
+                avaibleConstraint: avaibleConstraint.data,
+            }}
+              Component2={ConstraintData}
+              component2Props={{
+                  constraint: constraint.data,
+                  avaibleConstraint: avaibleConstraint.data,
+              }}
+          />
+      </div>
   )
 }
 
