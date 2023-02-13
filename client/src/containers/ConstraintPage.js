@@ -5,6 +5,7 @@ import useRemoveItem from '../features/customHooks/useRemoveItem'
 import ErrorList from '../components/ErrorList'
 import ToggleComponents from '../components/ToggleComponents'
 import ConstraintData from '../components/constraints/ConstraintData'
+import ConstraintForm from '../components/constraints/ConstraintForm'
 
 const ConstraintPage = () => {
 
@@ -16,12 +17,9 @@ const ConstraintPage = () => {
 
   const [ avaibleConstraint] = useGetAndChange({url:`/api/schedule/avaible-constraints`});
 
-  const [ group, {setData: setGroup, getData: getGroup, changeData: changeGroup}
-  ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
-
   const [removeError, remove] = useRemoveItem({refreshList: ()=>navigate('/constraints')});
 
-  const errors = [removeError, group.error, constraint.error, avaibleConstraint.error].filter(Boolean);
+  const errors = [removeError, constraint.error, avaibleConstraint.error].filter(Boolean);
 
   if (errors.length) {
       return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -32,10 +30,11 @@ const ConstraintPage = () => {
           <p>Grupa:</p>
 
           <ToggleComponents
-              Component1={ConstraintData}
+              Component1={ConstraintForm}
               component1Props={{
                 constraint: constraint.data,
-                avaibleConstraint: avaibleConstraint.data,
+                changeConstraint,
+                remove
             }}
               Component2={ConstraintData}
               component2Props={{
