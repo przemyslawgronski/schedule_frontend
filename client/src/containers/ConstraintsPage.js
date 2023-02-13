@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useGetAndChange from '../features/customHooks/useGetAndChange'
 import ErrorList from '../components/ErrorList'
@@ -11,18 +11,13 @@ const ConstraintsPage = () => {
   const [constraints, {getData: getConstraints}] = useGetAndChange({url: "/api/schedule/constraints"});
   const [createdConstraint, create] = useCreateData({url:"/api/schedule/constraints", refreshList:getConstraints});
   const [avaibleConstraints] = useGetAndChange({url: "/api/schedule/avaible-constraints"});
-  const [groups, {getData: getGroups}] = useGetAndChange({
-    url: "/api/schedule/groups",
-    modify: useCallback((arr)=>arr.filter(group => !group.hide),[]) // Hides groups that are hidden
-  });
-
   const [choosedConstraints, setChoosedConstraints] = useState([]);
 
   const formRef = {
     name: useRef(),
   }
 
-  const errors = [constraints.error, createdConstraint.error, avaibleConstraints.error, groups.error].filter(Boolean);
+  const errors = [constraints.error, createdConstraint.error, avaibleConstraints.error].filter(Boolean);
 
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
@@ -32,31 +27,20 @@ const ConstraintsPage = () => {
       <ul>
         {constraints.data?.map(constraint =>(
           <li key={constraint.id}>
-            <span>{constraint.constraint_name} </span>
+            <span>{constraint.representation} </span>
             <Link to={`/constraints/${constraint.id}`}>Więcej</Link>
           </li>
         ))}
       </ul>
 
       {createdConstraint.data && <p> Utworzono: {JSON.stringify(createdConstraint.data)}</p>}
-      
-      <p>Groups:</p>
-      <ul>
-        {groups.data?.map(group =>
-          <li key={group.id}>
-            <span>{group.group_name} </span>
-            <Link to={`/groups/${group.id}`}>Więcej</Link>
-          </li>
-        )}
-      </ul>
 
-      <p>Avaible Constraints:</p>
+      <p>Utwórz zbiór zasad</p>
       <ul>
         {avaibleConstraints.data?.map(constraint =>
           <li key={constraint.id}>
             <p>{constraint.name} </p>
             <p>{constraint.description}</p>
-            <Link to={`/constraints/${constraint.id}`}>Więcej</Link>
           </li>
         )}
       </ul>
@@ -73,7 +57,6 @@ const ConstraintsPage = () => {
         <label>
           Nazwa:
           <input ref={formRef.name} type="text" name="name" />
-          {/* (id)=>setCheckedGroups((prev)=>addOrRemove(prev, id)) */}
           <fieldset> Dodaj zasadę:
           {avaibleConstraints.data?.map((constraint) =>
               <CheckBox
