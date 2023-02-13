@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import DisplayObject from "../DisplayObject";
 
 const EmployeeData = ({employee, groups, getEmp, spanTag, removeInfo}) => {
 
@@ -21,11 +22,7 @@ const EmployeeData = ({employee, groups, getEmp, spanTag, removeInfo}) => {
     }
 
   return (
-    <div>
-      {Object.keys(empData).map((key)=>(
-        spanTag ? <span key={key}>&nbsp;{empData[key]}&nbsp;</span> : <p key={key}>{key} : {empData[key]}</p>
-      ))}
-    </div>
+    <DisplayObject object={empData} spanTag={spanTag}/>
   )
 }
 

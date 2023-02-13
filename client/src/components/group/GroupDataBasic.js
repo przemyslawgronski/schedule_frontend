@@ -1,4 +1,5 @@
 import React from 'react'
+import DisplayObject from '../DisplayObject'
 
 const GroupDataBasic = ({group, spanTag}) => {
 
@@ -9,11 +10,7 @@ const GroupDataBasic = ({group, spanTag}) => {
     }
 
   return (
-    <>
-        {Object.keys(data).map((key)=>(
-            spanTag ? <span key={key}>&nbsp;{data[key]}&nbsp;</span> : <p key={key}>{key}: {data[key]}</p>
-        ))}
-    </>
+    <DisplayObject object={data} spanTag={spanTag}/>
   )
 }
 
