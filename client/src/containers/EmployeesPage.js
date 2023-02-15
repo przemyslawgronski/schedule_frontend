@@ -4,8 +4,8 @@ import useGetAndChange from '../features/customHooks/useGetAndChange';
 import useCreateData from '../features/customHooks/useCreateData';
 import ErrorList from '../components/ErrorList';
 import EmployeeData from '../components/employee/EmployeeData';
-import CreateEmployeeForm from '../components/employee/CreateEmployeeForm';
 import { addOrRemove } from '../features/utils/arrayUtils';
+import EmployeeForm from '../components/employee/EmployeeForm';
 
 const EmployeesPage = () => {
 
@@ -14,7 +14,7 @@ const EmployeesPage = () => {
     url: "/api/schedule/groups",
     modify: useCallback((arr)=>arr.filter(group => !group.hide),[]) // Hides groups that are hidden
   })
-  const [checkedGroups, setCheckedGroups] = useState([]);
+  const [checkedGroupsIDs, setCheckedGroupsIDs] = useState([]);
   const [empState, createEmployee] = useCreateData({url: "/api/schedule/employees", refresh: getEmployees});
 
   const errors = [empsState.error, empState.error, groupsState.error].filter(Boolean);
@@ -39,11 +39,11 @@ const EmployeesPage = () => {
       
       {empState.data && <p> Utworzono: {JSON.stringify(empState.data)}</p>}
 
-      <CreateEmployeeForm
-        createEmployee={createEmployee}
-        checkedGroups={checkedGroups}
-        groupsState={groupsState}
-        handleOnChangeGroup={(id)=>setCheckedGroups((prev)=>addOrRemove(prev, id))}
+      <EmployeeForm
+        allgroups={groupsState.data}
+        submitFunc={createEmployee}
+        checkedGroups={checkedGroupsIDs}
+        onChangeGroup={(id)=>setCheckedGroupsIDs((prev)=>addOrRemove(prev, id))}
         />
       
       <div>

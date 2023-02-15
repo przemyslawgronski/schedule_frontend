@@ -10,7 +10,7 @@ const ToggleComponents = ({Component1, component1Props, Component2, component2Pr
                 <Component1 {...component1Props} setToggle={setToggle}/>
                 : <Component2 {...component2Props} />}
         
-            <button onClick={() => setToggle(p=>!p)}>Zmień</button> 
+            <button onClick={() => setToggle(p=>!p)}>{toggle ? 'Anuluj' : 'Zmień'}</button> 
         </div>
     )
 }
