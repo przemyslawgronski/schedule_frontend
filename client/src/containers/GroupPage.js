@@ -5,7 +5,6 @@ import GroupForm from '../components/group/GroupForm';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ToggleComponents from '../components/ToggleComponents';
 import ErrorList from '../components/ErrorList';
-import useBatchChange from '../features/customHooks/useBatchChange';
 import useRemoveItem from '../features/customHooks/useRemoveItem';
 
 
@@ -22,19 +21,10 @@ const GroupPage = () => {
         url:`/api/schedule/groups/${id}/employees`,
         modify: useCallback((arr=>arr.filter(gr=>!gr.hide)),[]) // Filter out hidden employees
     });
-    
-    const [batchError, batchChange] = useBatchChange({url: (emp)=>`/api/schedule/employees/${emp.id}`})
-    
-    const [ allEmployees, {setData: setAllEmployees, getData: getAllEmployees}
-    ] = useGetAndChange({
-        url: '/api/schedule/employees',
-        modify: useCallback((arr=>arr.filter(gr=>!gr.hide)),[]) // Filter out hidden employees
-    });
 
     const [removeError, remove] = useRemoveItem({refreshList: ()=>navigate('/groups')});
 
-
-    const errors = [removeError, group.error, groupEmployees.error, batchError, allEmployees.error].filter(Boolean);
+    const errors = [removeError, group.error, groupEmployees.error].filter(Boolean);
 
     if (errors.length) {
         return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -50,11 +40,7 @@ const GroupPage = () => {
                         group: group.data,
                         setGroup,
                         changeGroup,
-                        batchChange,
                         setGroupEmployees,
-                        allEmployees,
-                        setAllEmployees,
-                        getAllEmployees,
                         remove
                     }}
                     Component2={GroupDataExtended}
