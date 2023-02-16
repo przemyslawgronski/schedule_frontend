@@ -13,10 +13,10 @@ const GroupPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [ group, {setData: setGroup, getData: getGroup, changeData: changeGroup}
+    const [ group, {getData: getGroup, changeData: changeGroup}
     ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
     
-    const [ groupEmployees, {setData: setGroupEmployees, getData: getGroupEmployees}
+    const [ groupEmployees, {getData: getGroupEmployees}
     ] = useGetAndChange({
         url:`/api/schedule/groups/${id}/employees`,
         modify: useCallback((arr=>arr.filter(gr=>!gr.hide)),[]) // Filter out hidden employees
@@ -38,9 +38,7 @@ const GroupPage = () => {
                     Component1={GroupForm}
                     component1Props={{
                         group: group.data,
-                        setGroup,
-                        changeGroup,
-                        setGroupEmployees,
+                        submitFunc: changeGroup,
                         remove
                     }}
                     Component2={GroupDataExtended}

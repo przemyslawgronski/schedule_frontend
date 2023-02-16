@@ -4,12 +4,12 @@ import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
 import GroupDataBasic from '../components/group/GroupDataBasic';
-import CreateGroupForm from '../components/group/CreateGroupForm';
+import GroupForm from '../components/group/GroupForm';
 
 const GroupsPage = () => {
 
   const [groups, {getData: getGroups}] = useGetAndChange({url: "/api/schedule/groups"});
-  const [createdGroup, create] = useCreateData({url:"/api/schedule/groups", refreshList:getGroups});
+  const [createdGroup, create] = useCreateData({url:"/api/schedule/groups", refresh:getGroups});
 
   const errors = [groups.error, createdGroup.error].filter(Boolean);
 
@@ -32,7 +32,7 @@ const GroupsPage = () => {
 
       {createdGroup.data && <p> Utworzono: {JSON.stringify(createdGroup.data)}</p>}
 
-      <CreateGroupForm create={create} refresh={getGroups} />
+      <GroupForm submitFunc={create}/>
 
       <p>Ukryte grupy:</p>
       <ul>

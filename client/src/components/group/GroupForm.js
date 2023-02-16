@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import { ShiftsNum, TextInput, CheckBoxRef } from "../form/Inputs";
 
-const GroupForm = ({group, changeGroup, setToggle, remove}) => {
+const GroupForm = ({submitFunc, setToggle, group, remove}) => {
 
     const formRef = {
         group_name: useRef(),
         num_of_shifts: useRef(),
-        hide: useRef()
+        hide: useRef(false)
     }
 
   return (
@@ -14,29 +14,41 @@ const GroupForm = ({group, changeGroup, setToggle, remove}) => {
     <form onSubmit={(e)=>{
         e.preventDefault();
         
-        // Update group
-        changeGroup({
+        submitFunc({
             group_name: formRef.group_name.current.value,
             num_of_shifts: formRef.num_of_shifts.current.value,
             hide: formRef.hide.current.checked,
         });
 
-        //change view from 'form' to 'data viewer'
         setToggle && setToggle((prev)=>!prev);
         }}>
 
-        <TextInput ref={formRef.group_name} label="Nazwa:" defaultValue={group.group_name}/>
-        <ShiftsNum ref={formRef.num_of_shifts} defaultValue={group.num_of_shifts} />
-        <CheckBoxRef ref={formRef.hide} labelText="Ukryj:" defaultValue={group.hide} />
+        <fieldset>
+            <legend>{ group ? 'Zmień dane:' : 'Dodaj grupę:' }</legend>
+            <TextInput
+                ref={formRef.group_name}
+                label="Nazwa:"
+                defaultValue={group ? group.group_name : null}
+                />
+            <ShiftsNum
+                ref={formRef.num_of_shifts}
+                defaultValue={group ? group.num_of_shifts : null}
+                />
+            { group && <CheckBoxRef
+                ref={formRef.hide}
+                labelText="Ukryj:"
+                defaultValue={group.hide}
+                /> }
 
-        <button>Zapisz</button>
+            <button>Zapisz</button>
+        </fieldset>
     </form>
 
-    <button onClick={()=>remove({
-        name:group.group_name,
+    { remove && group && <button onClick={()=>remove({
+        name: group.group_name,
         url: `/api/schedule/groups/${group.id}`,
         msg: "Ostrożnie! Usunięcie grupy spowoduje usunięcie wszystkich zwiazanych z nią zmian. Zamiast tego można ją ukryć."
-        })}>Usuń</button>
+        })}>Usuń</button> }
 
     </div>
   )
