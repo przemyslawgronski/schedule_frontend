@@ -104,7 +104,7 @@ export const ShiftsNum = React.forwardRef(({defaultValue}, ref) => {
         id={id}
         min="0"
         max="100"
-        defaultValue={defaultValue || undefined}
+        defaultValue={defaultValue == null ? undefined : defaultValue}
         required
       />
     </>
