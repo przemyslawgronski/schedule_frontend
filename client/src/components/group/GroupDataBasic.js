@@ -7,6 +7,7 @@ const GroupDataBasic = ({group, spanTag}) => {
         'Nazwa': group?.group_name,
         'Liczba zmian': group?.num_of_shifts,
         'Ostatnia zmiana': group?.updated,
+        'Ukryty': group?.hide ? 'tak' : 'nie'
     }
 
   return (
