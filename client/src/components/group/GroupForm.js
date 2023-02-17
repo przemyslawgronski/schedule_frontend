@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { ShiftsNum, TextInput, CheckBoxRef } from "../form/Inputs";
+import Form from "../form/Form";
 
 const GroupForm = ({submitFunc, setToggle, group, remove}) => {
 
@@ -9,40 +10,33 @@ const GroupForm = ({submitFunc, setToggle, group, remove}) => {
         hide: useRef(false)
     }
 
-  return (
-    <div>
-    <form onSubmit={(e)=>{
-        e.preventDefault();
-        
+    const submitFuncReady = ()=>{
         submitFunc({
             group_name: formRef.group_name.current.value,
             num_of_shifts: formRef.num_of_shifts.current.value,
             hide: formRef.hide.current.checked,
-        });
-
+        })
         setToggle && setToggle((prev)=>!prev);
-        }}>
+    };
 
-        <fieldset>
-            <legend>{ group ? 'Zmień dane:' : 'Dodaj grupę:' }</legend>
-            <TextInput
-                ref={formRef.group_name}
-                label="Nazwa:"
-                defaultValue={group ? group.group_name : null}
-                />
-            <ShiftsNum
-                ref={formRef.num_of_shifts}
-                defaultValue={group ? group.num_of_shifts : null}
-                />
-            { group && <CheckBoxRef
-                ref={formRef.hide}
-                labelText="Ukryj:"
-                defaultValue={group.hide}
-                /> }
-
-            <button>Zapisz</button>
-        </fieldset>
-    </form>
+  return (
+    <div>
+    <Form submitFunc={submitFuncReady} legend={group ? 'Zmień dane:' : 'Dodaj grupę:'}>
+        <TextInput
+            ref={formRef.group_name}
+            label="Nazwa:"
+            defaultValue={group ? group.group_name : null}
+            />
+        <ShiftsNum
+            ref={formRef.num_of_shifts}
+            defaultValue={group ? group.num_of_shifts : null}
+            />
+        { group && <CheckBoxRef
+            ref={formRef.hide}
+            labelText="Ukryj:"
+            defaultValue={group.hide}
+            /> }
+    </Form>
 
     { remove && group && <button onClick={()=>remove({
         name: group.group_name,
