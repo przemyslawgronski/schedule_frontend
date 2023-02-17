@@ -12,7 +12,7 @@ const ConstraintPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [ constraint, {setData: setConstraint, getData: getConstraint, changeData: changeConstraint}]
+  const [ constraint, {getData: getConstraint, changeData: changeConstraint}]
   = useGetAndChange({url:`/api/schedule/constraints/${id}`});
 
   const [ avaibleConstraint] = useGetAndChange({url:`/api/schedule/avaible-constraints`});

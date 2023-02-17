@@ -1,30 +1,26 @@
 import React, { useRef } from "react";
 import { TextInput } from "../form/Inputs";
+import Form from "../form/Form";
 
 const ConstraintForm = ({constraint, changeConstraint, setToggle, remove}) => {
 
-    const formRef = {
-        representation: useRef()
-    }
+    const representation = useRef()
 
-  return (
-    <div>
-    <form onSubmit={(e)=>{
-        e.preventDefault();
-        
+    const submitFuncReady = ()=>{
         changeConstraint({
-            representation: formRef.representation.current.value,
+            representation: representation.current.value,
             avaible_constraints: constraint.avaible_constraints
         });
 
         //change view from 'form' to 'data viewer'
         setToggle && setToggle((prev)=>!prev);
-        }}>
+    };
 
-        <TextInput ref={formRef.representation} label="Nazwa:" defaultValue={constraint.representation}/>
-
-        <button>Zapisz</button>
-    </form>
+  return (
+    <div>
+    <Form submitFunc={submitFuncReady} legend={constraint ? 'Zmień dane:' : 'Dodaj ograniczenie:'}>
+        <TextInput ref={representation} label="Nazwa:" defaultValue={constraint.representation}/>
+    </Form>
 
     <button onClick={()=>remove({
         name: constraint.representation,

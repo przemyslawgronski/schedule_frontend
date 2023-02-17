@@ -9,7 +9,7 @@ import { addOrRemove } from '../features/utils/arrayUtils'
 const ConstraintsPage = () => {
 
   const [constraints, {getData: getConstraints}] = useGetAndChange({url: "/api/schedule/constraints"});
-  const [createdConstraint, create] = useCreateData({url:"/api/schedule/constraints", refreshList:getConstraints});
+  const [createdConstraint, create] = useCreateData({url:"/api/schedule/constraints", refresh:getConstraints});
   const [avaibleConstraints] = useGetAndChange({url: "/api/schedule/avaible-constraints"});
   const [choosedConstraints, setChoosedConstraints] = useState([]);
 
@@ -52,7 +52,6 @@ const ConstraintsPage = () => {
           "representation": formRef.name.current.value,
           "avaible_constraints": choosedConstraints
         })
-        getConstraints();
         }}>
         <label>
           Nazwa:
