@@ -13,11 +13,9 @@ const GroupPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [ group, {getData: getGroup, changeData: changeGroup}
-    ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
+    const [ group, {changeData: changeGroup} ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
     
-    const [ groupEmployees, {getData: getGroupEmployees}
-    ] = useGetAndChange({
+    const [groupEmployees] = useGetAndChange({
         url:`/api/schedule/groups/${id}/employees`,
         modify: useCallback((arr=>arr.filter(gr=>!gr.hide)),[]) // Filter out hidden employees
     });
@@ -44,9 +42,7 @@ const GroupPage = () => {
                     Component2={GroupDataExtended}
                     component2Props={{
                         groupEmployees: groupEmployees.data,
-                        getGroupEmployees,
                         group: group.data,
-                        getGroup
                     }}
                 />
             </div>

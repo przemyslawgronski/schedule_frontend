@@ -1,13 +1,7 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import GroupDataBasic from './GroupDataBasic'
 
-const GroupDataExtended = ({group, groupEmployees, getGroupEmployees, getGroup}) => {
-
-  useEffect(()=>{
-    getGroup?.();
-    getGroupEmployees?.();
-  },[getGroup, getGroupEmployees])
+const GroupDataExtended = ({group, groupEmployees}) => {
 
   return (
     <div>
