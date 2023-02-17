@@ -17,7 +17,7 @@ const EmployeePage = () => {
         url:"/api/schedule/groups",
         modify: useCallback((arr)=>arr.filter(gr=>!gr.hide),[]) // filter out hidden groups
     });
-    const [employeeState, {getData: getEmp, changeData:changeEmp}] = useGetAndChange({url:`/api/schedule/employees/${id}`});
+    const [employeeState, {changeData:changeEmp}] = useGetAndChange({url:`/api/schedule/employees/${id}`});
     const [removeError, remove] = useRemoveItem({refreshList: () => navigate('/employees')});
 
     // Keep track of checked groups
@@ -51,7 +51,6 @@ const EmployeePage = () => {
                     component2Props={{
                         employee: employeeState.data,
                         groups: groupsState.data,
-                        getEmp
                     }}
                 />
         </div>

@@ -1,11 +1,6 @@
-import { useEffect } from "react";
 import DisplayObject from "../DisplayObject";
 
-const EmployeeData = ({employee, groups, getEmp, spanTag, removeInfo}) => {
-
-  useEffect(()=>{
-    getEmp?.(); // Refresh data
-  },[getEmp])
+const EmployeeData = ({employee, groups, spanTag, removeInfo}) => {
 
   const empData = {
     'Imię:': employee?.first_name,
