@@ -43,7 +43,7 @@ const GroupForm = ({submitFunc, setToggle, group, remove, constraints}) => {
             ref={formRef.constraints}
             defaultValue={group ? group.constraints : null}
             >
-            <option value={null}>Brak ograniczeń</option>
+            <option key='-1' value=''>Brak ograniczeń</option>
             { constraints && constraints.map((constraint)=>(
                 <option key={constraint.id} value={constraint.id}>{constraint.representation}</option>
             ))}
