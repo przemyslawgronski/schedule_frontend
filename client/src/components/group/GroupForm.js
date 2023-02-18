@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ShiftsNum, TextInput, CheckBoxRef } from "../form/Inputs";
+import { ShiftsNum, TextInput, CheckBoxRef, DropDownGroupRef } from "../form/Inputs";
 import Form from "../form/Form";
 
 const GroupForm = ({submitFunc, setToggle, group, remove, constraints}) => {
@@ -39,15 +39,13 @@ const GroupForm = ({submitFunc, setToggle, group, remove, constraints}) => {
             labelText="Ukryj:"
             defaultValue={group.hide}
             /> }
-        <select
+
+        { constraints && <DropDownGroupRef
             ref={formRef.constraints}
-            defaultValue={group ? group.constraints : null}
-            >
-            <option key='-1' value=''>Brak ograniczeń</option>
-            { constraints && constraints.map((constraint)=>(
-                <option key={constraint.id} value={constraint.id}>{constraint.representation}</option>
-            ))}
-        </select>
+            group={group}
+            constraints={constraints}
+            label='Wybierz ograniczenia:'
+            /> }
     </Form>
 
     { remove && group && <button onClick={()=>remove({

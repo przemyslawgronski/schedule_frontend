@@ -110,3 +110,70 @@ export const ShiftsNum = React.forwardRef(({defaultValue}, ref) => {
     </>
   )
 })
+
+export const DropDownRef = React.forwardRef(({label, name, defaultVal, options, valueKey, objKey, objText, onChangeFunc}, ref) => {
+
+  const id = useId()+'DropDownRef';
+
+  const defaultValue = () => {
+    if (defaultVal === '') return ''; // JSON.stringify('') === ""
+    if (defaultVal) return JSON.stringify(defaultVal);
+    if (options) return JSON.stringify(options[0]);
+    return '';
+  };
+
+  return (
+    <>
+      <label htmlFor={id}>{label}</label>
+      <select
+        ref={ref}
+        id={id}
+        name={name}
+        onChange={onChangeFunc}
+        defaultValue={defaultValue()}
+      >
+          {options?.map(option =>(
+              <option
+                key={objKey ? option[objKey] : option}
+                value={valueKey ? (option[valueKey] === '' ? '' : JSON.stringify(option[valueKey])) : JSON.stringify(option)}>
+                  {objText ?
+                    typeof objText === 'function' ? objText(option) : option[objText]
+                  : option}
+              </option>
+          ))}
+      </select>
+    </>
+  )
+})
+
+// Render options to choose. Example:
+      //<DropDownRef
+            // ref={formRef.constraints}
+            // label="Ograniczenia:"
+            // options={[{id: '', representation: "Brak ograniczeń"}, ...constraints]}
+            // objKey="id"
+            // valueKey="id"
+            // objText="representation"
+            // defaultVal={group ? group.constraints : ''}
+            // />
+
+export const DropDownGroupRef = React.forwardRef(({group, constraints, label},ref) => {
+
+  const id = useId()+'DropDownGroupRef';
+
+  return (
+          <>
+          <label htmlFor={id}>{label}</label>
+          <select
+            ref={ref}
+            id={id}
+            defaultValue={group ? group.constraints : ''}
+            >
+            <option key='-1' value=''>Brak ograniczeń</option>
+            { constraints && constraints.map((constraint)=>(
+                <option key={constraint.id} value={constraint.id}>{constraint.representation}</option>
+            ))}
+        </select>
+        </>
+        )
+})
