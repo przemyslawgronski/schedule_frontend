@@ -1,25 +1,40 @@
 import React, { useRef } from "react";
-import { TextInput } from "../form/Inputs";
+import { TextInput, CheckBox } from "../form/Inputs";
 import Form from "../form/Form";
 
-const ConstraintForm = ({constraint, changeConstraint, setToggle, remove}) => {
+const ConstraintForm = ({avaibleConstraints, choosedConstraints, submitFunc, constraint, onChangeConstraint, setToggle, remove}) => {
 
-    const representation = useRef()
+    const representation = useRef();
 
     const submitFuncReady = ()=>{
-        changeConstraint({
+        submitFunc({
             representation: representation.current.value,
-            avaible_constraints: constraint.avaible_constraints
+            avaible_constraints: choosedConstraints
         });
 
-        //change view from 'form' to 'data viewer'
         setToggle && setToggle((prev)=>!prev);
     };
 
   return (
     <div>
     <Form submitFunc={submitFuncReady} legend={constraint ? 'Zmień dane:' : 'Dodaj ograniczenie:'}>
-        <TextInput ref={representation} label="Nazwa:" defaultValue={constraint.representation}/>
+        <TextInput ref={representation}
+            label="Nazwa:"
+            defaultValue={constraint ? constraint.representation : null}
+            />
+        <fieldset>
+            <legend>Dodaj zasadę:</legend>
+            {avaibleConstraints?.map((constraint) =>
+              <CheckBox
+                key={constraint.id}
+                isChecked={choosedConstraints.includes(constraint.id)}
+                changeFunc={()=>onChangeConstraint(constraint.id)}
+                name={constraint.name}
+                value={constraint.id}
+                labelText={constraint.name}
+                />
+          )}
+        </fieldset>
     </Form>
 
     <button onClick={()=>remove({

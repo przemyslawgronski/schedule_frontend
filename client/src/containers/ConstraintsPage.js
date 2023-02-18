@@ -1,21 +1,19 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import useGetAndChange from '../features/customHooks/useGetAndChange'
 import ErrorList from '../components/ErrorList'
 import useCreateData from '../features/customHooks/useCreateData'
-import { CheckBox } from '../components/form/Inputs'
 import { addOrRemove } from '../features/utils/arrayUtils'
+import ConstraintForm from '../components/constraints/ConstraintForm'
 
 const ConstraintsPage = () => {
 
   const [constraints, {getData: getConstraints}] = useGetAndChange({url: "/api/schedule/constraints"});
   const [createdConstraint, create] = useCreateData({url:"/api/schedule/constraints", refresh:getConstraints});
   const [avaibleConstraints] = useGetAndChange({url: "/api/schedule/avaible-constraints"});
+  
+  // Keep track of which constraints are choosed
   const [choosedConstraints, setChoosedConstraints] = useState([]);
-
-  const formRef = {
-    name: useRef(),
-  }
 
   const errors = [constraints.error, createdConstraint.error, avaibleConstraints.error].filter(Boolean);
 
@@ -45,32 +43,12 @@ const ConstraintsPage = () => {
         )}
       </ul>
 
-      <p>Create constrints set</p>
-      <form onSubmit={(e)=>{
-        e.preventDefault();
-        create({
-          "representation": formRef.name.current.value,
-          "avaible_constraints": choosedConstraints
-        })
-        }}>
-        <label>
-          Nazwa:
-          <input ref={formRef.name} type="text" name="name" />
-          <fieldset> Dodaj zasadę:
-          {avaibleConstraints.data?.map((constraint) =>
-              <CheckBox
-                key={constraint.id}
-                isChecked={choosedConstraints.includes(constraint.id)}
-                changeFunc={()=>setChoosedConstraints((prev)=>addOrRemove(prev, constraint.id))}
-                name={constraint.name}
-                value={constraint.id}
-                labelText={constraint.name}
-                />
-          )}
-        </fieldset>
-        </label>
-        <button>Utwórz</button>
-      </form>
+      <ConstraintForm
+        avaibleConstraints={avaibleConstraints.data}
+        submitFunc={create}
+        choosedConstraints={choosedConstraints}
+        onChangeConstraint={(constraintID)=>setChoosedConstraints((prev)=>addOrRemove(prev, constraintID))}
+      />
   </div>
   )
 }
