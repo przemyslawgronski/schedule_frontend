@@ -20,9 +20,11 @@ const GroupPage = () => {
         modify: useCallback((arr=>arr.filter(gr=>!gr.hide)),[]) // Filter out hidden employees
     });
 
+    const [constraints] = useGetAndChange({url:"/api/schedule/constraints"});
+
     const [removeError, remove] = useRemoveItem({refreshList: ()=>navigate('/groups')});
 
-    const errors = [removeError, group.error, groupEmployees.error].filter(Boolean);
+    const errors = [removeError, group.error, groupEmployees.error, constraints.error].filter(Boolean);
 
     if (errors.length) {
         return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -37,12 +39,14 @@ const GroupPage = () => {
                     component1Props={{
                         group: group.data,
                         submitFunc: changeGroup,
+                        constraints: constraints.data,
                         remove
                     }}
                     Component2={GroupDataExtended}
                     component2Props={{
                         groupEmployees: groupEmployees.data,
                         group: group.data,
+                        constraints: constraints.data
                     }}
                 />
             </div>

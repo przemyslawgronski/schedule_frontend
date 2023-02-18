@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import GroupDataBasic from './GroupDataBasic'
 
-const GroupDataExtended = ({group, groupEmployees}) => {
+const GroupDataExtended = ({group, groupEmployees, constraints}) => {
 
   return (
     <div>
-        <GroupDataBasic group={group}/>
+        <GroupDataBasic group={group} constraints={constraints}/>
         <p>Pracownicy przypisanin do grupy:</p>
         <ul>
             {groupEmployees?.map((employee) =>(

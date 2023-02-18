@@ -10,8 +10,9 @@ const GroupsPage = () => {
 
   const [groups, {getData: getGroups}] = useGetAndChange({url: "/api/schedule/groups"});
   const [createdGroup, create] = useCreateData({url:"/api/schedule/groups", refresh:getGroups});
+  const [constraints] = useGetAndChange({url:"/api/schedule/constraints"});
 
-  const errors = [groups.error, createdGroup.error].filter(Boolean);
+  const errors = [groups.error, createdGroup.error, constraints.error].filter(Boolean);
 
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
@@ -20,11 +21,11 @@ const GroupsPage = () => {
 
   return (
   <div>
-    <p>Group Page</p>
+    <p>Groups Page</p>
       <ul>
         {visibleGroups?.map(group =>(
           <li key={group.id}>
-            <GroupDataBasic group={group} spanTag={true}/>
+            <GroupDataBasic group={group} constraints={constraints.data} spanTag={true}/>
             <Link to={`/groups/${group.id}`}>Więcej</Link>
           </li>
         ))}
@@ -32,7 +33,7 @@ const GroupsPage = () => {
 
       {createdGroup.data && <p> Utworzono: {JSON.stringify(createdGroup.data)}</p>}
 
-      <GroupForm submitFunc={create}/>
+      <GroupForm submitFunc={create} constraints={constraints.data}/>
 
       <p>Ukryte grupy:</p>
       <ul>

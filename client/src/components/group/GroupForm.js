@@ -2,12 +2,13 @@ import React, { useRef } from "react";
 import { ShiftsNum, TextInput, CheckBoxRef } from "../form/Inputs";
 import Form from "../form/Form";
 
-const GroupForm = ({submitFunc, setToggle, group, remove}) => {
+const GroupForm = ({submitFunc, setToggle, group, remove, constraints}) => {
 
     const formRef = {
         group_name: useRef(),
         num_of_shifts: useRef(),
-        hide: useRef(false)
+        hide: useRef(false),
+        constraints: useRef(),
     }
 
     const submitFuncReady = ()=>{
@@ -15,7 +16,9 @@ const GroupForm = ({submitFunc, setToggle, group, remove}) => {
             group_name: formRef.group_name.current.value,
             num_of_shifts: formRef.num_of_shifts.current.value,
             hide: formRef.hide.current.checked,
+            constraints: formRef.constraints.current.value,
         })
+
         setToggle && setToggle((prev)=>!prev);
     };
 
@@ -36,6 +39,15 @@ const GroupForm = ({submitFunc, setToggle, group, remove}) => {
             labelText="Ukryj:"
             defaultValue={group.hide}
             /> }
+        <select
+            ref={formRef.constraints}
+            defaultValue={group ? group.constraints : null}
+            >
+            <option value={null}>Brak ograniczeń</option>
+            { constraints && constraints.map((constraint)=>(
+                <option key={constraint.id} value={constraint.id}>{constraint.representation}</option>
+            ))}
+        </select>
     </Form>
 
     { remove && group && <button onClick={()=>remove({
