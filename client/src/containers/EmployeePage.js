@@ -1,24 +1,21 @@
 import React, { useCallback, useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import EmployeeData from '../components/employee/EmployeeData'
 import EmployeeForm from '../components/employee/EmployeeForm'
 import useGetAndChange from '../features/customHooks/useGetAndChange'
 import ToggleComponents from '../components/ToggleComponents'
 import ErrorList from '../components/ErrorList'
-import useRemoveItem from '../features/customHooks/useRemoveItem'
 import { addOrRemove } from '../features/utils/arrayUtils'
 
 const EmployeePage = () => {
 
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const [groupsState] = useGetAndChange({
         url:"/api/schedule/groups",
         modify: useCallback((arr)=>arr.filter(gr=>!gr.hide),[]) // filter out hidden groups
     });
     const [employeeState, {changeData:changeEmp}] = useGetAndChange({url:`/api/schedule/employees/${id}`});
-    const [removeError, remove] = useRemoveItem({refreshList: () => navigate('/employees')});
 
     // Keep track of checked groups
     const [empsGroups, setEmpsGroups] = useState([]);
@@ -28,7 +25,7 @@ const EmployeePage = () => {
         if (employeeState.data) setEmpsGroups([...employeeState.data.groups]);
     }, [employeeState.data]);
 
-    const errors = [removeError, groupsState.error, employeeState.error].filter(Boolean);
+    const errors = [groupsState.error, employeeState.error].filter(Boolean);
 
     if (errors.length) {
         return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -45,7 +42,6 @@ const EmployeePage = () => {
                         checkedGroups: empsGroups,
                         onChangeGroup: addRemoveGroup,
                         employee: employeeState.data,
-                        remove: remove
                     }}
                     Component2={EmployeeData}
                     component2Props={{

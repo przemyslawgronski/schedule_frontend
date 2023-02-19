@@ -1,9 +1,10 @@
 import React, {useRef} from 'react';
 import { TextInput, CheckBox, CheckBoxRef } from '../form/Inputs';
 import Form from '../form/Form';
+import RemoveEmployeeButton from './RemoveEmployeeButton';
 
-const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, employee, remove, setToggle}) => {
-    // employee, remove, setToggle - optional
+const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, employee, setToggle}) => {
+    // employee, setToggle - optional
 
     const formRef = {
         firstName: useRef(),
@@ -55,11 +56,8 @@ const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, empl
             </fieldset>
         </Form>
 
-        {remove && employee && <button onClick={()=>remove({
-            name: employee.first_name,
-            url: `/api/schedule/employees/${employee.id}`,
-            msg: "Ostrożnie! Usunięcie pracownika spowoduje usunięcie wszystkich związanych z nim zmian. Zamiast tego, możesz ukryć pracownika."
-        })}>Usuń</button> }
+        {employee && <RemoveEmployeeButton employee={employee} />}
+
 
     </div>
   )
