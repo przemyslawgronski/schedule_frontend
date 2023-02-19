@@ -1,17 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { mapEmpIdToFreeDays } from '../features/pageSpecific/newShiftsFunc';
 import { parseAndSetObj } from '../features/utils/formUtils';
-import { safeInvertAtPos } from '../features/utils/objUtils';
-import { create2dArr } from '../features/utils/arrayUtils';
 import DropDown from '../components/form/DropDown';
 import { dateUtils } from '../features/utils/dateUtils';
 import RenderSolution from '../components/RenderSolution';
-import ChooseConstraints from '../components/ChooseConstraints';
-import ChooseDaysOff from '../components/ChooseDaysOff';
-import LinkEmployees from '../components/LinkEmployees';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
+import FormWithEmps from '../components/newShift/FormWithEmps';
 
 const NewShiftPage = () => {
 
@@ -44,9 +40,6 @@ const NewShiftPage = () => {
   const [{data: saveSuccess, error: saveError}, saveSolution, resetSave] = useCreateData({url:"/api/schedule/save-solution"});
 
   const [checkedConstraints, setCheckedConstraints] = useState({});
-
-  const daysCount = dateUtils.daysInMonth(form.date.year, form.date.month);
-  const handleDaysOff = (pos1, pos2) => setForm( p=> ({ ...p, daysOff: safeInvertAtPos(p.daysOff, [pos1, pos2]) }) )
   
   const createSol = (event) => {
     event.preventDefault();
@@ -77,11 +70,6 @@ const NewShiftPage = () => {
   }, [groups])
 
   useEffect(()=>{
-      // Create new empty array
-      setForm( p => ({...p, daysOff: create2dArr(daysCount, empsInGroup?.length, false) }) );
-  },[daysCount, empsInGroup?.length, form.groupId, form.date])
-
-  useEffect(()=>{
     resetSolution(); // Clear generated schedule and clear save info if something was changed
     resetSave();
   },[form, checkedConstraints, resetSave, resetSolution])
@@ -100,22 +88,14 @@ const NewShiftPage = () => {
       <DropDown label="Wybierz grupę" name="groupId" options={groups} valueKey="id"
       objKey="id" objText="group_name" onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
-      <LinkEmployees employees={empsInGroup} />
-
-      <DropDown label="Wybierz rok" name="date.year" defaultVal={dateUtils.nextMonthsYear()}
-      options={dateUtils.yearsArray(5)} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
-
-      <DropDown label="Wybierz miesiąc" name="date.month" defaultVal={dateUtils.nextMonth()} options={dateUtils.monthArray}
-      objText={dateUtils.monthName} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
-
-      <p>Dni w miesiącu: {daysCount}</p>
-
-      {checkedConstraints && <ChooseConstraints constraints={checkedConstraints} handleConstraints={(key)=>setCheckedConstraints({...checkedConstraints, [key]: !checkedConstraints[key]})} />}
-
-      <ChooseDaysOff employees={empsInGroup} daysOff={form.daysOff}
-      handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, form.daysOff)} />
-
-      <button onClick={createSol}> Generuj grafik </button><br/>
+      { empsInGroup.length !== 0 ? <FormWithEmps
+        empsInGroup={empsInGroup}
+        checkedConstraints={checkedConstraints}
+        form={form}
+        setForm={setForm}
+        createSol={createSol}
+        setCheckedConstraints={setCheckedConstraints}
+        /> : <p>Brak pracowników w grupie</p>}
 
       {/* TODO: Pokaż link do wszystkich zmian /shifts */}
       {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
