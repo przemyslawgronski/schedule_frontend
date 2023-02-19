@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { ShiftsNum, TextInput, CheckBoxRef, DropDownGroupRef } from "../form/Inputs";
 import Form from "../form/Form";
+import RemoveGroupButton from "./RemoveGroupButton";
 
 const GroupForm = ({submitFunc, setToggle, group, remove, constraints}) => {
 
@@ -47,12 +48,9 @@ const GroupForm = ({submitFunc, setToggle, group, remove, constraints}) => {
             label='Wybierz ograniczenia:'
             /> }
     </Form>
+    
+    { group && <RemoveGroupButton group={group} /> }
 
-    { remove && group && <button onClick={()=>remove({
-        name: group.group_name,
-        url: `/api/schedule/groups/${group.id}`,
-        msg: "Ostrożnie! Usunięcie grupy spowoduje usunięcie wszystkich zwiazanych z nią zmian. Zamiast tego można ją ukryć."
-        })}>Usuń</button> }
 
     </div>
   )

@@ -1,17 +1,15 @@
 import React, { useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import GroupDataExtended from '../components/group/GroupDataExtended';
 import GroupForm from '../components/group/GroupForm';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ToggleComponents from '../components/ToggleComponents';
 import ErrorList from '../components/ErrorList';
-import useRemoveItem from '../features/customHooks/useRemoveItem';
 
 
 const GroupPage = () => {
 
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const [ group, {changeData: changeGroup} ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
     
@@ -22,9 +20,7 @@ const GroupPage = () => {
 
     const [constraints] = useGetAndChange({url:"/api/schedule/constraints"});
 
-    const [removeError, remove] = useRemoveItem({refreshList: ()=>navigate('/groups')});
-
-    const errors = [removeError, group.error, groupEmployees.error, constraints.error].filter(Boolean);
+    const errors = [group.error, groupEmployees.error, constraints.error].filter(Boolean);
 
     if (errors.length) {
         return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -40,7 +36,6 @@ const GroupPage = () => {
                         group: group.data,
                         submitFunc: changeGroup,
                         constraints: constraints.data,
-                        remove
                     }}
                     Component2={GroupDataExtended}
                     component2Props={{
