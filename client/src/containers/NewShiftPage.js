@@ -88,14 +88,15 @@ const NewShiftPage = () => {
       <DropDown label="Wybierz grupę" name="groupId" options={groups} valueKey="id"
       objKey="id" objText="group_name" onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
-      { empsInGroup.length !== 0 ? <FormWithEmps
-        empsInGroup={empsInGroup}
-        checkedConstraints={checkedConstraints}
-        form={form}
-        setForm={setForm}
-        createSol={createSol}
-        setCheckedConstraints={setCheckedConstraints}
-        /> : <p>Brak pracowników w grupie</p>}
+      { empsInGroup.length !== 0 ?
+        <FormWithEmps
+            empsInGroup={empsInGroup}
+            checkedConstraints={checkedConstraints}
+            form={form}
+            setForm={setForm}
+            createSol={createSol}
+            setCheckedConstraints={setCheckedConstraints}
+        /> : <p>Brak pracowników w grupie</p> }
 
       {/* TODO: Pokaż link do wszystkich zmian /shifts */}
       {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
