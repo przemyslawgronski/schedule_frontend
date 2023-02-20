@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react'
 import LinkEmployees from '../LinkEmployees'
 import DropDown from '../form/DropDown'
-import ChooseConstraints from '../ChooseConstraints'
 import ChooseDaysOff from '../ChooseDaysOff'
 import { dateUtils } from '../../features/utils/dateUtils'
 import { parseAndSetObj } from '../../features/utils/formUtils'
@@ -10,7 +9,7 @@ import { create2dArr } from '../../features/utils/arrayUtils'
 import { mapEmpIdToFreeDays } from '../../features/pageSpecific/newShiftsFunc'
 
 
-const FormWithEmps = ({empsInGroup, checkedConstraints, form, setForm, createSol, setCheckedConstraints}) => {
+const FormWithEmps = ({empsInGroup, form, setForm, createSol}) => {
 
     const handleDaysOff = (pos1, pos2) => setForm( p=> ({ ...p, daysOff: safeInvertAtPos(p.daysOff, [pos1, pos2]) }) );
     const daysCount = dateUtils.daysInMonth(form.date.year, form.date.month);
@@ -31,8 +30,6 @@ const FormWithEmps = ({empsInGroup, checkedConstraints, form, setForm, createSol
         objText={dateUtils.monthName} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
         <p>Dni w miesiącu: {daysCount}</p>
-
-        {checkedConstraints && <ChooseConstraints constraints={checkedConstraints} handleConstraints={(key)=>setCheckedConstraints({...checkedConstraints, [key]: !checkedConstraints[key]})} />}
 
         <ChooseDaysOff employees={empsInGroup} daysOff={form.daysOff}
         handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, form.daysOff)} />
