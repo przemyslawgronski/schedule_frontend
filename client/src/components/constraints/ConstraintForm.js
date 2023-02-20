@@ -2,14 +2,14 @@ import React, { useRef } from "react";
 import { TextInput, CheckBox } from "../form/Inputs";
 import Form from "../form/Form";
 
-const ConstraintForm = ({avaibleConstraints, choosedConstraints, submitFunc, constraint, onChangeConstraint, setToggle, remove}) => {
+const ConstraintForm = ({availableConstraints, choosedConstraints, submitFunc, constraint, onChangeConstraint, setToggle, remove}) => {
 
     const representation = useRef();
 
     const submitFuncReady = ()=>{
         submitFunc({
             representation: representation.current.value,
-            avaible_constraints: choosedConstraints
+            available_constraints: choosedConstraints
         });
 
         setToggle && setToggle((prev)=>!prev);
@@ -24,7 +24,7 @@ const ConstraintForm = ({avaibleConstraints, choosedConstraints, submitFunc, con
             />
         <fieldset>
             <legend>Dodaj zasadę:</legend>
-            {avaibleConstraints?.map((constraint) =>
+            {availableConstraints?.map((constraint) =>
               <CheckBox
                 key={constraint.id}
                 isChecked={choosedConstraints.includes(constraint.id)}

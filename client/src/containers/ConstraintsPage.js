@@ -10,12 +10,12 @@ const ConstraintsPage = () => {
 
   const [constraints, {getData: getConstraints}] = useGetAndChange({url: "/api/schedule/constraints"});
   const [createdConstraint, create] = useCreateData({url:"/api/schedule/constraints", refresh:getConstraints});
-  const [avaibleConstraints] = useGetAndChange({url: "/api/schedule/avaible-constraints"});
+  const [availableConstraints] = useGetAndChange({url: "/api/schedule/available-constraints"});
   
   // Keep track of which constraints are choosed
   const [choosedConstraints, setChoosedConstraints] = useState([]);
 
-  const errors = [constraints.error, createdConstraint.error, avaibleConstraints.error].filter(Boolean);
+  const errors = [constraints.error, createdConstraint.error, availableConstraints.error].filter(Boolean);
 
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
@@ -35,7 +35,7 @@ const ConstraintsPage = () => {
 
       <p>Utwórz zbiór zasad</p>
       <ul>
-        {avaibleConstraints.data?.map(constraint =>
+        {availableConstraints.data?.map(constraint =>
           <li key={constraint.id}>
             <p>{constraint.name} </p>
             <p>{constraint.description}</p>
@@ -44,7 +44,7 @@ const ConstraintsPage = () => {
       </ul>
 
       <ConstraintForm
-        avaibleConstraints={avaibleConstraints.data}
+        availableConstraints={availableConstraints.data}
         submitFunc={create}
         choosedConstraints={choosedConstraints}
         onChangeConstraint={(constraintID)=>setChoosedConstraints((prev)=>addOrRemove(prev, constraintID))}

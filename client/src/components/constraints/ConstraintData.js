@@ -1,14 +1,14 @@
 import React from 'react'
 import DisplayObject from '../DisplayObject'
 
-const ConstraintData = ({constraint, avaibleConstraint}) => {
+const ConstraintData = ({constraint, availableConstraint}) => {
 
   const data = {
     'Nazwa': constraint?.representation,
     'Ostatnia zmiana': constraint?.updated,
   };
 
-  const choosedConstraints = avaibleConstraint?.filter((c) => constraint?.avaible_constraints?.includes(c.id));
+  const choosedConstraints = availableConstraint?.filter((c) => constraint?.available_constraints?.includes(c.id));
 
   return (
     <>

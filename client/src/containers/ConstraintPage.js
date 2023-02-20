@@ -16,7 +16,7 @@ const ConstraintPage = () => {
   const [ constraint, {changeData: changeConstraint}]
   = useGetAndChange({url:`/api/schedule/constraints/${id}`});
 
-  const [avaibleConstraints] = useGetAndChange({url:`/api/schedule/avaible-constraints`});
+  const [availableConstraints] = useGetAndChange({url:`/api/schedule/available-constraints`});
 
   const [removeError, remove] = useRemoveItem({refreshList: ()=>navigate('/constraints')});
 
@@ -24,10 +24,10 @@ const ConstraintPage = () => {
     const [choosedConstraints, setChoosedConstraints] = useState([]);
 
     useEffect(() => {
-        if (constraint.data?.avaible_constraints) setChoosedConstraints([...constraint.data.avaible_constraints]);
-    }, [constraint.data?.avaible_constraints]);
+        if (constraint.data?.available_constraints) setChoosedConstraints([...constraint.data.available_constraints]);
+    }, [constraint.data?.available_constraints]);
 
-  const errors = [removeError, constraint.error, avaibleConstraints.error].filter(Boolean);
+  const errors = [removeError, constraint.error, availableConstraints.error].filter(Boolean);
 
   if (errors.length) {
       return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -41,7 +41,7 @@ const ConstraintPage = () => {
               Component1={ConstraintForm}
               component1Props={{
                 choosedConstraints: choosedConstraints,
-                avaibleConstraints: avaibleConstraints.data,
+                availableConstraints: availableConstraints.data,
                 submitFunc: changeConstraint,
                 constraint: constraint.data,
                 onChangeConstraint: (constraintID)=>setChoosedConstraints((prev)=>addOrRemove(prev, constraintID)),
@@ -50,7 +50,7 @@ const ConstraintPage = () => {
               Component2={ConstraintData}
               component2Props={{
                   constraint: constraint.data,
-                  avaibleConstraint: avaibleConstraints.data,
+                  availableConstraint: availableConstraints.data,
               }}
           />
       </div>
