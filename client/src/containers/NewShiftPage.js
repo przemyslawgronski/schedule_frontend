@@ -11,6 +11,11 @@ import FormWithEmps from '../components/newShift/FormWithEmps';
 
 const NewShiftPage = () => {
 
+  // TODO: Sprawdzić czy już istnieje w shifts/<int:year>/<int:month>
+  // Jeśli tak to wyświetlić komunikat i zapytać co zrobić:
+  // przekierować do strony z grafikiem
+  // edytować grafik
+  // usunąć stary i utworzyć nowy
   const [form, setForm] = useState({
     date: {
       year: dateUtils.nextMonthsYear(),
