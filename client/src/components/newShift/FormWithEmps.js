@@ -1,9 +1,6 @@
 import React, {useEffect} from 'react'
-import LinkEmployees from '../LinkEmployees'
-import DropDown from '../form/DropDown'
 import ChooseDaysOff from '../ChooseDaysOff'
 import { dateUtils } from '../../features/utils/dateUtils'
-import { parseAndSetObj } from '../../features/utils/formUtils'
 import { safeInvertAtPos } from '../../features/utils/objUtils'
 import { create2dArr } from '../../features/utils/arrayUtils'
 import { mapEmpIdToFreeDays } from '../../features/pageSpecific/newShiftsFunc'
@@ -21,20 +18,13 @@ const FormWithEmps = ({empsInGroup, form, setForm, createSol}) => {
 
   return (
     <>
-        <LinkEmployees employees={empsInGroup} />
+          <p>Dni w miesiącu: {daysCount}</p>
 
-        <DropDown label="Wybierz rok" name="date.year" defaultVal={dateUtils.nextMonthsYear()}
-        options={dateUtils.yearsArray(5)} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
+          <ChooseDaysOff employees={empsInGroup} daysOff={form.daysOff}
+          handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, form.daysOff)} />
 
-        <DropDown label="Wybierz miesiąc" name="date.month" defaultVal={dateUtils.nextMonth()} options={dateUtils.monthArray}
-        objText={dateUtils.monthName} onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
+          <button onClick={createSol}> Generuj grafik </button><br/>
 
-        <p>Dni w miesiącu: {daysCount}</p>
-
-        <ChooseDaysOff employees={empsInGroup} daysOff={form.daysOff}
-        handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, form.daysOff)} />
-
-        <button onClick={createSol}> Generuj grafik </button><br/>
     </>
   )
 }

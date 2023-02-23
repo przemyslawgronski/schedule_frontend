@@ -8,6 +8,8 @@ import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
 import FormWithEmps from '../components/newShift/FormWithEmps';
+import LinkEmployees from '../components/LinkEmployees'
+import ChooseDate from '../components/newShift/ChooseDate';
 
 const NewShiftPage = () => {
 
@@ -83,19 +85,25 @@ const NewShiftPage = () => {
       objKey="id" objText="group_name" onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
       { empsInGroup.length !== 0 ?
-        <FormWithEmps
-            empsInGroup={empsInGroup}
-            form={form}
-            setForm={setForm}
-            createSol={createSol}
-        /> : <p>Brak pracowników w grupie</p> }
+        <>
+        <LinkEmployees employees={empsInGroup} />
+        <ChooseDate form={form} setForm={setForm} >
+          {!saveSuccess &&  <FormWithEmps
+              empsInGroup={empsInGroup}
+              form={form}
+              setForm={setForm}
+              createSol={createSol}
+          />}
+        </ChooseDate>
+        </>
+        : <p>Brak pracowników w grupie</p> }
 
       {/* TODO: Pokaż link do wszystkich zmian /shifts */}
       {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
 
     </form>}
 
-    { solution && <RenderSolution employees={empsInGroup} solution={solution} saveSolution={saveSol} /> }
+    { !saveSuccess && solution && <RenderSolution employees={empsInGroup} solution={solution} saveSolution={saveSol} /> }
 
     { saveSuccess && <p>{saveSuccess}</p> }
 
