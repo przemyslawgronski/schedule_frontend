@@ -73,12 +73,14 @@ const NewShiftPage = () => {
           <>
             <LinkEmployees employees={empsInGroup} />
             <ChooseDate form={form} setForm={setForm} >
+
               {!saveSuccess &&  <FormWithEmps
                   empsInGroup={empsInGroup}
                   form={form}
                   setForm={setForm}
                   createSol={createSol}
               />}
+              
             </ChooseDate>
           </>
           : <p>Brak pracowników w grupie</p> }
