@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { mapEmpIdToFreeDays } from '../features/pageSpecific/newShiftsFunc';
-import { parseAndSetObj } from '../features/utils/formUtils';
-import DropDown from '../components/form/DropDown';
 import { dateUtils } from '../features/utils/dateUtils';
 import RenderSolution from '../components/RenderSolution';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
@@ -10,6 +8,7 @@ import useCreateData from '../features/customHooks/useCreateData';
 import FormWithEmps from '../components/newShift/FormWithEmps';
 import LinkEmployees from '../components/LinkEmployees'
 import ChooseDate from '../components/newShift/ChooseDate';
+import ChooseGroup from '../components/newShift/ChooseGroup';
 
 const NewShiftPage = () => {
 
@@ -25,12 +24,6 @@ const NewShiftPage = () => {
     },
     groupId: null,
     daysOff: [],
-  });
-
-  // Data from django
-  const [{data: groups, error: groupsErrors}] = useGetAndChange({
-    url:"/api/schedule/groups",
-    modify:useCallback((arr)=>arr.filter(gr=>!gr.hide), []) // Filter out hidden groups
   });
   
   const [{data: empsInGroup, error: empsInGroupError}] = useGetAndChange({
@@ -61,16 +54,12 @@ const NewShiftPage = () => {
     resetSolution(); // Reset generated schedule
   }
 
-  useEffect(()=>{ // First render - set default chosen group to groups[0]
-    if (groups && groups[0] != null) setForm( p => ({ ...p, groupId: groups[0].id}) );
-  }, [groups])
-
   useEffect(()=>{
     resetSolution(); // Clear generated schedule and clear save info if something was changed
     resetSave();
   },[form, resetSave, resetSolution])
 
-  const errors = [groupsErrors, empsInGroupError, solutionError, saveError].filter(Boolean);
+  const errors = [empsInGroupError, solutionError, saveError].filter(Boolean);
 
   if (errors.length) {
       return <ErrorList errors={errors.map(({ message }) => message)} />;
@@ -78,13 +67,12 @@ const NewShiftPage = () => {
 
   return (
     <>
-    {groups && empsInGroup &&
+    
     
     <form>
-      <DropDown label="Wybierz grupę" name="groupId" options={groups} valueKey="id"
-      objKey="id" objText="group_name" onChangeFunc={(event)=>setForm(p=>parseAndSetObj(event, p))}/>
 
-      { empsInGroup.length !== 0 ?
+      <ChooseGroup setForm={setForm} />
+      { empsInGroup?.length !== 0 ?
         <>
         <LinkEmployees employees={empsInGroup} />
         <ChooseDate form={form} setForm={setForm} >
@@ -101,7 +89,7 @@ const NewShiftPage = () => {
       {/* TODO: Pokaż link do wszystkich zmian /shifts */}
       {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
 
-    </form>}
+    </form>
 
     { !saveSuccess && solution && <RenderSolution employees={empsInGroup} solution={solution} saveSolution={saveSol} /> }
 
