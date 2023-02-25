@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import { TextInput, CheckBox, CheckBoxRef } from '../form/Inputs';
 import Form from '../form/Form';
-import RemoveEmployeeButton from './RemoveEmployeeButton';
+import RemoveButton from '../form/RemoveButton';
 
 const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, employee, setToggle}) => {
     // employee, setToggle - optional
@@ -56,8 +56,12 @@ const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, empl
             </fieldset>
         </Form>
 
-        {employee && <RemoveEmployeeButton employee={employee} />}
-
+        { employee && <RemoveButton
+        name = {employee.first_name}
+        url = {`/api/schedule/employees/${employee.id}`}
+        after_url = "/employees"
+        msg = "Ostrożnie! Usunięcie pracownika spowoduje usunięcie wszystkich związanych z nim zmian. Zamiast tego, możesz ukryć pracownika."
+    /> }
 
     </div>
   )

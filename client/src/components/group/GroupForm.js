@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { ShiftsNum, TextInput, CheckBoxRef, DropDownGroupRef } from "../form/Inputs";
 import Form from "../form/Form";
-import RemoveGroupButton from "./RemoveGroupButton";
+import RemoveButton from "../form/RemoveButton";
 
 const GroupForm = ({submitFunc, setToggle, group, remove, constraints}) => {
 
@@ -49,7 +49,12 @@ const GroupForm = ({submitFunc, setToggle, group, remove, constraints}) => {
             /> }
     </Form>
     
-    { group && <RemoveGroupButton group={group} /> }
+    { group && <RemoveButton
+        name = {group.group_name}
+        url = {`/api/schedule/groups/${group.id}`}
+        after_url = "/groups"
+        msg = "Ostrożnie! Usunięcie grupy spowoduje usunięcie wszystkich zwiazanych z nią zmian. Zamiast tego można ją ukryć."
+    /> }
 
 
     </div>
