@@ -18,15 +18,12 @@ const NewShiftPage = () => {
   // przekierować do strony z grafikiem
   // edytować grafik
   // usunąć stary i utworzyć nowy
-  const [form, setForm] = useState({
-    date: {
-      year: dateUtils.nextMonthsYear(),
-      month: dateUtils.nextMonth(),
-    },
-    daysOff: [],
-  });
-
+  const [daysOff, setDaysOff] = useState([]);
   const [groupId, setGroupId] = useState(null);
+  const [date, setDate] = useState({
+    year: dateUtils.nextMonthsYear(),
+    month: dateUtils.nextMonth(),
+  });
   
   const [{data: empsInGroup, error: empsInGroupError}] = useGetAndChange({
     url:`/api/schedule/groups/${groupId}/employees`,
@@ -40,7 +37,7 @@ const NewShiftPage = () => {
   useEffect(()=>{
     resetSolution(); // Clear generated schedule and clear save info if something was changed
     resetSave();
-  },[form, resetSave, resetSolution])
+  },[daysOff, groupId, date, resetSave, resetSolution])
 
   const errors = [empsInGroupError, solutionError, saveError].filter(Boolean);
 
@@ -57,8 +54,8 @@ const NewShiftPage = () => {
       <Form
         legend="Nowy grafik"
         submitFunc={()=>createSolution({
-          checkedBoxes: mapEmpIdToFreeDays(empsInGroup, form.daysOff),
-          num_days: dateUtils.daysInMonth(form.date.year, form.date.month),
+          checkedBoxes: mapEmpIdToFreeDays(empsInGroup, daysOff),
+          num_days: dateUtils.daysInMonth(date.year, date.month),
           group_id: groupId,
         })}
       >
@@ -66,12 +63,14 @@ const NewShiftPage = () => {
         
           <>
             <LinkEmployees employees={empsInGroup} />
-            <ChooseDate form={form} setForm={setForm} >
+            <ChooseDate date={date} setDate={setDate} >
 
               {!saveSuccess &&  <FormWithEmps
-                  empsInGroup={empsInGroup}
-                  form={form}
-                  setForm={setForm}
+                  empsInGroup = {empsInGroup}
+                  date = {date}
+                  groupId = {groupId}
+                  setDaysOff = {setDaysOff}
+                  daysOff = {daysOff}
               />}
 
             </ChooseDate>
@@ -90,8 +89,8 @@ const NewShiftPage = () => {
           solution={solution}
           saveSolution={() => {
             saveSolution({
-              month: form.date.month,
-              year: form.date.year,
+              month: date.month,
+              year: date.year,
               group_id: groupId,
               solution: solution,
             });

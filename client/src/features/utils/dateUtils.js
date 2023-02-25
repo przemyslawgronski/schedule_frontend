@@ -16,3 +16,15 @@ export const dateUtils = {
             )
         }
 }
+
+// date = {"year": 2023, "month": 2},
+// yearsMonths = {"2023": [6,5,4,3,2]}
+export const dateExists = (date, yearsMonths) => {
+    const stringYear = String(date.year);
+    if(!Object.keys(yearsMonths).includes(stringYear)) return false;
+    const shiftsMonths = yearsMonths[stringYear];
+
+    // shiftsMonths - 0 based array of months with saved shifts
+    // date.month+1 - 1 based month number
+    return shiftsMonths.includes(date.month+1)
+  }

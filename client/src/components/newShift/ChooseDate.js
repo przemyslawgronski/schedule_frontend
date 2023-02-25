@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
 import DropDown from '../form/DropDown'
-import { parseAndSetObj } from '../../features/utils/formUtils'
-import { dateUtils } from '../../features/utils/dateUtils'
+//import { parseAndSetObj } from '../../features/utils/formUtils'
+import { dateUtils, dateExists } from '../../features/utils/dateUtils'
 import useGetAndChange from '../../features/customHooks/useGetAndChange'
 import ErrorList from '../ErrorList'
 import { useState } from 'react'
 
-const ChooseDate = ({setForm, form, children}) => {
+const ChooseDate = ({setDate, date, children}) => {
 
     const [yearsMonths, {getData: getYearsMonths}] = useGetAndChange({url:"/api/schedule/years-months-with-shifts"});
 
     const [shiftsExists, setShiftsExists] = useState(null);
 
     const onChangeFunc = (event) => {
-        setForm(prev => parseAndSetObj(event, prev));
+        setDate(prev => ({...prev, [event.target.name]: JSON.parse(event.target.value)}));
         getYearsMonths();
       }
 
@@ -21,18 +21,9 @@ const ChooseDate = ({setForm, form, children}) => {
         getYearsMonths();
       },[getYearsMonths])
 
-      const stringYear = form?.date?.year && String(form.date.year);
-    
-      // Months with saved shifts for selected year
-      const shiftsMonths = yearsMonths?.data && stringYear && yearsMonths.data[stringYear];
-  
-      // shiftsMonths - 0 based array of months with saved shifts
-      //form.date.month+1 - 1 based month number
-      const already_exists = shiftsMonths && shiftsMonths.includes(form.date.month+1)
-
       useEffect(()=>{ 
-        setShiftsExists(already_exists);
-      },[already_exists])
+        if(date?.year && yearsMonths?.data) setShiftsExists(dateExists(date, yearsMonths.data));
+      },[date, yearsMonths.data])
 
       const errors = [yearsMonths.error].filter(Boolean);
 
@@ -42,10 +33,10 @@ const ChooseDate = ({setForm, form, children}) => {
 
   return (
     <>
-        <DropDown label="Wybierz rok" name="date.year" defaultVal={dateUtils.nextMonthsYear()}
+        <DropDown label="Wybierz rok" name="year" defaultVal={dateUtils.nextMonthsYear()}
         options={dateUtils.yearsArray(5)} onChangeFunc={onChangeFunc}/>
 
-        <DropDown label="Wybierz miesiąc" name="date.month" defaultVal={dateUtils.nextMonth()} options={dateUtils.monthArray}
+        <DropDown label="Wybierz miesiąc" name="month" defaultVal={dateUtils.nextMonth()} options={dateUtils.monthArray}
         objText={dateUtils.monthName} onChangeFunc={onChangeFunc}/>
 
         {shiftsExists == null && <p>Ładowanie...</p>}

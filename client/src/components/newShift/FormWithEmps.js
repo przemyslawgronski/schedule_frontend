@@ -6,23 +6,22 @@ import { create2dArr } from '../../features/utils/arrayUtils'
 import { mapEmpIdToFreeDays } from '../../features/pageSpecific/newShiftsFunc'
 
 
-const FormWithEmps = ({empsInGroup, form, setForm, createSol}) => {
+const FormWithEmps = ({empsInGroup, date, groupId, setDaysOff, daysOff}) => {
 
-    const handleDaysOff = (pos1, pos2) => setForm( p=> ({ ...p, daysOff: safeInvertAtPos(p.daysOff, [pos1, pos2]) }) );
-    const daysCount = dateUtils.daysInMonth(form.date.year, form.date.month);
+    const handleDaysOff = (pos1, pos2) => setDaysOff( prev=> safeInvertAtPos(prev, [pos1, pos2]) );
+    const daysCount = dateUtils.daysInMonth(date.year, date.month);
 
     useEffect(()=>{
         // Create new empty array
-        setForm( p => ({...p, daysOff: create2dArr(daysCount, empsInGroup?.length, false) }) );
-    },[daysCount, empsInGroup?.length, form.groupId, form.date, setForm])
+        setDaysOff(create2dArr(daysCount, empsInGroup?.length, false));
+    },[daysCount, empsInGroup?.length, groupId, date, setDaysOff])
 
   return (
     <>
           <p>Dni w miesiącu: {daysCount}</p>
 
-          <ChooseDaysOff employees={empsInGroup} daysOff={form.daysOff}
-          handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, form.daysOff)} />
-
+          <ChooseDaysOff employees={empsInGroup} daysOff={daysOff}
+          handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, daysOff)} />
     </>
   )
 }
