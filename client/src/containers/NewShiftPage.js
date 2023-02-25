@@ -9,6 +9,7 @@ import FormWithEmps from '../components/newShift/FormWithEmps';
 import LinkEmployees from '../components/LinkEmployees'
 import ChooseDate from '../components/newShift/ChooseDate';
 import ChooseGroup from '../components/newShift/ChooseGroup';
+import Form from '../components/form/Form';
 
 const NewShiftPage = () => {
 
@@ -34,25 +35,6 @@ const NewShiftPage = () => {
 
   const [{data: solution, error: solutionError}, createSolution, resetSolution] = useCreateData({url:"/api/schedule/render-solution"});
   const [{data: saveSuccess, error: saveError}, saveSolution, resetSave] = useCreateData({url:"/api/schedule/save-solution"});
-  
-  const createSol = (event) => {
-    event.preventDefault();
-    createSolution({
-      checkedBoxes: mapEmpIdToFreeDays(empsInGroup, form.daysOff),
-      num_days: dateUtils.daysInMonth(form.date.year, form.date.month),
-      group_id: form.groupId,
-    });
-  }
-
-  const saveSol = () => {
-    saveSolution({
-      month: form.date.month,
-      year: form.date.year,
-      group_id: form.groupId,
-      solution: solution,
-    });
-    resetSolution(); // Reset generated schedule
-  }
 
   useEffect(()=>{
     resetSolution(); // Clear generated schedule and clear save info if something was changed
@@ -67,8 +49,18 @@ const NewShiftPage = () => {
 
   return (
     <>
-      <form>
-        <ChooseGroup setForm={setForm} />
+    <ChooseGroup setForm={setForm} />
+
+
+      <Form
+        legend="Nowy grafik"
+        submitFunc={()=>createSolution({
+          checkedBoxes: mapEmpIdToFreeDays(empsInGroup, form.daysOff),
+          num_days: dateUtils.daysInMonth(form.date.year, form.date.month),
+          group_id: form.groupId,
+        })}
+      >
+        
         { empsInGroup?.length !== 0 ?
           <>
             <LinkEmployees employees={empsInGroup} />
@@ -78,9 +70,8 @@ const NewShiftPage = () => {
                   empsInGroup={empsInGroup}
                   form={form}
                   setForm={setForm}
-                  createSol={createSol}
               />}
-              
+
             </ChooseDate>
           </>
           : <p>Brak pracowników w grupie</p> }
@@ -88,13 +79,26 @@ const NewShiftPage = () => {
         {/* TODO: Pokaż link do wszystkich zmian /shifts */}
         {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
 
-      </form>
+      </Form>
+    
 
-      { !saveSuccess && solution && <RenderSolution employees={empsInGroup} solution={solution} saveSolution={saveSol} /> }
+      { !saveSuccess && solution && 
+        <RenderSolution
+          employees={empsInGroup}
+          solution={solution}
+          saveSolution={() => {
+            saveSolution({
+              month: form.date.month,
+              year: form.date.year,
+              group_id: form.groupId,
+              solution: solution,
+            });
+            resetSolution(); // Reset generated schedule
+          }}
+        /> }
 
       { saveSuccess && <p>{saveSuccess}</p> }
-
-    </>
+      </>
   )
 }
 

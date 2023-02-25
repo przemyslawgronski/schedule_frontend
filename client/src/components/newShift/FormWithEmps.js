@@ -23,8 +23,6 @@ const FormWithEmps = ({empsInGroup, form, setForm, createSol}) => {
           <ChooseDaysOff employees={empsInGroup} daysOff={form.daysOff}
           handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, form.daysOff)} />
 
-          <button onClick={createSol}> Generuj grafik </button><br/>
-
     </>
   )
 }
