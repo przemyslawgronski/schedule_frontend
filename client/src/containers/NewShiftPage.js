@@ -67,33 +67,30 @@ const NewShiftPage = () => {
 
   return (
     <>
-    
-    
-    <form>
+      <form>
+        <ChooseGroup setForm={setForm} />
+        { empsInGroup?.length !== 0 ?
+          <>
+            <LinkEmployees employees={empsInGroup} />
+            <ChooseDate form={form} setForm={setForm} >
+              {!saveSuccess &&  <FormWithEmps
+                  empsInGroup={empsInGroup}
+                  form={form}
+                  setForm={setForm}
+                  createSol={createSol}
+              />}
+            </ChooseDate>
+          </>
+          : <p>Brak pracowników w grupie</p> }
 
-      <ChooseGroup setForm={setForm} />
-      { empsInGroup?.length !== 0 ?
-        <>
-        <LinkEmployees employees={empsInGroup} />
-        <ChooseDate form={form} setForm={setForm} >
-          {!saveSuccess &&  <FormWithEmps
-              empsInGroup={empsInGroup}
-              form={form}
-              setForm={setForm}
-              createSol={createSol}
-          />}
-        </ChooseDate>
-        </>
-        : <p>Brak pracowników w grupie</p> }
+        {/* TODO: Pokaż link do wszystkich zmian /shifts */}
+        {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
 
-      {/* TODO: Pokaż link do wszystkich zmian /shifts */}
-      {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
+      </form>
 
-    </form>
+      { !saveSuccess && solution && <RenderSolution employees={empsInGroup} solution={solution} saveSolution={saveSol} /> }
 
-    { !saveSuccess && solution && <RenderSolution employees={empsInGroup} solution={solution} saveSolution={saveSol} /> }
-
-    { saveSuccess && <p>{saveSuccess}</p> }
+      { saveSuccess && <p>{saveSuccess}</p> }
 
     </>
   )

@@ -12,7 +12,7 @@ const ChooseGroup = ({setForm}) => {
       });
 
     useEffect(()=>{ // First render - set default chosen group to groups[0]
-    if (groups && groups[0] != null) setForm( p => ({ ...p, groupId: groups[0].id}) );
+        if (groups && groups[0] != null) setForm( p => ({ ...p, groupId: groups[0].id}) );
     }, [groups, setForm])
 
     const errors = [groupsErrors].filter(Boolean);
