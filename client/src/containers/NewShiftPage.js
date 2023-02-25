@@ -23,13 +23,14 @@ const NewShiftPage = () => {
       year: dateUtils.nextMonthsYear(),
       month: dateUtils.nextMonth(),
     },
-    groupId: null,
     daysOff: [],
   });
+
+  const [groupId, setGroupId] = useState(null);
   
   const [{data: empsInGroup, error: empsInGroupError}] = useGetAndChange({
-    url:`/api/schedule/groups/${form.groupId}/employees`,
-    test: form.groupId,
+    url:`/api/schedule/groups/${groupId}/employees`,
+    test: groupId,
     modify:useCallback((arr)=>arr.filter(emp=>!emp.hide), []) // Filter out hidden employees
   });
 
@@ -49,19 +50,20 @@ const NewShiftPage = () => {
 
   return (
     <>
-    <ChooseGroup setForm={setForm} />
-
+    <ChooseGroup setGroupId={setGroupId} />
+    { empsInGroup?.length !== 0 ?
+    <>
 
       <Form
         legend="Nowy grafik"
         submitFunc={()=>createSolution({
           checkedBoxes: mapEmpIdToFreeDays(empsInGroup, form.daysOff),
           num_days: dateUtils.daysInMonth(form.date.year, form.date.month),
-          group_id: form.groupId,
+          group_id: groupId,
         })}
       >
         
-        { empsInGroup?.length !== 0 ?
+        
           <>
             <LinkEmployees employees={empsInGroup} />
             <ChooseDate form={form} setForm={setForm} >
@@ -74,7 +76,7 @@ const NewShiftPage = () => {
 
             </ChooseDate>
           </>
-          : <p>Brak pracowników w grupie</p> }
+          
 
         {/* TODO: Pokaż link do wszystkich zmian /shifts */}
         {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
@@ -90,7 +92,7 @@ const NewShiftPage = () => {
             saveSolution({
               month: form.date.month,
               year: form.date.year,
-              group_id: form.groupId,
+              group_id: groupId,
               solution: solution,
             });
             resetSolution(); // Reset generated schedule
@@ -98,7 +100,9 @@ const NewShiftPage = () => {
         /> }
 
       { saveSuccess && <p>{saveSuccess}</p> }
-      </>
+    </>
+    : <p>Brak pracowników w grupie</p> }
+    </>
   )
 }
 
