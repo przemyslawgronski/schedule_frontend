@@ -3,6 +3,7 @@ import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import shiftMangle from '../features/pageSpecific/shiftMangle';
 import Tables from '../components/Tables';
+import RemoveButton from '../components/form/RemoveButton';
 
 const ShiftPage = () => {
 
@@ -37,6 +38,12 @@ const ShiftPage = () => {
           headers={(grID)=>['Dzień', ...(empsInGroup[grID].map((emp)=>emp ? emp : removedEmpName))]}
           rows={(grID)=>Object.keys(mangledShifts[grID])} // array of row keys for a given table key
           cells={cellsGen} // cell value for a given table key, row key and column key
+        />
+        <RemoveButton
+          name={`Zmiany z ${month}.${year}`}
+          url={`/api/schedule/shifts/${year}/${month}`}
+          after_url={`/shifts`}
+          msg = "Ostrożnie! Zostaną usunięte wszystkie zmiany z tego miesiąca."
         />
       </div>
     </div>
