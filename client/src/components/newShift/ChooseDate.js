@@ -1,9 +1,10 @@
-import React, { useEffect, createContext } from 'react'
+import React, { useEffect, createContext, useContext } from 'react'
 import DropDown from '../form/DropDown'
 import { dateUtils, dateExists } from '../../features/utils/dateUtils'
 import useGetAndChange from '../../features/customHooks/useGetAndChange'
 import ErrorList from '../ErrorList'
 import { useState } from 'react'
+import { GroupIdContext } from './ChooseGroup'
 
 export const DateContext = createContext();
 
@@ -14,7 +15,9 @@ const ChooseDate = ({children}) => {
       month: dateUtils.nextMonth(),
     });
 
-    const [yearsMonths, {getData: getYearsMonths}] = useGetAndChange({url:"/api/schedule/years-months-with-shifts"});
+    const groupId = useContext(GroupIdContext);
+
+    const [yearsMonths, {getData: getYearsMonths}] = useGetAndChange({url:`/api/schedule/groups/${groupId}/years-months-with-shifts`});
 
     const [shiftsExists, setShiftsExists] = useState(null);
 
