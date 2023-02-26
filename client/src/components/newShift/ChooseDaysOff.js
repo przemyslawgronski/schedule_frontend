@@ -23,8 +23,8 @@ const ChooseDaysOff = ({children}) => {
 
     useEffect(()=>{
         // Create new empty array
-        setDaysOff(create2dArr(daysCount, empsInGroup?.length, false));
-    },[daysCount, empsInGroup?.length, groupId, date, setDaysOff])
+        setDaysOff(create2dArr(daysCount, empsInGroup.length, false));
+    },[daysCount, empsInGroup.length, groupId, date, setDaysOff])
 
   return (
     <>

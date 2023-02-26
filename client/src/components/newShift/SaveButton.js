@@ -11,6 +11,8 @@ const SaveButton = () => {
     const groupId = useContext(GroupIdContext);
     const {solution, resetSolution} = useContext(SolutionContext);
 
+    if (!solution) return null;
+
   return (
     <button onClick={() => {
         saveSolution({
