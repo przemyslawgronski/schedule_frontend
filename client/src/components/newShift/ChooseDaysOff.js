@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react'
-import ChooseDaysOff from '../ChooseDaysOff'
+import ChooseDaysOffForm from '../ChooseDaysOffForm'
 import { dateUtils } from '../../features/utils/dateUtils'
 import { safeInvertAtPos } from '../../features/utils/objUtils'
 import { create2dArr } from '../../features/utils/arrayUtils'
 import { mapEmpIdToFreeDays } from '../../features/pageSpecific/newShiftsFunc'
 
 
-const FormWithEmps = ({empsInGroup, date, groupId, setDaysOff, daysOff}) => {
+const ChooseDaysOff = ({empsInGroup, date, groupId, setDaysOff, daysOff}) => {
 
     const handleDaysOff = (pos1, pos2) => setDaysOff( prev=> safeInvertAtPos(prev, [pos1, pos2]) );
     const daysCount = dateUtils.daysInMonth(date.year, date.month);
@@ -20,10 +20,10 @@ const FormWithEmps = ({empsInGroup, date, groupId, setDaysOff, daysOff}) => {
     <>
           <p>Dni w miesiącu: {daysCount}</p>
 
-          <ChooseDaysOff employees={empsInGroup} daysOff={daysOff}
+          <ChooseDaysOffForm employees={empsInGroup} daysOff={daysOff}
           handleDaysOff={handleDaysOff} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, daysOff)} />
     </>
   )
 }
 
-export default FormWithEmps
+export default ChooseDaysOff

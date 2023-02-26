@@ -5,7 +5,7 @@ import RenderSolution from '../components/RenderSolution';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
-import FormWithEmps from '../components/newShift/FormWithEmps';
+import ChooseDaysOff from '../components/newShift/ChooseDaysOff';
 import LinkEmployees from '../components/LinkEmployees'
 import ChooseDate from '../components/newShift/ChooseDate';
 import ChooseGroup from '../components/newShift/ChooseGroup';
@@ -65,7 +65,7 @@ const NewShiftPage = () => {
             <LinkEmployees employees={empsInGroup} />
             <ChooseDate date={date} setDate={setDate} >
 
-              {!saveSuccess &&  <FormWithEmps
+              {!saveSuccess &&  <ChooseDaysOff
                   empsInGroup = {empsInGroup}
                   date = {date}
                   groupId = {groupId}
