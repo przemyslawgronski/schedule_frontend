@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { mapEmpIdToFreeDays } from '../features/pageSpecific/newShiftsFunc';
-import { dateUtils } from '../features/utils/dateUtils';
+import React from 'react';
 import RenderSolution from '../components/RenderSolution';
-import useGetAndChange from '../features/customHooks/useGetAndChange';
-import ErrorList from '../components/ErrorList';
-import useCreateData from '../features/customHooks/useCreateData';
 import ChooseDaysOff from '../components/newShift/ChooseDaysOff';
 import ChooseDate from '../components/newShift/ChooseDate';
 import ChooseGroup from '../components/newShift/ChooseGroup';
-import Form from '../components/form/Form';
+import EmpsInGroup from '../components/newShift/EmpsInGroup';
+import GetSolution from '../components/newShift/GetSolution';
+import GenerateButton from '../components/newShift/GenerateButton';
+import SaveSuccess from '../components/newShift/SaveSuccess';
+
 
 const NewShiftPage = () => {
 
@@ -17,82 +16,36 @@ const NewShiftPage = () => {
   // przekierować do strony z grafikiem
   // edytować grafik
   // usunąć stary i utworzyć nowy
-  const [daysOff, setDaysOff] = useState([]);
-  const [groupId, setGroupId] = useState(null);
-  const [date, setDate] = useState({
-    year: dateUtils.nextMonthsYear(),
-    month: dateUtils.nextMonth(),
-  });
-  
-  const [{data: empsInGroup, error: empsInGroupError}] = useGetAndChange({
-    url:`/api/schedule/groups/${groupId}/employees`,
-    test: groupId,
-    modify:useCallback((arr)=>arr.filter(emp=>!emp.hide), []) // Filter out hidden employees
-  });
 
-  const [{data: solution, error: solutionError}, createSolution, resetSolution] = useCreateData({url:"/api/schedule/render-solution"});
-  const [{data: saveSuccess, error: saveError}, saveSolution, resetSave] = useCreateData({url:"/api/schedule/save-solution"});
+  // TODO: Pokaż link do wszystkich zmian /shifts
+  // TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja
 
-  useEffect(()=>{
-    resetSolution(); // Clear generated schedule and clear save info if something was changed
-    resetSave();
-  },[daysOff, groupId, date, resetSave, resetSolution])
+  // useEffect(()=>{
+  //   resetSolution(); // Clear generated schedule and clear save info if something was changed
+  //   resetSave();
+  // },[daysOff, groupId, date, resetSave, resetSolution])
 
-  const errors = [empsInGroupError, solutionError, saveError].filter(Boolean);
-
-  if (errors.length) {
-      return <ErrorList errors={errors.map(({ message }) => message)} />;
-  }
+  // TODO: resetSolution chyba nie działa po zapisaniu grafiku
 
   return (
-    <>
-    <ChooseGroup setGroupId={setGroupId} />
-    { empsInGroup?.length > 0 ?
-    <ChooseDate date={date} setDate={setDate} >
+    <ChooseGroup>                   {/*create: GroupIdContext,      consume: */}
+      <EmpsInGroup>                 {/*create: EmpsInGroupContext,  consume: GroupIdContext*/}
+        <ChooseDate>                {/*create: DateContext,         consume: */}
+          <GetSolution>             {/*create: SolutionContext,     consume: */}
 
-      <Form
-        legend="Nowy grafik"
-        submitFunc={()=>createSolution({
-          checkedBoxes: mapEmpIdToFreeDays(empsInGroup, daysOff),
-          num_days: dateUtils.daysInMonth(date.year, date.month),
-          group_id: groupId,
-        })}
-      >
-            
+            <ChooseDaysOff>         {/*create: DaysOffContext,      consume: EmpsInGroupContext, DateContext, GroupIdContext*/}
+              <GenerateButton />    {/*create:                      consume: SolutionContext, EmpsInGroupContext, DateContext, GroupIdContext, DaysOffContext*/}
+            </ChooseDaysOff>
 
-      {!saveSuccess &&  <ChooseDaysOff
-          empsInGroup = {empsInGroup}
-          date = {date}
-          groupId = {groupId}
-          setDaysOff = {setDaysOff}
-          daysOff = {daysOff}
-      />}
+            <SaveSuccess>             {/*create: SaveSuccessContext,  consume: */}
+              <RenderSolution/>       {/*create:                      consume: EmpsInGroupContext, SolutionContext, SaveSuccessContext, DateContext, GroupIdContext*/}
+            </SaveSuccess>
 
-        {/* TODO: Pokaż link do wszystkich zmian /shifts */}
-        {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
+          </GetSolution>
 
-      </Form>
-    
-
-      { !saveSuccess && solution && 
-        <RenderSolution
-          employees={empsInGroup}
-          solution={solution}
-          saveSolution={() => {
-            saveSolution({
-              month: date.month,
-              year: date.year,
-              group_id: groupId,
-              solution: solution,
-            });
-            resetSolution(); // Reset generated schedule
-          }}
-        /> }
-
-      { saveSuccess && <p>{saveSuccess}</p> }
-      </ChooseDate>
-    : <p>Brak pracowników w grupie</p> }
-    </>
+        </ChooseDate>
+      </EmpsInGroup>
+    </ChooseGroup>
   )
 }
 

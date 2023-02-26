@@ -1,12 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, createContext } from 'react'
 import DropDown from '../form/DropDown'
-//import { parseAndSetObj } from '../../features/utils/formUtils'
 import { dateUtils, dateExists } from '../../features/utils/dateUtils'
 import useGetAndChange from '../../features/customHooks/useGetAndChange'
 import ErrorList from '../ErrorList'
 import { useState } from 'react'
 
-const ChooseDate = ({setDate, date, children}) => {
+export const DateContext = createContext();
+
+const ChooseDate = ({children}) => {
+
+    const [date, setDate] = useState({
+      year: dateUtils.nextMonthsYear(),
+      month: dateUtils.nextMonth(),
+    });
 
     const [yearsMonths, {getData: getYearsMonths}] = useGetAndChange({url:"/api/schedule/years-months-with-shifts"});
 
@@ -41,7 +47,11 @@ const ChooseDate = ({setDate, date, children}) => {
 
         {shiftsExists == null && <p>Ładowanie...</p>}
         {shiftsExists && <p>W tym miesiącu istnieją już zapisane zmiany</p>}
-        {shiftsExists === false && children}
+        {shiftsExists === false && 
+          <DateContext.Provider value={date}>
+            {children}
+          </DateContext.Provider>
+        }
     </>
   )
 }
