@@ -4,7 +4,6 @@ import { useEffect, useReducer, useCallback } from "react";
 
 //Fettch data from django backend
 // url - url to be fetched
-// test - optional, if boolean value is true then return data, otherwise false
 // modify - optional, modify returned data
 
 const ACTION = {
@@ -40,14 +39,11 @@ const reducer = (state, action) => {
   }
 };
 
-const useGetAndChange = ({ url, test, modify }) => {
+const useGetAndChange = ({ url, modify }) => {
   const dispatch = useDispatch();
   const [state, dispatchState] = useReducer(reducer, initialState);
 
-
-
   const getData = useCallback(async () => {
-    if ((typeof test !== "undefined") && !test) return;
 
     try {
       const fetchResponse = await fetch(url, {
@@ -74,7 +70,7 @@ const useGetAndChange = ({ url, test, modify }) => {
     } catch (error) {
       dispatchState({ type: ACTION.FETCH_ERROR, payload: error });
     }
-  },[dispatch, modify, test, url]);
+  },[dispatch, modify, url]);
 
 
 
@@ -88,8 +84,6 @@ const useGetAndChange = ({ url, test, modify }) => {
 
 
   const changeData = async (body) => {
-
-    if ((typeof test !== "undefined") && !test) return;
 
     try {
       const fetchResponse = await fetch(url, {
