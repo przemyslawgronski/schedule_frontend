@@ -6,7 +6,7 @@ export const SolutionContext = createContext();
 
 const GetSolution = ({children}) => {
 
-    const [{data: solution, error: solutionError}, createSolution, resetSolution] = useCreateData({url:"/api/schedule/render-solution"});
+    const [{data: solution, error: solutionError}, createSolution] = useCreateData({url:"/api/schedule/render-solution"});
 
     const errors = [solutionError].filter(Boolean);
 
@@ -15,7 +15,7 @@ const GetSolution = ({children}) => {
     }
 
   return (
-    <SolutionContext.Provider value={{solution, createSolution, resetSolution}}>
+    <SolutionContext.Provider value={{solution, createSolution}}>
         {children}
     </SolutionContext.Provider>
   )

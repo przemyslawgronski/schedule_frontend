@@ -13,6 +13,7 @@ import SaveButton from '../components/newShift/SaveButton';
 const NewShiftPage = () => {
 
   // TODO: Sprawdzić czy już istnieje w shifts/<int:year>/<int:month>
+  // Ale w tej samej grupie !!!!!
   // Jeśli tak to wyświetlić komunikat i zapytać co zrobić:
   // przekierować do strony z grafikiem
   // edytować grafik
@@ -32,18 +33,19 @@ const NewShiftPage = () => {
     <ChooseGroup>                   {/*create: GroupIdContext,      consume: */}
       <EmpsInGroup>                 {/*create: EmpsInGroupContext,  consume: GroupIdContext*/}
         <ChooseDate>                {/*create: DateContext,         consume: */}
-          <GetSolution>             {/*create: SolutionContext,     consume: */}
 
-            <ChooseDaysOff>         {/*create: DaysOffContext,      consume: EmpsInGroupContext, DateContext, GroupIdContext*/}
-              <GenerateButton />    {/*create:                      consume: SolutionContext, EmpsInGroupContext, DateContext, GroupIdContext, DaysOffContext*/}
-            </ChooseDaysOff>
+          <SaveSuccess>             {/*create: SaveSuccessContext,  consume: */}
+            <GetSolution>             {/*create: SolutionContext,     consume: */}
 
-            <SaveSuccess>             {/*create: SaveSuccessContext,  consume: */}
-              <RenderSolution/>       {/*create:                      consume: EmpsInGroupContext, SolutionContext*/}
-              <SaveButton/>           {/*create:                      consume: SaveSuccessContext, DateContext, GroupIdContext, SolutionContext*/}
-            </SaveSuccess>
+              <ChooseDaysOff>         {/*create: DaysOffContext,      consume: EmpsInGroupContext, DateContext, GroupIdContext*/}
+                <GenerateButton />    {/*create:                      consume: SolutionContext, EmpsInGroupContext, DateContext, GroupIdContext, DaysOffContext*/}
+              </ChooseDaysOff>
 
-          </GetSolution>
+                <RenderSolution/>       {/*create:                      consume: EmpsInGroupContext, SolutionContext*/}
+                <SaveButton/>           {/*create:                      consume: SaveSuccessContext, DateContext, GroupIdContext, SolutionContext*/}
+            
+            </GetSolution>
+          </SaveSuccess>
 
         </ChooseDate>
       </EmpsInGroup>

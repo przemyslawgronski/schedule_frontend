@@ -9,7 +9,7 @@ const SaveButton = () => {
     const {saveSolution} = useContext(SaveSuccessContext);
     const date = useContext(DateContext);
     const groupId = useContext(GroupIdContext);
-    const {solution, resetSolution} = useContext(SolutionContext);
+    const {solution} = useContext(SolutionContext);
 
     if (!solution) return null;
 
@@ -21,7 +21,6 @@ const SaveButton = () => {
           group_id: groupId,
           solution: solution,
         });
-        resetSolution(); // Reset generated schedule
       }}>Zapisz</button>
   )
 }
