@@ -6,7 +6,6 @@ import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
 import ChooseDaysOff from '../components/newShift/ChooseDaysOff';
-import LinkEmployees from '../components/LinkEmployees'
 import ChooseDate from '../components/newShift/ChooseDate';
 import ChooseGroup from '../components/newShift/ChooseGroup';
 import Form from '../components/form/Form';
@@ -48,8 +47,8 @@ const NewShiftPage = () => {
   return (
     <>
     <ChooseGroup setGroupId={setGroupId} />
-    { empsInGroup?.length !== 0 ?
-    <>
+    { empsInGroup?.length > 0 ?
+    <ChooseDate date={date} setDate={setDate} >
 
       <Form
         legend="Nowy grafik"
@@ -59,23 +58,15 @@ const NewShiftPage = () => {
           group_id: groupId,
         })}
       >
-        
-        
-          <>
-            <LinkEmployees employees={empsInGroup} />
-            <ChooseDate date={date} setDate={setDate} >
+            
 
-              {!saveSuccess &&  <ChooseDaysOff
-                  empsInGroup = {empsInGroup}
-                  date = {date}
-                  groupId = {groupId}
-                  setDaysOff = {setDaysOff}
-                  daysOff = {daysOff}
-              />}
-
-            </ChooseDate>
-          </>
-          
+      {!saveSuccess &&  <ChooseDaysOff
+          empsInGroup = {empsInGroup}
+          date = {date}
+          groupId = {groupId}
+          setDaysOff = {setDaysOff}
+          daysOff = {daysOff}
+      />}
 
         {/* TODO: Pokaż link do wszystkich zmian /shifts */}
         {/* TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja */}
@@ -99,7 +90,7 @@ const NewShiftPage = () => {
         /> }
 
       { saveSuccess && <p>{saveSuccess}</p> }
-    </>
+      </ChooseDate>
     : <p>Brak pracowników w grupie</p> }
     </>
   )
