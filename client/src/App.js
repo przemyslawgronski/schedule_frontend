@@ -27,6 +27,9 @@ import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import ConstraintsPage from "./containers/ConstraintsPage";
 
+//Styling
+import "./App.css";
+
 const App = ()=>{
   const dispatch = useDispatch();
 
