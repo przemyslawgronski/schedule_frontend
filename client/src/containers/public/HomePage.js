@@ -1,9 +1,9 @@
 const HomePage = () => {
     return (
-      <>
-          <h1>Auth Site</h1>
-          <p>Welcome to Auth Site!</p>
-      </>
+      <main>
+          <h1>Grafik online</h1>
+          <p>Strona do generowania grafików pracowniczych.</p>
+      </main>
     )
   }
   

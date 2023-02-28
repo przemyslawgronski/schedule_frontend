@@ -27,12 +27,10 @@ const Navbar = () => {
 
 
     return (
-    <div>
+    <nav>
         <NavLink to='/'> Home </NavLink>
         {isAuthenticated ? authLinks : guestLinks}
-
-        {/* Navlink adds class active to active page */}
-    </div> )
+    </nav> )
 };
 
 export default Navbar;
