@@ -12,7 +12,7 @@ body{
     padding: 1rem;
     font-family: 'Roboto', sans-serif;
     background-color: rgb(214, 214, 214);
-    color: black;
+    color: #111;
 }
 
 button{
@@ -32,4 +32,20 @@ button{
 button:hover{
   transition: 0.3s;
   background-position: left center;
+}
+
+a{
+    text-decoration: none;
+    color: var(--darkblue2);
+    margin: 0.1rem;
+}
+
+a:hover{
+    color: var(--darkblue2);
+    text-decoration: underline;
+}
+
+a.active{
+    color: var(--darkblue1);
+    text-decoration: underline;
 }
