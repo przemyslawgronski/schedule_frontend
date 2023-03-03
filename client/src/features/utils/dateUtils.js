@@ -1,6 +1,6 @@
 import { numArray } from "./arrayUtils";
 
-const monthNames = ["1. Styczeń","2. Luty","3. Marzec","4. Kwiecień","5. Maj","6. Czerwiec","7. Lipiec","8. Sierpień","9. Wrzesień","10. Październik","11. Listopad","12. Grudzień"];
+const monthNames = ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"];
 
 export const dateUtils = {
     yearsArray(radius){ return numArray(new Date().getFullYear()-radius, new Date().getFullYear()+radius)},

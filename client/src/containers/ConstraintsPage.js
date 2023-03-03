@@ -21,7 +21,7 @@ const ConstraintsPage = () => {
 
   return (
   <div>
-    <p>Constraints Page</p>
+    <h1>Ograniczenia</h1>
       <ul>
         {constraints.data?.map(constraint =>(
           <li key={constraint.id}>

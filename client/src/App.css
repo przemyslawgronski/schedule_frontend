@@ -92,10 +92,24 @@ fieldset{
     margin: 0.5rem;
 }
 
+ul{
+  border: 1px solid #bbb;
+  border-radius: 0.3rem;
+}
+
+
 li{
   border-bottom: 1px solid #bbb;
   padding: 0.5rem 1rem;
   line-height: 1.5rem;
+}
+
+li:last-child{
+  border-bottom: none;
+}
+
+li:hover{
+  background-color: #eee;
 }
 
 ::marker{
@@ -105,4 +119,9 @@ li{
 
 span{
   margin: 0 0.5rem 0 0;
+}
+
+nav{
+  display: flex;
+  justify-content: space-between;
 }

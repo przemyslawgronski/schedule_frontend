@@ -7,15 +7,14 @@ const DashboardPage = () => {
   return (
     <>
       {loading || user === null ? (
-        <span>loading</span>
+        <span>Ładowanie</span>
       ) : (
         <>
-          <h1>Dashboard</h1>
-          <p> User details:</p>
+          <h1>Dane użytkownika</h1>
           <ul>
-            <li>First Name: {user?.first_name}</li>
-            <li>Last Name: {user?.last_name}</li>
-            <li>Email: {user?.email}</li>
+            <li><b>Imię:</b> {user?.first_name}</li>
+            <li><b>Nazwisko:</b> {user?.last_name}</li>
+            <li><b>Email:</b> {user?.email}</li>
           </ul>
         </>
       )}

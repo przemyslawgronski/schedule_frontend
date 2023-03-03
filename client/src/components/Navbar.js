@@ -9,27 +9,31 @@ const Navbar = () => {
 
     const authLinks = (
         <>
-            <NavLink to='/dashboard'> Dashboard </NavLink>
-            <NavLink to='/groups'> Groups </NavLink>
-            <NavLink to='/employees'> Employees </NavLink>
-            <NavLink to='/shifts'> Shifts </NavLink>
-            <NavLink to='/constraints'> Constraints </NavLink>
+            <NavLink to='/shifts'>Shifts</NavLink>
+            <NavLink to='/employees'>Employees</NavLink>
+            <NavLink to='/groups'>Groups</NavLink>
+            <NavLink to='/constraints'>Constraints</NavLink>
+            <NavLink to='/dashboard'>Dashboard</NavLink>
             <a href="#!" onClick={()=>dispatch(logout())}> Logout </a>
         </>
     );
 
     const guestLinks = (
       <>
-            <NavLink to='/login'> Login </NavLink>
-            <NavLink to='/register'> Register </NavLink>
+            <NavLink to='/login'>Login</NavLink>
+            <NavLink to='/register'>Register</NavLink>
       </>  
     );
 
 
     return (
     <nav>
-        <NavLink to='/'> Home </NavLink>
-        {isAuthenticated ? authLinks : guestLinks}
+        <div>
+            <NavLink to='/'>Home</NavLink>
+        </div>
+        <div>
+            {isAuthenticated ? authLinks : guestLinks}
+        </div>
     </nav> )
 };
 

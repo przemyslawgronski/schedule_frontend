@@ -7,7 +7,7 @@ const ShiftsPage = () => {
 
   return (
     <>
-      <div>ShiftsPage</div>
+      <h1>Zmiany</h1>
       <Link to="new">Dodaj nowe zmiany</Link>
 
       <ChooseGroup>

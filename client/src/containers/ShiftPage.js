@@ -4,6 +4,7 @@ import ErrorList from '../components/ErrorList';
 import shiftMangle from '../features/pageSpecific/shiftMangle';
 import Tables from '../components/Tables';
 import RemoveButton from '../components/form/RemoveButton';
+import { dateUtils } from '../features/utils/dateUtils';
 
 const ShiftPage = () => {
 
@@ -29,8 +30,8 @@ const ShiftPage = () => {
   }
 
   return (
-    <div>ShiftPage {year} / {month} /
-      <div>
+    <>
+    <h1>Zmiany: {dateUtils.monthName(month)} {year}</h1>
         <Tables
           tables={Object.keys(mangledShifts)} // array of table keys
           captions={(grID)=>grID !== 'null' ? grID : "Grupa usunięta"} // caption for a given table key
@@ -45,8 +46,7 @@ const ShiftPage = () => {
           after_url={`/shifts`}
           msg = "Ostrożnie! Zostaną usunięte wszystkie zmiany z tego miesiąca."
         />
-      </div>
-    </div>
+    </>
   )    
 }
 
