@@ -1,0 +1,115 @@
+.navbar {
+    background-color: lightgreen;
+}
+
+.pagetop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: lightblue;
+    display: flex;
+    justify-content: space-between;
+    height: var(--pagetop-height);
+}
+
+.pagetop a {
+    display: inline-block;
+    padding: 0.5rem;
+    background-color: lightcoral;
+}
+
+.login{
+    background-color: lightseagreen;
+}
+
+.logged{
+    background-color: lightgoldenrodyellow;
+    position: fixed;
+    left: 0;
+    top: var(--pagetop-height);
+    height: 100vh;
+    width: var(--menu-width);
+}
+
+.logged a{
+    display: block;
+    padding: 0.5rem;
+    background-color: lightcoral;
+}
+
+/* 
+
+#root>:last-child{
+  margin-left: var(--menu-width);
+  padding: 1rem;
+}
+
+nav{
+  height: 100vh;
+  width: var(--menu-width);
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #bbb;
+  overflow-x: hidden;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+nav>div{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  border-top: 1px solid var(--darkblue2);
+}
+
+nav a{
+  padding: 0.5rem;
+  width: 100%;
+}
+
+nav a:hover{
+  background-color: #eee;
+  text-decoration: none;
+}
+
+.hamburger{
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+    nav{
+      left: calc(-1*var(--menu-width));
+    }
+    #root>:last-child{
+      margin-left: 0;
+    }
+    .hamburger{
+      display: block;
+      cursor: pointer;
+    }
+  
+    .hamburgerOn .bar1 {
+      transform: translate(0, 11px) rotate(-45deg);
+    }
+    
+    .hamburgerOn .bar2 {
+      opacity: 0;
+    }
+      
+    .hamburgerOn .bar3 {
+      transform: translate(0, -11px) rotate(45deg);
+    }
+  
+    .bar1, .bar2, .bar3 {
+      width: 35px;
+      height: 5px;
+      background-color: #333;
+      margin: 6px 0;
+      transition: 0.4s;
+      border-radius: 5px;
+    }
+  } */
