@@ -33,6 +33,16 @@ const Navbar = () => {
         </div>
     );
 
+    const toggleMenuWidth = () => {
+        if (isAuthenticated) {
+            document.documentElement.style.setProperty('--menu-width', '12rem');
+        } else {
+            document.documentElement.style.setProperty('--menu-width', '0');
+        };
+    }
+
+    toggleMenuWidth();
+
     return (
     <div className={styles.navbar}>
         <nav className={styles.pagetop}>
