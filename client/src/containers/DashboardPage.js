@@ -9,14 +9,14 @@ const DashboardPage = () => {
       {loading || user === null ? (
         <span>Ładowanie</span>
       ) : (
-        <>
+        <div>
           <h1>Dane użytkownika</h1>
           <ul>
             <li><b>Imię:</b> {user?.first_name}</li>
             <li><b>Nazwisko:</b> {user?.last_name}</li>
             <li><b>Email:</b> {user?.email}</li>
           </ul>
-        </>
+        </div>
       )}
     </>
   )

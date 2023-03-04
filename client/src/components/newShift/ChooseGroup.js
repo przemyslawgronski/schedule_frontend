@@ -25,7 +25,7 @@ const ChooseGroup = ({children}) => {
     }
 
   return (
-    <>
+    <div>
       <DropDown label="Wybierz grupę" name="groupId" options={groups} valueKey="id"
       objKey="id" objText="group_name" onChangeFunc={(event)=>setGroupId(JSON.parse(event.target.value))}/>
 
@@ -34,7 +34,7 @@ const ChooseGroup = ({children}) => {
           {children}
       </GroupIdContext.Provider>
       }
-    </>
+    </div>
   )
 }
 

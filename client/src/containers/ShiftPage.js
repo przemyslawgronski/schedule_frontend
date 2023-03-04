@@ -30,7 +30,7 @@ const ShiftPage = () => {
   }
 
   return (
-    <>
+    <div>
     <h1>Zmiany: {dateUtils.monthName(month)} {year}</h1>
         <Tables
           tables={Object.keys(mangledShifts)} // array of table keys
@@ -46,7 +46,7 @@ const ShiftPage = () => {
           after_url={`/shifts`}
           msg = "Ostrożnie! Zostaną usunięte wszystkie zmiany z tego miesiąca."
         />
-    </>
+    </div>
   )    
 }
 

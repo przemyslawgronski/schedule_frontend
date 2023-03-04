@@ -28,14 +28,14 @@ const LoginPage = () => {
     }
 
     return (
-      <>
+      <div>
           <h1>Log into your account</h1>
           <form onSubmit={onSubmit}>
             <Email ref={formRef.email}/>
             <Password ref={formRef.password}/>
             { loading ? ("loading") : (<button> Login </button>) }
           </form>
-      </>
+      </div>
     )
   }
   

@@ -28,7 +28,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <>
+    <div>
         <h1>RegisterPage</h1>
         <form onSubmit={onSubmit}>
           <TextInput ref={formRef.firstName} label='First Name' />
@@ -37,7 +37,7 @@ const RegisterPage = () => {
           <Password ref={formRef.password} />
           { loading ? ("loading") : (<button> Register </button>) }
         </form>
-    </>
+    </div>
   )
 }
 

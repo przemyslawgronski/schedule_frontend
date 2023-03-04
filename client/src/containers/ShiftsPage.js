@@ -6,14 +6,14 @@ import ShiftsLinks from '../components/shifts/ShiftsLinks'
 const ShiftsPage = () => {
 
   return (
-    <>
+    <div>
       <h1>Zmiany</h1>
       <Link to="new">Dodaj nowe zmiany</Link>
 
       <ChooseGroup>
         <ShiftsLinks />
       </ChooseGroup>
-    </> 
+    </div> 
   )
 }
 
