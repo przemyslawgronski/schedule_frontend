@@ -6,6 +6,7 @@
   --darkblue1: rgb(0, 92, 99);
   --darkblue2: rgb(0, 0, 104);
   --menu-width: 12rem;
+  --left-margin-for-menu: 12rem;
   --pagetop-height: 3rem;
 }
 
@@ -15,11 +16,11 @@ body{
     font-family: 'Arial', sans-serif;
     background-color: #eee;
     color: #111;
-    min-height: 100vh;
+    min-height: calc(100vh - var(--pagetop-height));
 }
 
 #root>:last-child{
-  margin-left: var(--menu-width);
+  margin-left: var(--left-margin-for-menu);
   margin-top: var(--pagetop-height);
   padding: 1rem;
 }
@@ -45,8 +46,6 @@ button:hover{
 a{
     text-decoration: none;
     color: var(--darkblue2);
-    margin: 0.3rem;
-    border-radius: 0.3rem;
 }
 
 a:hover{
@@ -125,3 +124,8 @@ span{
   margin: 0 0.5rem 0 0;
 }
 
+@media screen and (max-width: 600px) {
+  :root {
+    --left-margin-for-menu: 0;
+  }
+}

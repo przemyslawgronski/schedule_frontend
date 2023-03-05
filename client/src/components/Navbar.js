@@ -8,10 +8,10 @@ const Navbar = () => {
 
     const dispatch = useDispatch();
     const { isAuthenticated } = useSelector(state => state.user)
-    const [active, setActive] = useState(false);
+    const [mobileMenuOn, setMobileMenuOn] = useState(false);
 
     const authLinks = (
-        <nav className={styles.logged}>
+        <nav className={mobileMenuOn ? `${styles.logged} ${styles.loggedVisible}` : styles.logged}>
                 <NavLink to='/shifts'>Shifts</NavLink>
                 <NavLink to='/employees'>Employees</NavLink>
                 <NavLink to='/groups'>Groups</NavLink>
@@ -20,7 +20,7 @@ const Navbar = () => {
     );
 
     const guestLinks = (
-      <div className={styles.login}>
+      <div>
             <NavLink to='/login'>Login</NavLink>
             <NavLink to='/register'>Register</NavLink>
       </div>  
@@ -35,29 +35,34 @@ const Navbar = () => {
 
     const toggleMenuWidth = () => {
         if (isAuthenticated) {
-            document.documentElement.style.setProperty('--menu-width', '12rem');
+            document.documentElement.style.setProperty(
+                '--left-margin-for-menu',
+                document.documentElement.style.getPropertyValue('--menu-width')
+            );
         } else {
-            document.documentElement.style.setProperty('--menu-width', '0');
+            document.documentElement.style.setProperty('--left-margin-for-menu', '0');
         };
     }
 
     toggleMenuWidth();
 
     return (
-    <div className={styles.navbar}>
+    <>
         <nav className={styles.pagetop}>
             <div>
-                <div className={active ? 'hamburger hamburgerOn' : 'hamburger' } onClick={()=>setActive(!active)}>
-                    <div className="bar1"></div>
-                    <div className="bar2"></div>
-                    <div className="bar3"></div>
-                </div>
+                {isAuthenticated &&
+                    <div className={mobileMenuOn ? `${styles.hamburger} ${styles.hamburgerOn}` : styles.hamburger } onClick={()=>setMobileMenuOn(prev=>!prev)}>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                }
                 <NavLink to='/'>Home</NavLink>
             </div>
             {isAuthenticated ? logOutLinks : guestLinks}
         </nav>
         {isAuthenticated && authLinks}
-    </div>
+    </>
     )
 };
 
