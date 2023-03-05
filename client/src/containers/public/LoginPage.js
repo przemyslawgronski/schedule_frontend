@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { resetRegistered, login } from "../../features/user";
 import { Navigate } from "react-router-dom";
 import { Email, Password } from "../../components/form/Inputs";
+import style from "../../styles/loginpage.module.css"
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const LoginPage = () => {
     }
 
     return (
-      <div>
+      <div className={style.center}>
           <h1>Log into your account</h1>
           <form onSubmit={onSubmit}>
             <Email ref={formRef.email}/>
