@@ -5,8 +5,11 @@
 :root {
   --darkblue1: rgb(0, 92, 99);
   --darkblue2: rgb(0, 0, 104);
-  --left-margin-for-menu: 12rem;
+  --left-margin-for-menu: 12rem; /* managed with js */
   --pagetop-height: 3rem;
+  --black1: #111;
+  --gray1: #333;
+  --gray2: #555;
 }
 
 body{
@@ -14,7 +17,7 @@ body{
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color: #eee;
-    color: #111;
+    color: var(--black1);
     min-height: calc(100vh - var(--pagetop-height));
 }
 
@@ -52,7 +55,7 @@ a:hover{
 }
 
 a.active{
-    color: var(--darkblue1);
+  text-decoration: underline;
 }
 
 input{
@@ -116,7 +119,7 @@ li:hover{
 
 ::marker{
   font-size: 1.5rem;
-  color: #111;
+  color: var(--black1);
 }
 
 span{
