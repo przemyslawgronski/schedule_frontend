@@ -12,10 +12,10 @@ const Navbar = () => {
 
     const authLinks = (
         <nav className={mobileMenuOn ? `${styles.logged} ${styles.loggedVisible}` : styles.logged}>
-                <NavLink to='/shifts'>Shifts</NavLink>
-                <NavLink to='/employees'>Employees</NavLink>
-                <NavLink to='/groups'>Groups</NavLink>
-                <NavLink to='/constraints'>Constraints</NavLink>
+                <NavLink to='/shifts'       onClick={()=>setMobileMenuOn(false)}>Shifts</NavLink>
+                <NavLink to='/employees'    onClick={()=>setMobileMenuOn(false)}>Employees</NavLink>
+                <NavLink to='/groups'       onClick={()=>setMobileMenuOn(false)}>Groups</NavLink>
+                <NavLink to='/constraints'  onClick={()=>setMobileMenuOn(false)}>Constraints</NavLink>
         </nav>
     );
 
