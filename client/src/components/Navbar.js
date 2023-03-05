@@ -34,14 +34,8 @@ const Navbar = () => {
     );
 
     const toggleMenuWidth = () => {
-        if (isAuthenticated) {
-            document.documentElement.style.setProperty(
-                '--left-margin-for-menu',
-                document.documentElement.style.getPropertyValue('--menu-width')
-            );
-        } else {
-            document.documentElement.style.setProperty('--left-margin-for-menu', '0');
-        };
+        if (!isAuthenticated) document.documentElement.style.setProperty('--left-margin-for-menu', '0');
+        else document.documentElement.style.setProperty('--left-margin-for-menu', '12rem');
     }
 
     toggleMenuWidth();

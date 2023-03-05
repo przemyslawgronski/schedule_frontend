@@ -29,8 +29,9 @@
     position: fixed;
     left: 0;
     top: var(--pagetop-height);
-    height: 100%;
-    width: var(--menu-width);
+    height: calc(100vh - var(--pagetop-height));
+    width: 12rem;
+    overflow-y: auto;
 }
 
 .logged a{
@@ -42,8 +43,19 @@
 @media screen and (max-width: 600px) {
 
   .logged{
-    left: calc(-1*var(--menu-width));
-    transition: 0.4s;
+    width: 100%;
+    left: -100%;
+    transition: 0.3s;
+    opacity: 0.9;
+  }
+
+  .logged a{
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .logged a:hover{
+    background-color: lightblue;
   }
 
   .hamburger{

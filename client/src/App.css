@@ -5,7 +5,6 @@
 :root {
   --darkblue1: rgb(0, 92, 99);
   --darkblue2: rgb(0, 0, 104);
-  --menu-width: 12rem;
   --left-margin-for-menu: 12rem;
   --pagetop-height: 3rem;
 }
@@ -125,7 +124,7 @@ span{
 }
 
 @media screen and (max-width: 600px) {
-  :root {
-    --left-margin-for-menu: 0;
+  #root>:last-child{
+    margin-left: 0;
   }
 }
