@@ -28,7 +28,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import ConstraintsPage from "./containers/ConstraintsPage";
 
 //Styling
-import "./App.css";
+import "./styles/App.css";
 
 const App = ()=>{
   const dispatch = useDispatch();
