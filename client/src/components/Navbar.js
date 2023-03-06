@@ -28,8 +28,11 @@ const Navbar = () => {
 
     const logOutLinks = (
         <div>
-            <NavLink to='/dashboard'>Dashboard</NavLink>
-            <a href="#!" onClick={()=>dispatch(logout())}> Logout </a>
+            <NavLink to='/dashboard' onClick={()=>setMobileMenuOn(false)}>Dashboard</NavLink>
+            <a href="#!" onClick={()=>{
+                setMobileMenuOn(false);
+                dispatch(logout());
+                }}> Logout </a>
         </div>
     );
 
@@ -51,7 +54,7 @@ const Navbar = () => {
                         <div></div>
                     </div>
                 }
-                <NavLink to='/'>Home</NavLink>
+                <NavLink to='/' onClick={()=>setMobileMenuOn(false)}>Home</NavLink>
             </div>
             {isAuthenticated ? logOutLinks : guestLinks}
         </nav>
