@@ -1,5 +1,5 @@
 .center{
-    height: calc(100vh - var(--pagetop-height));
+    min-height: calc(100vh - var(--pagetop-height));
     display: flex;
     flex-direction: column;
     justify-content: center;
