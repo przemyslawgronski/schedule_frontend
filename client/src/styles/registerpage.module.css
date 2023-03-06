@@ -1,0 +1,89 @@
+.center{
+    height: calc(100vh - var(--pagetop-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.center form>label{
+    place-self: center right;
+}
+
+.center form>label:nth-of-type(1){
+    grid-area: first-name;
+}
+
+.center form>label:nth-of-type(2){
+    grid-area: last-name;
+}
+
+.center form>label:nth-of-type(3){
+    grid-area: email;
+}
+
+.center form>label:nth-of-type(4){
+    grid-area: pass;
+}
+
+.center form>input:nth-of-type(1){
+    grid-area: first-name-input;
+}
+
+.center form>input:nth-of-type(2){
+    grid-area: last-name-input;
+}
+
+.center form>input:nth-of-type(3){
+    grid-area: email-input;
+}
+
+.center form>input:nth-of-type(4){
+    grid-area: pass-input;
+}
+
+.center form>button{
+    grid-area: button;
+}
+
+.center form{
+    display: grid;
+    grid-template-areas: 'first-name first-name-input last-name last-name-input'
+                         'email email-input pass pass-input'
+                         'button button button button';
+    place-items: center;
+    gap: .5rem;
+}
+
+@media screen and (max-width: 800px) {
+    .center form{
+        grid-template-areas: 'first-name first-name-input'
+                             'last-name last-name-input'
+                             'email email-input'
+                             'pass pass-input'
+                             'button button';
+        grid-template-columns: auto auto;
+        grid-template-rows: repeat(5, auto);
+        row-gap: .5rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .center form{
+        grid-template-areas:    'first-name-input'
+                                'first-name'
+                                'last-name-input'
+                                'last-name'
+                                'email-input'
+                                'email'
+                                'pass-input'
+                                'pass'
+                                'button';
+        grid-template-columns: auto;
+        grid-template-rows: repeat(4, auto 2.2rem) auto;
+        row-gap: 0;
+    }
+    .center form>label{
+        place-self: baseline center;
+    }
+}

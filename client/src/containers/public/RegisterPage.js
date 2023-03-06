@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom"; // TODO: Should be useNavigate ??? 
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../features/user";
 import { Email, Password, TextInput } from "../../components/form/Inputs";
+import style from "../../styles/registerpage.module.css"
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <div>
+    <div className={style.center}>
         <h1>RegisterPage</h1>
         <form onSubmit={onSubmit}>
           <TextInput ref={formRef.firstName} label='First Name' />

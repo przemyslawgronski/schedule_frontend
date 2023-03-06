@@ -6,12 +6,6 @@
     align-items: center;
 }
 
-.center form{
-    display: grid;
-    grid-template-areas: 'email email-input pass pass-input button';
-    place-items: center;
-}
-
 .center form>label:first-of-type{
     grid-area: email;
     place-self: center right;
@@ -33,6 +27,12 @@
 
 .center form>button{
     grid-area: button;
+}
+
+.center form{
+    display: grid;
+    grid-template-areas: 'email email-input pass pass-input button';
+    place-items: center;
 }
 
 @media screen and (max-width: 800px) {
