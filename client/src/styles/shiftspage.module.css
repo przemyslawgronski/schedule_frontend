@@ -1,0 +1,21 @@
+.shiftspage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.shiftspage>a{
+    background-color: var(--darkblue1);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    margin: 1rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.shiftspage>a>svg{
+    margin: 0 0 0 0.3rem;
+}
