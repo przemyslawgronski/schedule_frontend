@@ -5,7 +5,13 @@
     justify-content: center;
 }
 
-.shiftspage>a{
+.shiftspage>div:first-of-type{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shiftspage>div:first-of-type>a{
     background-color: var(--darkblue1);
     color: white;
     padding: 0.5rem 1rem;
@@ -16,6 +22,16 @@
     align-items: center;
 }
 
-.shiftspage>a>svg{
+.shiftspage>div:first-of-type>a:hover{
+    text-decoration: underline;
+}
+
+.shiftspage>div:first-of-type>a>svg{
     margin: 0 0 0 0.3rem;
+}
+
+.shiftspage>div:nth-of-type(2){
+    height: .2rem;
+    width: 100%;
+    background-color: var(--darkblue1);
 }

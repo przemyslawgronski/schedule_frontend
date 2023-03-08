@@ -9,9 +9,13 @@ const ShiftsPage = () => {
 
   return (
     <div className={style.shiftspage}>
-      <h1>Zmiany</h1>
-      <Link to="new">Dodaj nowe zmiany <AddCircleIcon/></Link>
-      
+      <div>
+        <h1>Zmiany</h1>
+        <Link to="new">Nowe <AddCircleIcon/></Link>
+      </div>
+
+      <div></div>
+
       <ChooseGroup>
         <ShiftsLinks />
       </ChooseGroup>

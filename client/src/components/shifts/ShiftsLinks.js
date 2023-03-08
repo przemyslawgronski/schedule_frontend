@@ -3,6 +3,7 @@ import useGetAndChange from '../../features/customHooks/useGetAndChange'
 import ErrorList from '../ErrorList'
 import { Link } from 'react-router-dom'
 import { GroupIdContext } from '../newShift/ChooseGroup'
+import style from '../../styles/shiftslinks.module.css'
 
 const ShiftsLinks = () => {
 
@@ -13,7 +14,7 @@ const ShiftsLinks = () => {
     if (yearsMonths.error) return <ErrorList errors={[yearsMonths.error.message]} />
 
   return (
-    <div>
+    <div className={style.shiftslink}>
         <h4>Zapisane zmiany:</h4>
 
         {yearsMonths.data && Object.keys(yearsMonths.data).sort(function(a, b){return b-a}).map((year)=>(
