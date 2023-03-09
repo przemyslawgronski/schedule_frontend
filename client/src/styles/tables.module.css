@@ -4,5 +4,15 @@
 }
 
 .responsivetable table{
-    min-width: 100%;
+    margin: auto;
+}
+
+.responsivetable td{
+    padding: .5rem 2rem;
+}
+
+@media screen and (max-width: 800px) {
+    .responsivetable table{
+        min-width: 100%;
+    }   
 }
