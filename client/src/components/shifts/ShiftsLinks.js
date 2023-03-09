@@ -15,17 +15,16 @@ const ShiftsLinks = () => {
     if (yearsMonths.error) return <ErrorList errors={[yearsMonths.error.message]} />
 
   return (
-    <div className={style.shiftslink}>
-        <h4>Zapisane zmiany:</h4>
-
+    <div className={style.shiftslinks}>
         {yearsMonths.data && Object.keys(yearsMonths.data).sort((a, b)=>b-a).map((year)=>(
-        <div key={year}><p>{year}</p>
+          <div key={year}>
+            <h4>{year}</h4>
+            <div>
             {yearsMonths.data[year].sort((a,b)=>a-b).map((month)=>
-            <span key={month}>
-                <Link to={`/shifts/${year}/${month}`}>{month}. {dateUtils.monthName(month-1)}</Link>, &nbsp;
-            </span>
+                <Link key={month} to={`/shifts/${year}/${month}`}>{month}. {dateUtils.monthName(month-1)}</Link>
             )}
-        </div>    
+            </div>
+          </div>
         ))}
     </div>
   )

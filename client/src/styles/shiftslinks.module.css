@@ -1,3 +1,25 @@
-.shiftslink{
-    background-color: red;
+.shiftslinks>div{
+    margin-top: 3rem;
+    border-top: .1rem solid var(--darkblue1);
+}
+
+.shiftslinks>div:first-of-type{
+    margin-top: 1rem;
+}
+
+.shiftslinks>div>h4{
+    text-align: center;
+    margin-top: .7rem;
+}
+
+.shiftslinks>div>div{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    grid-gap: 1rem;
+}
+
+.shiftslinks>div>div>a{
+    padding: .5rem 1rem;
+    background-color: var(--darkblue1);
+    color: white;
 }

@@ -1,10 +1,3 @@
-.shiftspage{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .shiftspage>div:first-of-type{
     display: flex;
     align-items: center;
@@ -31,7 +24,6 @@
 }
 
 .shiftspage>div:nth-of-type(2){
-    height: .2rem;
-    width: 100%;
+    height: .3rem;
     background-color: var(--darkblue1);
 }
