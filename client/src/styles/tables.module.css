@@ -1,0 +1,8 @@
+.responsivetable{
+    margin: 3rem 1rem;
+    overflow-x: auto;
+}
+
+.responsivetable table{
+    min-width: 100%;
+}

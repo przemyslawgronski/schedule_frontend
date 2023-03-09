@@ -1,4 +1,5 @@
 import React from 'react'
+import style from '../styles/tables.module.css'
 
 const Tables = ({tables, captions, headers, rows, cells}) => {
   // tables - array of table keys
@@ -7,30 +8,32 @@ const Tables = ({tables, captions, headers, rows, cells}) => {
 
   const spanIfArray = (item) => {
     if(Array.isArray(item))
-      return item.map((val, indx)=><span key={indx}> {val} </span>)
+      return item.map((val, indx)=><span key={indx}>{val}</span>)
     return item
   }
 
   return (
     <>
     { tables.map((table)=>(
-      <table key={table}>
-        <caption>{captions(table)}</caption>
-        <thead>
-          <tr>
-            {headers(table).map((header)=>(<th key={header}>{header}</th>))}
-          </tr>
-        </thead>
-        <tbody>
-        {rows(table).map((row)=>(
-          <tr key={row}>
-            {headers(table).map((header)=>(
-              <td key={header}>{spanIfArray(cells(table, row, header))}</td>
-            ))}
-          </tr>
-        ) )}
-        </tbody>
-      </table>
+      <div key={table} className={style.responsivetable}>
+        <table>
+          <caption>{captions(table)}</caption>
+          <thead>
+            <tr>
+              {headers(table).map((header)=>(<th key={header}>{header}</th>))}
+            </tr>
+          </thead>
+          <tbody>
+          {rows(table).map((row)=>(
+            <tr key={row}>
+              {headers(table).map((header)=>(
+                <td key={header}>{spanIfArray(cells(table, row, header))}</td>
+              ))}
+            </tr>
+          ) )}
+          </tbody>
+        </table>
+      </div>
     ))}
   </>
   )

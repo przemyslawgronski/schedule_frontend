@@ -122,10 +122,6 @@ li:hover{
   color: var(--black1);
 }
 
-span{
-  margin: 0 0.5rem 0 0;
-}
-
 h1{
   text-align: center;
 }
@@ -142,6 +138,10 @@ th{
 
 td{
   padding: 0.5rem;
+}
+
+td span{
+  margin: 0 .2rem;
 }
 
 th, td{
