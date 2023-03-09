@@ -156,10 +156,6 @@ tr:nth-child(even){
   background-color: #ddd;
 }
 
-tbody>tr:hover{
-  outline: 0.2rem solid var(--darkblue1);
-}
-
 caption{
   font-size: 1.2rem;
   font-weight: bold;
