@@ -30,13 +30,13 @@ const RegisterPage = () => {
 
   return (
     <div className={style.center}>
-        <h1>RegisterPage</h1>
+        <h1>Zarejestruj się</h1>
         <form onSubmit={onSubmit}>
-          <TextInput ref={formRef.firstName} label='First Name' />
-          <TextInput ref={formRef.lastName} label='Last Name' />
-          <Email ref={formRef.email} />
-          <Password ref={formRef.password} />
-          { loading ? ("loading") : (<button> Register </button>) }
+          <TextInput ref={formRef.firstName} label='Imię' />
+          <TextInput ref={formRef.lastName} label='Nazwisko' />
+          <Email ref={formRef.email} label='E-mail' />
+          <Password ref={formRef.password} label='Hasło' />
+          { loading ? ("ładowanie") : (<button>Rejestracja</button>) }
         </form>
     </div>
   )

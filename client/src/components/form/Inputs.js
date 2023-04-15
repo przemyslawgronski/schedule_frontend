@@ -45,26 +45,26 @@ export const CheckBoxRef = React.forwardRef(({labelText, defaultValue}, ref) => 
 })
 
 
-export const Email = React.forwardRef((_, ref) => {
+export const Email = React.forwardRef(({label}, ref) => {
 
   const id = useId()+'email';
 
   return (
     <>
-      <label htmlFor={id}>Email</label>
+      {label && <label htmlFor={id}>{label}</label>}
       <input ref={ref} id={id} type='email' name='email' required />
     </>
   )
 })
 
 
-export const Password = React.forwardRef((_, ref) => {
+export const Password = React.forwardRef(({label}, ref) => {
   
   const id = useId()+'password';
 
   return (
     <>
-      <label htmlFor={id}>Password</label>
+      {label && <label htmlFor={id}>{label}</label>}
       <input ref={ref} id={id} type='password' name='password' required />
     </>
   )
@@ -78,7 +78,7 @@ export const TextInput = React.forwardRef(({label, defaultValue}, ref) => {
 
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      {label && <label htmlFor={id}>{label}</label>}
       <input
         ref={ref}
         type='text'
