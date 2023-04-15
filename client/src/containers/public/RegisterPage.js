@@ -1,13 +1,15 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Navigate } from "react-router-dom"; // TODO: Should be useNavigate ??? !!!
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../features/user";
 import { Email, Password, TextInput } from "../../components/form/Inputs";
 import style from "../../styles/registerpage.module.css"
+import ErrorList from "../../components/ErrorList";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const {registered, loading} = useSelector(state => state.user);
+  const [errors, setErrors] = useState(null);
 
   const formRef = {
     firstName: useRef(null),
@@ -18,15 +20,27 @@ const RegisterPage = () => {
 
   if (registered) return <Navigate to='/login' />
 
-  const onSubmit = e => {
+  const onSubmit = async(e) => {
     e.preventDefault();
-    dispatch(register({
-      first_name: formRef.firstName.current.value,
-      last_name: formRef.lastName.current.value,
-      email: formRef.email.current.value,
-      password: formRef.password.current.value
-    }));
+    try{
+      await dispatch(register({
+        first_name: formRef.firstName.current.value,
+        last_name: formRef.lastName.current.value,
+        email: formRef.email.current.value,
+        password: formRef.password.current.value
+      })).unwrap();
+    } catch (err) {
+      setErrors(err);
+    // egzample of err:
+    //   {
+    //     "email": [
+    //         "user account with this email already exists."
+    //     ]
+    // }
+    }
   }
+
+  if (errors) return <ErrorList errors={Object.values(errors)} />
 
   return (
     <div className={style.center}>
@@ -43,5 +57,3 @@ const RegisterPage = () => {
 }
 
 export default RegisterPage;
-
-// TODO: Wyświetlanie błędów rejestracji i sprawdzanie poprawności wprowadzonych danych na froncie i backendzie
