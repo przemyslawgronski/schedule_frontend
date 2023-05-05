@@ -10,9 +10,9 @@ const ShiftPage = () => {
 
   const { id, year, month } = useParams();
   const [{data:shifts, error:shiftsErr}] = useGetAndChange({url: `/api/schedule/shifts/${id}/${year}/${month}`});
-  const [groups] = useGetAndChange({url: "/api/schedule/groups"});
+  const [ group ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
 
-  const errors = [groups.error, shiftsErr].filter(Boolean);
+  const errors = [group.error, shiftsErr].filter(Boolean);
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
   const [mangledShifts, empsInGroup] = shiftMangle(shifts);
@@ -33,8 +33,8 @@ const ShiftPage = () => {
 
   const groupIdToName = (grId) => {
     grId = parseInt(grId);
-    const group = groups?.data?.find((gr) => gr.id === grId);
-    return group?.group_name;
+    console.log(group?.data?.group_name);
+    return "elo"
   };
 
   return (
