@@ -17,6 +17,8 @@ const ShiftPage = () => {
 
   const [mangledShifts, empsInGroup] = shiftMangle(shifts);
 
+  console.log({mangledShifts, empsInGroup});
+
   // mangledShifts
   // {"1": {"2024-12-31": {"1": [0]},"2024-12-30": {"2": [0]}, ...
 
@@ -26,16 +28,10 @@ const ShiftPage = () => {
   const removedEmpName = "Pracownicy usunięci";
 
   const cellsGen = (grID, day, emp)=>{
-    if (emp === 'Dzień') return day
-    if (emp === removedEmpName) return mangledShifts[grID][day][null]
-    return mangledShifts[grID][day][emp]
+    if (emp === 'Dzień') return day;
+    if (emp === removedEmpName) return mangledShifts[grID][day][null];
+    return mangledShifts[grID][day][emp];
   }
-
-  const groupIdToName = (grId) => {
-    grId = parseInt(grId);
-    console.log(group?.data?.group_name);
-    return "elo"
-  };
 
   return (
     <div>
@@ -43,7 +39,7 @@ const ShiftPage = () => {
     <h2>Grupa: {group?.data?.group_name}</h2>
         <Tables
           tables={Object.keys(mangledShifts)} // array of table keys
-          captions={(grID)=>grID !== 'null' ? groupIdToName(grID) : "Grupa usunięta"} // caption for a given table key
+          captions={()=>'Elo'} // caption for a given table key
           // array of headers for a given table key
           headers={(grID)=>['Dzień', ...(empsInGroup[grID].map((emp)=>emp ? emp : removedEmpName))]}
           rows={(grID)=>Object.keys(mangledShifts[grID])} // array of row keys for a given table key
