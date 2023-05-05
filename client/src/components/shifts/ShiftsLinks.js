@@ -21,7 +21,7 @@ const ShiftsLinks = () => {
             <h4>{year}</h4>
             <div>
             {yearsMonths.data[year].sort((a,b)=>a-b).map((month)=>
-                <Link key={month} to={`/shifts/${year}/${month}`}>{month}. {dateUtils.monthName(month-1)}</Link>
+                <Link key={month} to={`/shifts/${groupId}/${year}/${month}`}>{month}. {dateUtils.monthName(month-1)}</Link>
             )}
             </div>
           </div>

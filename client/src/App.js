@@ -57,7 +57,7 @@ const App = ()=>{
             <Route path="/constraints/:id" element={<ConstraintPage />} />
             <Route path="/shifts"          element={<ShiftsPage />} />
             <Route path="/shifts/new"      element={<NewShiftPage />} />
-            <Route path="/shifts/:year/:month" element={<ShiftPage />}/>
+            <Route path="/shifts/:id/:year/:month" element={<ShiftPage />}/>
           </Route>
           
           <Route path="*" element={<PageNotFound/>} />

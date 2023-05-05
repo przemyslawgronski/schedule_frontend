@@ -8,12 +8,14 @@ import { dateUtils } from '../features/utils/dateUtils';
 
 const ShiftPage = () => {
 
-  const { year, month } = useParams();
-  const [{data:shifts, error:shiftsErr}] = useGetAndChange({url: `/api/schedule/shifts/${year}/${month}`});
+  const { id, year, month } = useParams();
+  const [{data:shifts, error:shiftsErr}] = useGetAndChange({url: `/api/schedule/shifts/${id}/${year}/${month}`});
+  const [groups] = useGetAndChange({url: "/api/schedule/groups"});
+
+  const errors = [groups.error, shiftsErr].filter(Boolean);
+  if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
   const [mangledShifts, empsInGroup] = shiftMangle(shifts);
-
-  if (shiftsErr) return <ErrorList errors={[shiftsErr.message]} />
 
   // mangledShifts
   // {"1": {"2024-12-31": {"1": [0]},"2024-12-30": {"2": [0]}, ...
@@ -29,12 +31,18 @@ const ShiftPage = () => {
     return mangledShifts[grID][day][emp]
   }
 
+  const groupIdToName = (grId) => {
+    grId = parseInt(grId);
+    const group = groups?.data?.find((gr) => gr.id === grId);
+    return group?.group_name;
+  };
+
   return (
     <div>
     <h1>Zmiany: {dateUtils.monthName(month-1)} {year}</h1>
         <Tables
           tables={Object.keys(mangledShifts)} // array of table keys
-          captions={(grID)=>grID !== 'null' ? grID : "Grupa usunięta"} // caption for a given table key
+          captions={(grID)=>grID !== 'null' ? groupIdToName(grID) : "Grupa usunięta"} // caption for a given table key
           // array of headers for a given table key
           headers={(grID)=>['Dzień', ...(empsInGroup[grID].map((emp)=>emp ? emp : removedEmpName))]}
           rows={(grID)=>Object.keys(mangledShifts[grID])} // array of row keys for a given table key
@@ -42,9 +50,9 @@ const ShiftPage = () => {
         />
         <RemoveButton
           name={`Zmiany z ${month}.${year}`}
-          url={`/api/schedule/shifts/${year}/${month}`}
+          url={`/api/schedule/shifts/${id}/${year}/${month}`}
           after_url={`/shifts`}
-          msg = "Ostrożnie! Zostaną usunięte wszystkie zmiany z tego miesiąca."
+          msg = "Ostrożnie! Zostaną usunięte wszystkie zmiany z tej grupy z tego miesiąca."
         />
     </div>
   )    
