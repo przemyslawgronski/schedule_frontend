@@ -31,7 +31,7 @@ const ShiftPage = () => {
 
   return (
     <div>
-    <h1>Zmiany: {dateUtils.monthName(month)} {year}</h1>
+    <h1>Zmiany: {dateUtils.monthName(month-1)} {year}</h1>
         <Tables
           tables={Object.keys(mangledShifts)} // array of table keys
           captions={(grID)=>grID !== 'null' ? grID : "Grupa usunięta"} // caption for a given table key
