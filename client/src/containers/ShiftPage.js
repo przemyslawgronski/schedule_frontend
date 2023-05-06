@@ -5,25 +5,35 @@ import shiftMangle from '../features/pageSpecific/shiftMangle';
 import Tables from '../components/Tables';
 import RemoveButton from '../components/form/RemoveButton';
 import { dateUtils } from '../features/utils/dateUtils';
+import ShiftsTable from '../components/ShiftsTable';
 
 const ShiftPage = () => {
 
   const { id, year, month } = useParams();
   const [{data:shifts, error:shiftsErr}] = useGetAndChange({url: `/api/schedule/shifts/${id}/${year}/${month}`});
   const [ group ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
+  const [ allEmps ] = useGetAndChange({url: "/api/schedule/employees"})
 
-  const errors = [group.error, shiftsErr].filter(Boolean);
+  const errors = [group.error, allEmps.error, shiftsErr].filter(Boolean);
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
   const [mangledShifts, empsInGroup] = shiftMangle(shifts);
 
-  console.log({mangledShifts, empsInGroup});
+  console.log({mangledShifts, empsInGroup, shifts, allEmps});
 
   // mangledShifts
   // {"1": {"2024-12-31": {"1": [0]},"2024-12-30": {"2": [0]}, ...
 
   // empsInGroup
   // {"1": [1, 2]}
+
+  //uniqueEmps from shifts:
+  const uniqueEmpsIds = [...new Set(shifts?.map(shift => shift.employee))];
+  console.log({uniqueEmpsIds});
+  
+  const uniqueEmps = uniqueEmpsIds?.map((empID)=>allEmps?.data?.find((emp)=>emp.id === empID));
+  
+  console.log({uniqueEmps});
 
   const removedEmpName = "Pracownicy usunięci";
 
@@ -45,6 +55,7 @@ const ShiftPage = () => {
           rows={(grID)=>Object.keys(mangledShifts[grID])} // array of row keys for a given table key
           cells={cellsGen} // cell value for a given table key, row key and column key
         />
+        { uniqueEmps.filter(Boolean).length && <ShiftsTable emps={uniqueEmps} shifts={shifts}/>}
         <RemoveButton
           name={`Zmiany z ${month}.${year}`}
           url={`/api/schedule/shifts/${id}/${year}/${month}`}

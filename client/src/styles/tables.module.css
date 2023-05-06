@@ -9,6 +9,7 @@
 
 .responsivetable td{
     padding: .5rem 2rem;
+    text-align: center;
 }
 
 @media screen and (max-width: 800px) {
