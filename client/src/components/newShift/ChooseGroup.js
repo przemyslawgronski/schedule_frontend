@@ -7,7 +7,7 @@ export const GroupIdContext = createContext();
 
 const ChooseGroup = ({children}) => {
 
-    const [{data: groups, error: groupsErrors}] = useGetAndChange({
+    const [{data: groups, error: groupsErr}] = useGetAndChange({
         url:"/api/schedule/groups",
         modify:useCallback((arr)=>arr.filter(gr=>!gr.hide), []) // Filter out hidden groups
       });
@@ -18,22 +18,18 @@ const ChooseGroup = ({children}) => {
         if (groups && groups[0] != null) setGroupId( groups[0].id );
     }, [groups, setGroupId])
 
-    const errors = [groupsErrors].filter(Boolean);
+    if(groupsErr) return <ErrorList errors={[groupsErr.message]} />
 
-    if (errors.length) {
-        return <ErrorList errors={errors.map(({ message }) => message)} />;
-    }
+    if (!groups || !groupId) return <div>Ładowanie...</div>;
 
   return (
     <div>
       <DropDown label="Wybierz grupę" name="groupId" options={groups} valueKey="id"
       objKey="id" objText="group_name" onChangeFunc={(event)=>setGroupId(JSON.parse(event.target.value))}/>
 
-      {groupId &&
       <GroupIdContext.Provider value={groupId}>
           {children}
       </GroupIdContext.Provider>
-      }
     </div>
   )
 }

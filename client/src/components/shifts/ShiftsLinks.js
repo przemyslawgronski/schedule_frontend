@@ -10,17 +10,19 @@ const ShiftsLinks = () => {
 
     const groupId = useContext(GroupIdContext);
 
-    const [yearsMonths] = useGetAndChange({url: `api/schedule/groups/${groupId}/years-months-with-shifts`})
+    const [{data:yearsMonths, error:yearsMonthsErr}] = useGetAndChange({url: `api/schedule/groups/${groupId}/years-months-with-shifts`})
 
-    if (yearsMonths.error) return <ErrorList errors={[yearsMonths.error.message]} />
+    if (yearsMonthsErr) return <ErrorList errors={[yearsMonthsErr.message]} />
+
+    if (!yearsMonths) return <div>Ładowanie...</div>
 
   return (
     <div className={style.shiftslinks}>
-        {yearsMonths.data && Object.keys(yearsMonths.data).sort((a, b)=>b-a).map((year)=>(
+        {Object.keys(yearsMonths).sort((a, b)=>b-a).map((year)=>(
           <div key={year}>
             <h4>{year}</h4>
             <div>
-            {yearsMonths.data[year].sort((a,b)=>a-b).map((month)=>
+            {yearsMonths[year].sort((a,b)=>a-b).map((month)=>
                 <Link key={month} to={`/shifts/${groupId}/${year}/${month}`}>{month}. {dateUtils.monthName(month-1)}</Link>
             )}
             </div>
