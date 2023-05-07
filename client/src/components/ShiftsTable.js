@@ -2,6 +2,8 @@ import style from '../styles/tables.module.css'
 
 const ShiftsTable = ({headers, shifts}) => {
 
+  // TODO: Zrobić przycisk do przeglądania jak w excel online
+
     return (
         <>
           <div className={style.responsivetable}>
