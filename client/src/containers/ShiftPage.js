@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
 import shiftMangle from '../features/pageSpecific/shiftMangle';
-import Tables from '../components/Tables';
 import RemoveButton from '../components/form/RemoveButton';
 import { dateUtils } from '../features/utils/dateUtils';
 import ShiftsTable from '../components/ShiftsTable';
@@ -19,8 +18,6 @@ const ShiftPage = () => {
 
   const [mangledShifts, empsInGroup] = shiftMangle(shifts);
 
-  console.log({mangledShifts, empsInGroup, shifts, allEmps});
-
   // mangledShifts
   // {"1": {"2024-12-31": {"1": [0]},"2024-12-30": {"2": [0]}, ...
 
@@ -29,32 +26,13 @@ const ShiftPage = () => {
 
   //uniqueEmps from shifts:
   const uniqueEmpsIds = [...new Set(shifts?.map(shift => shift.employee))];
-  console.log({uniqueEmpsIds});
   
   const uniqueEmps = uniqueEmpsIds?.map((empID)=>allEmps?.data?.find((emp)=>emp.id === empID));
-  
-  console.log({uniqueEmps});
-
-  const removedEmpName = "Pracownicy usunięci";
-
-  const cellsGen = (grID, day, emp)=>{
-    if (emp === 'Dzień') return day;
-    if (emp === removedEmpName) return mangledShifts[grID][day][null];
-    return mangledShifts[grID][day][emp];
-  }
 
   return (
     <div>
     <h1>Zmiany: {dateUtils.monthName(month-1)} {year}</h1>
     <h2>Grupa: {group?.data?.group_name}</h2>
-        <Tables
-          tables={Object.keys(mangledShifts)} // array of table keys
-          captions={()=>'Elo'} // caption for a given table key
-          // array of headers for a given table key
-          headers={(grID)=>['Dzień', ...(empsInGroup[grID].map((emp)=>emp ? emp : removedEmpName))]}
-          rows={(grID)=>Object.keys(mangledShifts[grID])} // array of row keys for a given table key
-          cells={cellsGen} // cell value for a given table key, row key and column key
-        />
         { uniqueEmps.filter(Boolean).length && <ShiftsTable emps={uniqueEmps} shifts={shifts}/>}
         <RemoveButton
           name={`Zmiany z ${month}.${year}`}
