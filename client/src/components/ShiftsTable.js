@@ -1,8 +1,6 @@
 import style from '../styles/tables.module.css'
 
-const ShiftsTable = ({emps, shifts}) => {
-
-    const headers = emps.map(({id, first_name, last_name})=>({id:id, full_name:`${first_name} ${last_name}`}) );
+const ShiftsTable = ({headers, shifts}) => {
 
     return (
         <>

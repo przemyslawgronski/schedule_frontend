@@ -4,6 +4,7 @@ import ErrorList from '../components/ErrorList';
 import RemoveButton from '../components/form/RemoveButton';
 import { dateUtils } from '../features/utils/dateUtils';
 import ShiftsTable from '../components/ShiftsTable';
+import { genHeaders } from '../features/pageSpecific/shiftPageFunc';
 
 const ShiftPage = () => {
 
@@ -17,25 +18,21 @@ const ShiftPage = () => {
 
   if(!shifts || !group || !allEmps) return (<div>Ładowanie...</div>);
 
-  // unique employee ids from shifts:
-  const uniqueEmpsIds = [...new Set(shifts.map(shift => shift.employee))];
-  
-  // unique employees from ids
-  const uniqueEmps = uniqueEmpsIds?.map((empID)=>allEmps.find((emp)=>emp.id === empID));
+  const headers = genHeaders(shifts, allEmps);
 
   return (
     <div>
-    <h1>Zmiany: {dateUtils.monthName(month-1)} {year}</h1>
-    <h2>Grupa: {group.group_name}</h2>
-        
-        { uniqueEmps.filter(Boolean).length && <ShiftsTable emps={uniqueEmps} shifts={shifts}/>}
+      <h1>Zmiany: {dateUtils.monthName(month-1)} {year}</h1>
+      <h2>Grupa: {group.group_name}</h2>
+          
+          <ShiftsTable headers={headers} shifts={shifts}/>
 
-        <RemoveButton
-          name={`Zmiany z ${month}.${year}`}
-          url={`/api/schedule/shifts/${id}/${year}/${month}`}
-          after_url={`/shifts`}
-          msg = "Ostrożnie! Zostaną usunięte wszystkie zmiany z tej grupy z tego miesiąca."
-        />
+          <RemoveButton
+            name={`Zmiany z ${month}.${year}`}
+            url={`/api/schedule/shifts/${id}/${year}/${month}`}
+            after_url={`/shifts`}
+            msg = "Ostrożnie! Zostaną usunięte wszystkie zmiany z tej grupy z tego miesiąca."
+          />
     </div>
   )    
 }
