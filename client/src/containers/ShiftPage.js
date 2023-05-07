@@ -9,8 +9,8 @@ const ShiftPage = () => {
 
   const { id, year, month } = useParams();
   const [{data:shifts, error:shiftsErr}] = useGetAndChange({url: `/api/schedule/shifts/${id}/${year}/${month}`});
-  const [ {data:group, error:groupErr} ] = useGetAndChange({url:`/api/schedule/groups/${id}`});
-  const [ {data:allEmps, error:allEmpsErr} ] = useGetAndChange({url: "/api/schedule/employees"})
+  const [{data:group, error:groupErr}] = useGetAndChange({url:`/api/schedule/groups/${id}`});
+  const [{data:allEmps, error:allEmpsErr}] = useGetAndChange({url: "/api/schedule/employees"})
 
   const errors = [groupErr, allEmpsErr, shiftsErr].filter(Boolean);
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
