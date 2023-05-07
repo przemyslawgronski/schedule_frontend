@@ -9,6 +9,8 @@ const RenderSolution = () => {
 
   if (!solution) return null;
   
+  // TODO: Pokazać grafik w formie ładnej tabeli
+
   return (
     <>
         {Object.keys(solution).map((dayIndex)=>
