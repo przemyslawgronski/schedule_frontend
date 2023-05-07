@@ -15,16 +15,21 @@ const ShiftPage = () => {
   const errors = [group.error, allEmps.error, shiftsErr].filter(Boolean);
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
-  //uniqueEmps from shifts:
+  if(!shifts || !group || !allEmps) return (<div>Ładowanie...</div>);
+
+  // unique employee ids from shifts:
   const uniqueEmpsIds = [...new Set(shifts?.map(shift => shift.employee))];
   
+  // unique employees from ids
   const uniqueEmps = uniqueEmpsIds?.map((empID)=>allEmps?.data?.find((emp)=>emp.id === empID));
 
   return (
     <div>
     <h1>Zmiany: {dateUtils.monthName(month-1)} {year}</h1>
     <h2>Grupa: {group?.data?.group_name}</h2>
+        
         { uniqueEmps.filter(Boolean).length && <ShiftsTable emps={uniqueEmps} shifts={shifts}/>}
+
         <RemoveButton
           name={`Zmiany z ${month}.${year}`}
           url={`/api/schedule/shifts/${id}/${year}/${month}`}
