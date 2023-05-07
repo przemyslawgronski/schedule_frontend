@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList';
-import shiftMangle from '../features/pageSpecific/shiftMangle';
 import RemoveButton from '../components/form/RemoveButton';
 import { dateUtils } from '../features/utils/dateUtils';
 import ShiftsTable from '../components/ShiftsTable';
@@ -15,14 +14,6 @@ const ShiftPage = () => {
 
   const errors = [group.error, allEmps.error, shiftsErr].filter(Boolean);
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
-
-  const [mangledShifts, empsInGroup] = shiftMangle(shifts);
-
-  // mangledShifts
-  // {"1": {"2024-12-31": {"1": [0]},"2024-12-30": {"2": [0]}, ...
-
-  // empsInGroup
-  // {"1": [1, 2]}
 
   //uniqueEmps from shifts:
   const uniqueEmpsIds = [...new Set(shifts?.map(shift => shift.employee))];
