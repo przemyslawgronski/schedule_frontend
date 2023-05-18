@@ -1,3 +1,4 @@
+import { unArr } from '../features/utils/arrayUtils'
 import style from '../styles/tables.module.css'
 
 const ShiftsTable = ({headers, shifts}) => {
@@ -16,10 +17,11 @@ const ShiftsTable = ({headers, shifts}) => {
               </thead>
               <tbody>
               {shifts.map((shift)=>(
-                <tr key={shift.id}>
+                // Each row (date) must be unique
+                <tr key={shift.date}>
                     <td>{shift.date}</td>
                     {headers.map((emp)=>(
-                        <td key={emp.id}>{emp.id===shift.employee && shift.shift_num}</td>
+                        <td key={emp.id}>{emp.id===shift.employee && unArr(shift.shift_num)}</td>
                     ))}
                 </tr>
               ) )}

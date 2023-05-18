@@ -67,3 +67,12 @@ export const addOrRemove = (array, item) => {
       return [...array, item];
     }
 }
+
+// If item is not an array returns it
+// If item is array with one element returns that element
+// If item is array with more than one element returns string with elements separated by ', '
+export const unArr = (item) => {
+  if(!Array.isArray(item)) return item;
+  if(item.length === 1) return item[0];
+  return item.join(', ');
+}
