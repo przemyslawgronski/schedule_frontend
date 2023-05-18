@@ -1,5 +1,7 @@
 import { CheckBox } from "./form/Inputs"
 
+// TODO: Pokazać w ładnej tabeli (może ShiftsTable?) wybrane dni wolne
+
 const ChooseDaysOffForm = ({employees, daysOff, handleDaysOff, chosenDaysOff}) => (
     <>
         <p>Wybierz dni wolne:</p>
