@@ -11,8 +11,8 @@ export const dateUtils = {
     daysInMonth(year, month){ return new Date(year, month+1, 0).getDate() },
     datesArray(year, month){
         return Array.from(
-            Array(dateUtils.daysInMonth(year, month-1)).keys()).map(
-                (day)=>`${year}-${month.toString().padStart(2,'0')}-${(day+1).toString().padStart(2,'0')}`
+            Array(dateUtils.daysInMonth(year, month)).keys()).map(
+                (day)=>`${year}-${(month+1).toString().padStart(2,'0')}-${(day+1).toString().padStart(2,'0')}`
             )
         }
 }

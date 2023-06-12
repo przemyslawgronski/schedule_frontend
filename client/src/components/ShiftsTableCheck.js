@@ -1,13 +1,13 @@
-import { unArr } from '../features/utils/arrayUtils'
 import style from '../styles/tables.module.css'
+import CheckDataRows from './newShift/CheckDataRows'
 
-const ShiftsTable = ({headers, shifts}) => {
-
-  console.log({shifts, headers});
+const ShiftsTableCheck = ({headers, daysOff2, handleDaysOff2}) => {
 
   // TODO: Zrobić przycisk do przeglądania jak w excel online
 
-  // TODO: Co gdy w jednym dniu będzie więcej niż jedna zmiana?
+
+
+  console.log({daysOff2});
 
     return (
         <>
@@ -19,8 +19,8 @@ const ShiftsTable = ({headers, shifts}) => {
                     {headers.map((emp)=>(<th key={emp.id}>{emp.full_name}</th>))}
                 </tr>
               </thead>
-              <tbody>
-              {shifts.map((shift)=>(
+              <CheckDataRows daysOff2={daysOff2} handleDaysOff2={handleDaysOff2} headers={headers}/>
+              {/* {shifts.map((shift)=>(
                 // Each row (date) must be unique
                 <tr key={shift.date}>
                     <td>{shift.date}</td>
@@ -28,11 +28,10 @@ const ShiftsTable = ({headers, shifts}) => {
                         <td key={emp.id}>{emp.id===shift.employee && unArr(shift.shift_num)}</td>
                     ))}
                 </tr>
-              ) )}
-              </tbody>
+              ) )} */}
             </table>
           </div>
       </>
       )
 }
-export default ShiftsTable
+export default ShiftsTableCheck
