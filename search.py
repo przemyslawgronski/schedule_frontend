@@ -10,7 +10,10 @@ def count_levels(most_parent_path, nested_path, count=0):
     count += 1
     return count_levels(most_parent_path, os.path.split(nested_path)[0], count)
 
-def search_text_in_file(extension=".js", exclude_path_words = None):
+def search_text_in_file(extension=".js", exclude_path_words=None):
+    if exclude_path_words is None:
+        exclude_path_words = []
+        
     path_dir = os.path.dirname(__file__)
     
     for root, _, files in os.walk(path_dir):
@@ -34,7 +37,7 @@ def search_text_in_file(extension=".js", exclude_path_words = None):
                         # if(results):
                         #     for result in results:
                         #         print(result)
-                        if "TODO" in content:
+                        if "daysOff2" in content:
                             print(full_path)
                 except UnicodeDecodeError as e:
                     print("Error reading file: " + full_path)
