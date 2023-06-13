@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { GroupIdContext } from './ChooseGroup'
-import { EmpsInGroupContext } from './EmpsInGroup'
 import { DateContext } from './ChooseDate'
 import { dateUtils } from '../../features/utils/dateUtils'
 import { SolutionContext } from './GetSolution'
@@ -8,13 +7,8 @@ import { SolutionContext } from './GetSolution'
 const GenerateButton2 = ({daysOff2}) => {
 
     const groupId = useContext(GroupIdContext);
-    const empsInGroup = useContext(EmpsInGroupContext);
     const date = useContext(DateContext);
     const {createSolution} = useContext(SolutionContext);
-
-    console.log('------- > daysOff2 -------');
-    console.log(daysOff2);
-    console.log('------- < daysOff2 -------');
 
   return (
     <button onClick={()=>createSolution({

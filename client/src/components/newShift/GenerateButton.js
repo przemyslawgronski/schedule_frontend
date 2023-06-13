@@ -7,6 +7,8 @@ import { dateUtils } from '../../features/utils/dateUtils'
 import { SolutionContext } from './GetSolution'
 import { DaysOffContext } from './ChooseDaysOff'
 
+// TODO: Remove this component
+
 const GenerateButton = () => {
 
     const groupId = useContext(GroupIdContext);

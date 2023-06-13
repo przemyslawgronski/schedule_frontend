@@ -1,11 +1,7 @@
 import React, {useEffect, useContext, useState, createContext} from 'react'
 import ChooseDaysOffForm from '../ChooseDaysOffForm'
 import { dateUtils } from '../../features/utils/dateUtils'
-import { safeInvertAtPos } from '../../features/utils/objUtils'
-import { create2dArr } from '../../features/utils/arrayUtils'
-import { mapEmpIdToFreeDays } from '../../features/pageSpecific/newShiftsFunc'
 import { EmpsInGroupContext } from './EmpsInGroup'
-import { GroupIdContext } from './ChooseGroup'
 import { DateContext } from './ChooseDate'
 import GenerateButton2 from './GenerateButton2'
 
@@ -14,26 +10,19 @@ export const DaysOffContext = createContext();
 const ChooseDaysOff = ({children}) => {
 
     const empsInGroup = useContext(EmpsInGroupContext);
-    const groupId = useContext(GroupIdContext);
     const date = useContext(DateContext);
 
     const [daysOff, setDaysOff] = useState([]);
-    const [daysOff2, setDaysOff2] = useState([]);
 
-    const handleDaysOff = (pos1, pos2) => setDaysOff( prev=> safeInvertAtPos(prev, [pos1, pos2]) );
-    const handleDaysOff2 = (dayOffId)=>setDaysOff2( prev=> {
+    const handleDaysOff = (dayOffId)=>setDaysOff( prev=> {
       const newDaysOff = JSON.parse(JSON.stringify(prev));
       const dayOff = newDaysOff.find( ({id})=>id===dayOffId );
       dayOff.dayOff = !dayOff.dayOff;
       console.log({newDaysOff});
       return newDaysOff;
     });
-    const daysCount = dateUtils.daysInMonth(date.year, date.month);
 
-    useEffect(()=>{
-        // Create new empty array
-        setDaysOff(create2dArr(daysCount, empsInGroup.length, false));
-    },[daysCount, empsInGroup.length, groupId, date, setDaysOff])
+    const daysCount = dateUtils.daysInMonth(date.year, date.month);
 
     // {
     //  id: 1,
@@ -58,28 +47,18 @@ const ChooseDaysOff = ({children}) => {
         })
       })
 
-      setDaysOff2(newDaysOff);
+      setDaysOff(newDaysOff);
     
-    },[empsInGroup, date])
+    },[empsInGroup, date]);
 
-    console.log({daysOff2, daysOff});
-
-
-
-    const compressedDaysOff2 = convertDaysOff2(daysOff2);
-
-    console.log({compressedDaysOff2});
+    // TODO: Remove this function and use daysOff2 directly
+    const compressedDaysOff2 = convertDaysOff2(daysOff);
 
   return (
     <>
           <p>Dni w miesiącu: {daysCount}</p>
 
-          <ChooseDaysOffForm employees={empsInGroup} daysOff={daysOff} daysOff2={daysOff2}
-          handleDaysOff={handleDaysOff} handleDaysOff2={handleDaysOff2} chosenDaysOff={mapEmpIdToFreeDays(empsInGroup, daysOff)} />
-
-          <DaysOffContext.Provider value={daysOff}>
-              {children}
-          </DaysOffContext.Provider>
+          <ChooseDaysOffForm employees={empsInGroup} daysOff={daysOff} handleDaysOff={handleDaysOff} />
 
           <GenerateButton2 daysOff2={compressedDaysOff2} />
     </>

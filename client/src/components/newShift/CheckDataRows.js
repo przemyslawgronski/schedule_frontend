@@ -1,7 +1,7 @@
 import { CheckBox } from "../form/Inputs"
 
 
-const CheckDataRows = ({daysOff2, handleDaysOff2, headers}) => {
+const CheckDataRows = ({daysOff, handleDaysOff, headers}) => {
 
     // daysOff2:
   //   [
@@ -51,8 +51,8 @@ const CheckDataRows = ({daysOff2, handleDaysOff2, headers}) => {
   // ]
 
   // Group daysOff2 by date
-
-  const daysOff2ByDate = daysOff2.reduce((acc, curr)=>{
+  // TODO: move function to utils (outside of component)
+  const daysOff2ByDate = daysOff.reduce((acc, curr)=>{
     if(acc[curr.date]==null) acc[curr.date] = {};
     if(acc[curr.date][curr.empId]==null) acc[curr.date][curr.empId] = {};
     acc[curr.date][curr.empId] = {dayOff: curr.dayOff, id: curr.id};
@@ -70,7 +70,7 @@ const CheckDataRows = ({daysOff2, handleDaysOff2, headers}) => {
               <td key={emp.id}>
                 <CheckBox
                   isChecked={daysOff2ByDate[day][emp.id].dayOff}
-                  changeFunc={()=>handleDaysOff2(daysOff2ByDate[day][emp.id].id)}
+                  changeFunc={()=>handleDaysOff(daysOff2ByDate[day][emp.id].id)}
                 />
               </td>
             ))
@@ -82,31 +82,5 @@ const CheckDataRows = ({daysOff2, handleDaysOff2, headers}) => {
     </tbody>
   )
 }
+
 export default CheckDataRows
-
-//   {shifts.map((shift)=>(
-//     // Each row (date) must be unique
-//     <tr key={shift.date}>
-//         <td>{shift.date}</td>
-//         {headers.map((emp)=>(
-//             <td key={emp.id}>{emp.id===shift.employee && unArr(shift.shift_num)}</td>
-//         ))}
-//     </tr>
-//   ) )}
-
-
-        /* {daysOff?.map((isCheckedByDay, dayIndex)=>(
-        <div key={dayIndex}>
-          {dayIndex+1}
-          {isCheckedByDay?.map( (isCheckedByShift, shiftIndex)=> (
-          
-          <CheckBox
-            key={shiftIndex}
-            isChecked={isCheckedByShift}
-            changeFunc={()=>handleDaysOff2()}
-          />
-          
-          ) )}
-        </div>
-    )
-    )} */
