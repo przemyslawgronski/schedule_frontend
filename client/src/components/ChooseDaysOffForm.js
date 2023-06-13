@@ -1,4 +1,3 @@
-import { CheckBox } from "./form/Inputs"
 import ShiftsTableCheck from "./ShiftsTableCheck"
 
 const ChooseDaysOffForm = ({employees, daysOff, handleDaysOff}) => {
