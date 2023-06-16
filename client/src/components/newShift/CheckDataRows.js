@@ -3,7 +3,7 @@ import { CheckBox } from "../form/Inputs"
 
 const CheckDataRows = ({daysOff, handleDaysOff, headers}) => {
 
-    // daysOff2:
+    // daysOff:
   //   [
   //     {
   //         "id": "8-2023-05-01",
@@ -50,9 +50,9 @@ const CheckDataRows = ({daysOff, handleDaysOff, headers}) => {
   //     ...
   // ]
 
-  // Group daysOff2 by date
+  // Group daysOff by date
   // TODO: move function to utils (outside of component)
-  const daysOff2ByDate = daysOff.reduce((acc, curr)=>{
+  const daysOffByDate = daysOff.reduce((acc, curr)=>{
     if(acc[curr.date]==null) acc[curr.date] = {};
     if(acc[curr.date][curr.empId]==null) acc[curr.date][curr.empId] = {};
     acc[curr.date][curr.empId] = {dayOff: curr.dayOff, id: curr.id};
@@ -62,15 +62,15 @@ const CheckDataRows = ({daysOff, handleDaysOff, headers}) => {
   return (
     <tbody>
     {
-      Object.keys(daysOff2ByDate).map(day=>(
+      Object.keys(daysOffByDate).map(day=>(
         <tr key={day}>
           <td>{day}</td>
           {
             headers.map(emp=>(
               <td key={emp.id}>
                 <CheckBox
-                  isChecked={daysOff2ByDate[day][emp.id].dayOff}
-                  changeFunc={()=>handleDaysOff(daysOff2ByDate[day][emp.id].id)}
+                  isChecked={daysOffByDate[day][emp.id].dayOff}
+                  changeFunc={()=>handleDaysOff(daysOffByDate[day][emp.id].id)}
                 />
               </td>
             ))
