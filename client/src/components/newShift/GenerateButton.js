@@ -4,7 +4,7 @@ import { DateContext } from './ChooseDate'
 import { dateUtils } from '../../features/utils/dateUtils'
 import { SolutionContext } from './GetSolution'
 
-const GenerateButton2 = ({daysOff2}) => {
+const GenerateButton = ({daysOff2}) => {
 
     const groupId = useContext(GroupIdContext);
     const date = useContext(DateContext);
@@ -15,8 +15,8 @@ const GenerateButton2 = ({daysOff2}) => {
         checkedBoxes: daysOff2,
         num_days: dateUtils.daysInMonth(date.year, date.month),
         group_id: groupId,
-      })}>Generuj2</button>
+      })}>Generuj</button>
   )
 }
 
-export default GenerateButton2
+export default GenerateButton

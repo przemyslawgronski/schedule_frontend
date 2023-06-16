@@ -3,7 +3,7 @@ import ChooseDaysOffForm from '../ChooseDaysOffForm'
 import { dateUtils } from '../../features/utils/dateUtils'
 import { EmpsInGroupContext } from './EmpsInGroup'
 import { DateContext } from './ChooseDate'
-import GenerateButton2 from './GenerateButton2'
+import GenerateButton from './GenerateButton'
 
 export const DaysOffContext = createContext();
 
@@ -18,7 +18,7 @@ const ChooseDaysOff = () => {
       const newDaysOff = JSON.parse(JSON.stringify(prev));
       const dayOff = newDaysOff.find( ({id})=>id===dayOffId );
       dayOff.dayOff = !dayOff.dayOff;
-      console.log({newDaysOff});
+      
       return newDaysOff;
     });
 
@@ -60,7 +60,7 @@ const ChooseDaysOff = () => {
 
           <ChooseDaysOffForm employees={empsInGroup} daysOff={daysOff} handleDaysOff={handleDaysOff} />
 
-          <GenerateButton2 daysOff2={compressedDaysOff2} />
+          <GenerateButton daysOff2={compressedDaysOff2} />
     </>
   )
 }
