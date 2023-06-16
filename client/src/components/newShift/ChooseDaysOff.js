@@ -7,7 +7,7 @@ import GenerateButton2 from './GenerateButton2'
 
 export const DaysOffContext = createContext();
 
-const ChooseDaysOff = ({children}) => {
+const ChooseDaysOff = () => {
 
     const empsInGroup = useContext(EmpsInGroupContext);
     const date = useContext(DateContext);

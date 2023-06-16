@@ -5,7 +5,6 @@ import ChooseDate from '../components/newShift/ChooseDate';
 import ChooseGroup from '../components/newShift/ChooseGroup';
 import EmpsInGroup from '../components/newShift/EmpsInGroup';
 import GetSolution from '../components/newShift/GetSolution';
-import GenerateButton from '../components/newShift/GenerateButton';
 import SaveSuccess from '../components/newShift/SaveSuccess';
 import SaveButton from '../components/newShift/SaveButton';
 
@@ -37,12 +36,9 @@ const NewShiftPage = () => {
           <SaveSuccess>             {/*create: SaveSuccessContext,  consume: */}
             <GetSolution>             {/*create: SolutionContext,     consume: */}
 
-              <ChooseDaysOff>         {/*create: DaysOffContext,      consume: EmpsInGroupContext, DateContext, GroupIdContext*/}
-                <GenerateButton />    {/*create:                      consume: SolutionContext, EmpsInGroupContext, DateContext, GroupIdContext, DaysOffContext*/}
-              </ChooseDaysOff>
-
-                <RenderSolution/>       {/*create:                      consume: EmpsInGroupContext, SolutionContext, DateContext*/}
-                <SaveButton/>           {/*create:                      consume: SaveSuccessContext, DateContext, GroupIdContext, SolutionContext*/}
+              <ChooseDaysOff/>         {/*create: DaysOffContext,      consume: EmpsInGroupContext, DateContext, GroupIdContext and more*/}
+              <RenderSolution/>       {/*create:                      consume: EmpsInGroupContext, SolutionContext, DateContext*/}
+              <SaveButton/>           {/*create:                      consume: SaveSuccessContext, DateContext, GroupIdContext, SolutionContext*/}
             
             </GetSolution>
           </SaveSuccess>
