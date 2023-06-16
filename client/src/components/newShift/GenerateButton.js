@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { GroupIdContext } from './ChooseGroup'
 import { DateContext } from './ChooseDate'
-import { dateUtils } from '../../features/utils/dateUtils'
 import { SolutionContext } from './GetSolution'
+import { convertDaysOff } from '../../features/pageSpecific/generateButtonFunc'
 
 const GenerateButton = ({daysOff}) => {
 
@@ -11,11 +11,13 @@ const GenerateButton = ({daysOff}) => {
     const {createSolution} = useContext(SolutionContext);
 
   return (
-    <button onClick={()=>createSolution({
-        checkedBoxes: daysOff,
-        num_days: dateUtils.daysInMonth(date.year, date.month),
+    <button onClick={
+      ()=>createSolution({
+        checkedBoxes: convertDaysOff(daysOff),
+        num_days: new Set(daysOff.map( ({date}) => date)).size,
         group_id: groupId,
-      })}>Generuj</button>
+      })
+    }>Generuj</button>
   )
 }
 

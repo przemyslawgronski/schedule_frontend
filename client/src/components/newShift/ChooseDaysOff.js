@@ -51,36 +51,15 @@ const ChooseDaysOff = () => {
     
     },[empsInGroup, date]);
 
-    // TODO: Remove this function and use daysOff2 directly
-    const compressedDaysOff = convertDaysOff(daysOff);
-
   return (
     <>
           <p>Dni w miesiącu: {daysCount}</p>
 
           <ChooseDaysOffForm employees={empsInGroup} daysOff={daysOff} handleDaysOff={handleDaysOff} />
 
-          <GenerateButton daysOff={compressedDaysOff} />
+          <GenerateButton daysOff={daysOff} />
     </>
   )
 }
 
 export default ChooseDaysOff
-
-
-  function convertDaysOff(daysOff){
-    const newDaysOff = {};
-    daysOff.forEach( ({empId, date, dayOff}) => {
-
-      if(!newDaysOff[empId]) newDaysOff[empId] = [];
-      
-      if(dayOff) {
-        // full date to day index
-        // example: 2023-04-30 -> 29
-        const dayIndex = new Date(date).getDate()-1;
-        newDaysOff[empId].push(dayIndex);
-      }
-
-    })
-    return newDaysOff;
-  }
