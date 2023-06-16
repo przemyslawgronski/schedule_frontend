@@ -3,8 +3,6 @@ import style from '../styles/tables.module.css'
 
 const ShiftsTable = ({headers, shifts}) => {
 
-  console.log({shifts, headers});
-
   // TODO: Zrobić przycisk do przeglądania jak w excel online
 
   // TODO: Co gdy w jednym dniu będzie więcej niż jedna zmiana?
