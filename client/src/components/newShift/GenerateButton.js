@@ -1,13 +1,11 @@
 import React, { useContext } from 'react'
 import { GroupIdContext } from './ChooseGroup'
-import { DateContext } from './ChooseDate'
 import { SolutionContext } from './GetSolution'
 import { convertDaysOff } from '../../features/pageSpecific/generateButtonFunc'
 
 const GenerateButton = ({daysOff}) => {
 
     const groupId = useContext(GroupIdContext);
-    const date = useContext(DateContext);
     const {createSolution} = useContext(SolutionContext);
 
   return (
