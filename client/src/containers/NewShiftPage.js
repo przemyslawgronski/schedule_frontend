@@ -36,7 +36,7 @@ const NewShiftPage = () => {
           <SaveSuccess>             {/*create: SaveSuccessContext,  consume: */}
             <GetSolution>             {/*create: SolutionContext,     consume: DateContext, GroupIdContext */}
 
-              <ChooseDaysOff/>         {/*create: DaysOffContext,      consume: EmpsInGroupContext, DateContext*/}
+              <ChooseDaysOff/>         {/*create: DaysOffContext,      consume: EmpsInGroupContext, DateContext, SolutionContext*/}
                 {/* <GenerateButton/>    create:                      consume: GroupIdContext, SolutionContext */}
               <RenderSolution/>       {/*create:                      consume: EmpsInGroupContext, SolutionContext, DateContext*/}
               <SaveButton/>           {/*create:                      consume: SaveSuccessContext, DateContext, GroupIdContext, SolutionContext*/}

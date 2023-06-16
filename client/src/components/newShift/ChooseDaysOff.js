@@ -1,16 +1,16 @@
-import React, {useEffect, useContext, useState, createContext} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import ChooseDaysOffForm from '../ChooseDaysOffForm'
 import { dateUtils } from '../../features/utils/dateUtils'
 import { EmpsInGroupContext } from './EmpsInGroup'
 import { DateContext } from './ChooseDate'
+import { SolutionContext } from './GetSolution'
 import GenerateButton from './GenerateButton'
-
-export const DaysOffContext = createContext();
 
 const ChooseDaysOff = () => {
 
     const empsInGroup = useContext(EmpsInGroupContext);
     const date = useContext(DateContext);
+    const {resetSolution} = useContext(SolutionContext);
 
     const [daysOff, setDaysOff] = useState([]);
 
@@ -18,9 +18,10 @@ const ChooseDaysOff = () => {
       const newDaysOff = JSON.parse(JSON.stringify(prev));
       const dayOff = newDaysOff.find( ({id})=>id===dayOffId );
       dayOff.dayOff = !dayOff.dayOff;
-
       return newDaysOff;
     });
+
+    useEffect(()=>resetSolution(),[resetSolution, daysOff]); // Reset solution if daysOff changed
 
     const daysCount = dateUtils.daysInMonth(date.year, date.month);
 

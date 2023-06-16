@@ -24,7 +24,7 @@ const GetSolution = ({children}) => {
     }
 
   return (
-    <SolutionContext.Provider value={{solution, createSolution}}>
+    <SolutionContext.Provider value={{solution, createSolution, resetSolution}}>
         {children}
     </SolutionContext.Provider>
   )
