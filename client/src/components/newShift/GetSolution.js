@@ -15,7 +15,7 @@ const GetSolution = ({children}) => {
 
     useEffect(() => {
       resetSolution(); // Reset solution if date or group changed
-    }, [date, groupId]);
+    }, [date, groupId, resetSolution]);
 
     const errors = [solutionError].filter(Boolean);
 
