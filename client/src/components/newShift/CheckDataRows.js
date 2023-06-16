@@ -5,8 +5,6 @@ const CheckDataRows = ({daysOff, handleDaysOff, headers}) => {
 
   const daysOffByDate = groupDaysOffByDate(daysOff);
 
-  console.log('daysOffByDate', daysOffByDate);
-
   return (
     <tbody>
     {

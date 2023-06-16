@@ -18,15 +18,7 @@ const NewShiftPage = () => {
   // edytować grafik
   // usunąć stary i utworzyć nowy
 
-  // TODO: Pokaż link do wszystkich zmian /shifts
   // TODO: Zakaz nadpisywania grafików (ta sama grupa, ten sam dzień), tylko modyfikacja
-
-  // useEffect(()=>{
-  //   resetSolution(); // Clear generated schedule and clear save info if something was changed
-  //   resetSave();
-  // },[daysOff, groupId, date, resetSave, resetSolution])
-
-  // TODO: resetSolution chyba nie działa po zapisaniu grafiku
 
   return (
     <ChooseGroup>                   {/*create: GroupIdContext,      consume: */}
