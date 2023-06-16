@@ -1,4 +1,5 @@
 import ShiftsTableCheck from "./ShiftsTableCheck"
+import ChoosedDaysOff from "./newShift/ChoosedDaysOff";
 
 const ChooseDaysOffForm = ({employees, daysOff, handleDaysOff}) => {
 
@@ -11,17 +12,7 @@ return (
 
         <ShiftsTableCheck headers={headers} daysOff={daysOff} handleDaysOff={handleDaysOff}/>
 
-        <p>Wybrane dni wolne:</p>
-
-        {/* TODO: Wybrane dni wolne */}
-
-        {/* {employees?.map((emp)=>
-          <p key={emp.id}>
-            {emp.first_name} {emp.last_name} : {chosenDaysOff[emp.id]?.map((dayIndex)=>
-            <span key={dayIndex}>
-              {dayIndex+1}
-            </span>)}
-          </p>)} */}
+        <ChoosedDaysOff daysOff={daysOff} employees={employees}/>
     </>
   )
 }
