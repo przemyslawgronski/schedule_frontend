@@ -18,7 +18,7 @@ const ChooseDaysOff = () => {
       const newDaysOff = JSON.parse(JSON.stringify(prev));
       const dayOff = newDaysOff.find( ({id})=>id===dayOffId );
       dayOff.dayOff = !dayOff.dayOff;
-      
+
       return newDaysOff;
     });
 
@@ -52,7 +52,7 @@ const ChooseDaysOff = () => {
     },[empsInGroup, date]);
 
     // TODO: Remove this function and use daysOff2 directly
-    const compressedDaysOff2 = convertDaysOff2(daysOff);
+    const compressedDaysOff = convertDaysOff(daysOff);
 
   return (
     <>
@@ -60,7 +60,7 @@ const ChooseDaysOff = () => {
 
           <ChooseDaysOffForm employees={empsInGroup} daysOff={daysOff} handleDaysOff={handleDaysOff} />
 
-          <GenerateButton daysOff2={compressedDaysOff2} />
+          <GenerateButton daysOff={compressedDaysOff} />
     </>
   )
 }
@@ -68,86 +68,9 @@ const ChooseDaysOff = () => {
 export default ChooseDaysOff
 
 
-
-// function to convert this:
-    // daysOff2:
-  //   [
-  //     {
-  //         "id": "8-2023-04-01",
-  //         "empId": 8,
-  //         "date": "2023-04-01",
-  //         "dayOff": false
-  //     },
-  //     {
-  //         "id": "11-2023-04-01",
-  //         "empId": 11,
-  //         "date": "2023-04-01",
-  //         "dayOff": false
-  //     },
-  //     {
-  //         "id": "8-2023-04-02",
-  //         "empId": 8,
-  //         "date": "2023-04-02",
-  //         "dayOff": true
-  //     },
-  //     {
-  //         "id": "11-2023-04-02",
-  //         "empId": 11,
-  //         "date": "2023-04-02",
-  //         "dayOff": false
-  //     },
-  //     {
-  //         "id": "8-2023-04-03",
-  //         "empId": 8,
-  //         "date": "2023-04-03",
-  //         "dayOff": false
-  //     },
-  //     {
-  //         "id": "11-2023-04-03",
-  //         "empId": 11,
-  //         "date": "2023-04-03",
-  //         "dayOff": false
-  //     },
-  //     {
-  //         "id": "8-2023-04-04",
-  //         "empId": 8,
-  //         "date": "2023-04-04",
-  //         "dayOff": true
-  //     },
-  //     {
-  //         "id": "11-2023-04-04",
-  //         "empId": 11,
-  //         "date": "2023-04-04",
-  //         "dayOff": false
-  //     },
-  //     {
-  //         "id": "8-2023-04-05",
-  //         "empId": 8,
-  //         "date": "2023-04-05",
-  //         "dayOff": false
-  //     },
-  //     {
-  //         "id": "11-2023-04-05",
-  //         "empId": 11,
-  //         "date": "2023-04-05",
-  //         "dayOff": false
-  //     },
-  //     ...
-  // ]
-
- // into this:
-  //  mapEmpIdToFreeDays(empsInGroup, daysOff):
-  //   {
-  //     "8": [
-  //         1,
-  //         3
-  //     ],
-  //     "11": []
-  // }
-
-  function convertDaysOff2(daysOff2){
+  function convertDaysOff(daysOff){
     const newDaysOff = {};
-    daysOff2.forEach( ({empId, date, dayOff}) => {
+    daysOff.forEach( ({empId, date, dayOff}) => {
 
       if(!newDaysOff[empId]) newDaysOff[empId] = [];
       
