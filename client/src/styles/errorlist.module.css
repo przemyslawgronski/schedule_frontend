@@ -1,0 +1,9 @@
+.errorlist b{
+    color: red;
+}
+
+.errorlist>div{
+    border: 1px solid red;
+    margin: 1em;
+    padding: 1em;
+}
