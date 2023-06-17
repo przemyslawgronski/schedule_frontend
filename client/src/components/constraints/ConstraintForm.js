@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import { TextInput, CheckBox } from "../form/Inputs";
 import Form from "../form/Form";
+import RemoveButton from "../form/RemoveButton";
 
-const ConstraintForm = ({availableConstraints, choosedConstraints, submitFunc, constraint, onChangeConstraint, setToggle, remove}) => {
+const ConstraintForm = ({availableConstraints, choosedConstraints, submitFunc, constraint, onChangeConstraint, setToggle}) => {
 
     const representation = useRef();
 
@@ -36,12 +37,12 @@ const ConstraintForm = ({availableConstraints, choosedConstraints, submitFunc, c
           )}
         </fieldset>
     </Form>
-
-    <button onClick={()=>remove({
-        name: constraint.representation,
-        url: `/api/schedule/constraints/${constraint.id}`,
-        msg: "Ostrożnie! Usunięcie grupy spowoduje usunięcie wszystkich zwiazanych z nią zmian. Zamiast tego można ją ukryć."
-        })}>Usuń</button>
+      
+    {constraint && <RemoveButton
+        name = {constraint.representation}
+        url = {`/api/schedule/constraints/${constraint.id}`}
+        after_url = "/constraints"
+    /> }
 
     </div>
   )
