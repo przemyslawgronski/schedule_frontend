@@ -40,10 +40,11 @@ const RegisterPage = () => {
     }
   }
 
-  if (errors) return <ErrorList errors={Object.values(errors)} />
+  //if (errors) return <ErrorList errors={Object.values(errors)} />
 
   return (
     <div className={style.center}>
+        {errors && <ErrorList errors={Object.values(errors)} />}
         <h1>Zarejestruj się</h1>
         <form onSubmit={onSubmit}>
           <TextInput ref={formRef.firstName} label='Imię' />
