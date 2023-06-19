@@ -3,6 +3,7 @@ import { SolutionContext } from './newShift/GetSolution';
 import { EmpsInGroupContext } from './newShift/EmpsInGroup';
 import { DateContext } from './newShift/ChooseDate';
 import ShiftsTable from './ShiftsTable';
+import TbodyShifts from './TbodyShifts';
 
 const RenderSolution = () => {
 
@@ -28,7 +29,11 @@ const RenderSolution = () => {
     });
   });
 
-  return <ShiftsTable headers={headers} shifts={shifts} />;
+  return (
+  <ShiftsTable headers={headers}>
+    <TbodyShifts shifts={shifts} headers={headers}/>
+  </ShiftsTable>
+  )
 }
 
 export default RenderSolution

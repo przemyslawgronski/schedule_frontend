@@ -5,6 +5,7 @@ import RemoveButton from '../components/form/RemoveButton';
 import { dateUtils } from '../features/utils/dateUtils';
 import ShiftsTable from '../components/ShiftsTable';
 import { genHeaders } from '../features/pageSpecific/shiftPageFunc';
+import TbodyShifts from '../components/TbodyShifts';
 
 const ShiftPage = () => {
 
@@ -25,7 +26,9 @@ const ShiftPage = () => {
       <h1>Zmiany: {dateUtils.monthName(month-1)} {year}</h1>
       <h2>Grupa: {group.group_name}</h2>
           
-          <ShiftsTable headers={headers} shifts={shifts}/>
+          <ShiftsTable headers={headers}>
+            <TbodyShifts shifts={shifts} headers={headers}/>
+          </ShiftsTable>
 
           <RemoveButton
             name={`Zmiany z ${month}.${year}`}
