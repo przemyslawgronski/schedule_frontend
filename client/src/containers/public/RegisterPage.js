@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom"; // TODO: Should be useNavigate ??? !!!
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../features/user";
-import { Email, Password } from "../../components/form/Inputs";
+import { Password } from "../../components/form/Inputs";
 import style from "../../styles/registerpage.module.css"
 import ErrorList from "../../components/ErrorList";
 import TextInput from "../../components/form/inputs/TextInput";
+import EmailInput from "../../components/form/inputs/EmailInput";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ const RegisterPage = () => {
         <form onSubmit={onSubmit}>
           <TextInput ref={formRef.firstName} label='Imię' errorLabel={fieldErrors?.first_name} />
           <TextInput ref={formRef.lastName} label='Nazwisko' errorLabel={fieldErrors?.last_name} />
-          <Email ref={formRef.email} label='E-mail' errorLabel={fieldErrors?.email} />
+          <EmailInput ref={formRef.email} errorLabel={fieldErrors?.email} />
           <Password ref={formRef.password} label='Hasło' errorLabel={fieldErrors?.password} />
           { loading ? ("ładowanie") : (<button>Rejestracja</button>) }
         </form>

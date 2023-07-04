@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 import { resetRegistered, login } from "../../features/user";
 import { Navigate } from "react-router-dom";
-import { Email, Password } from "../../components/form/Inputs";
+import { Password } from "../../components/form/Inputs";
 import style from "../../styles/loginpage.module.css"
+import EmailInput from "../../components/form/inputs/EmailInput";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const LoginPage = () => {
       <div className={style.center}>
           <h1>Log into your account</h1>
           <form onSubmit={onSubmit}>
-            <Email ref={formRef.email}/>
+            <EmailInput ref={formRef.email}/>
             <Password ref={formRef.password}/>
             { loading ? ("loading") : (<button> Login </button>) }
           </form>
