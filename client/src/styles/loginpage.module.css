@@ -6,23 +6,12 @@
     align-items: center;
 }
 
-.center form>label:first-of-type{
+.center form>div:nth-of-type(1){
     grid-area: email;
-    place-self: center right;
 }
 
-.center form>label:last-of-type{
-    grid-area: pass;
-    place-self: center right;
-    margin: 0 0 0 1rem;
-}
-
-.center form>input:first-of-type{
-    grid-area: email-input;
-}
-
-.center form>input:last-of-type{
-    grid-area: pass-input;
+.center form>div:nth-of-type(2){
+    grid-area: password;
 }
 
 .center form>button{
@@ -31,37 +20,13 @@
 
 .center form{
     display: grid;
-    grid-template-areas: 'email email-input pass pass-input button';
-    place-items: center;
+    grid-template-areas: 'email password button';
 }
 
 @media screen and (max-width: 800px) {
     .center form{
-        grid-template-areas: 'email email-input'
-                             'pass pass-input'
-                             'button button';
-    }
-
-    .center form>label:last-of-type{
-        margin: 0;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .center form{
-        grid-template-rows: auto 2.2rem auto 2.2rem auto;
-        grid-template-areas:    'email-input'
-                                'email'
-                                'pass-input'
-                                'pass'
-                                'button';
-    }
-
-    .center form>label:first-of-type{
-        place-self: baseline center;
-    }
-    
-    .center form>label:last-of-type{
-        place-self: baseline center;
+        grid-template-areas: 'email'
+                             'password'
+                             'button';
     }
 }

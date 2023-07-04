@@ -26,8 +26,6 @@
         grid-template-areas: 'input'
                              'label'
                              'error';
-        grid-template-columns: auto;
-        grid-template-rows: repeat(3, auto);
         gap: .2rem;
     }
 }

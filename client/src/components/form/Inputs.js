@@ -36,19 +36,6 @@ export const CheckBoxRef = React.forwardRef(({labelText, defaultValue}, ref) => 
   )
 })
 
-
-export const Password = React.forwardRef(({label}, ref) => {
-  
-  const id = useId()+'password';
-
-  return (
-    <>
-      {label && <label htmlFor={id}>{label}</label>}
-      <input ref={ref} id={id} type='password' name='password' required />
-    </>
-  )
-})
-
 export const ShiftsNum = React.forwardRef(({defaultValue}, ref) => {
   
   const id = useId()+'ShiftsNum'; 
