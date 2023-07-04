@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
-import { TextInput, CheckBox } from "../form/Inputs";
+import { CheckBox } from "../form/Inputs";
 import Form from "../form/Form";
 import RemoveButton from "../form/RemoveButton";
+import TextInput from "../form/inputs/TextInput";
 
 const ConstraintForm = ({availableConstraints, choosedConstraints, submitFunc, constraint, onChangeConstraint, setToggle}) => {
 

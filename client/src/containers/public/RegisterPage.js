@@ -1,15 +1,17 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom"; // TODO: Should be useNavigate ??? !!!
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../features/user";
-import { Email, Password, TextInput } from "../../components/form/Inputs";
+import { Email, Password } from "../../components/form/Inputs";
 import style from "../../styles/registerpage.module.css"
 import ErrorList from "../../components/ErrorList";
+import TextInput from "../../components/form/inputs/TextInput";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const {registered, loading} = useSelector(state => state.user);
   const [errors, setErrors] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState(null);
 
   const formRef = {
     firstName: useRef(null),
@@ -17,6 +19,21 @@ const RegisterPage = () => {
     email: useRef(null),
     password: useRef(null),
   };
+
+  useEffect(()=>{
+    if (errors) {
+      ["email", "password", "first_name", "last_name"].forEach(key => {
+        if (Object.hasOwn(errors, key)) {
+          setFieldErrors((prev) => ({...prev, [key]: errors[key]})); // Add key to fieldErrors
+          setErrors((prev)=>{
+            const newErrors = {...prev};
+            delete newErrors[key];
+            return newErrors;
+          }); // Remove key from errors
+        }
+      })
+    }
+  },[errors])
 
   if (registered) return <Navigate to='/login' />
 
@@ -31,20 +48,11 @@ const RegisterPage = () => {
       })).unwrap();
     } catch (err) {
       setErrors(err);
-    // egzample of err:
-    //   {
-    //     "email": [
-    //         "user account with this email already exists."
-    //     ]
-    // }
     }
   }
 
-  // TODO: If in errors are email, password, first_name or last_name errors, then show them in form. Else show them in ErrorList.
 
   //if (errors) return <ErrorList errors={Object.values(errors)} />
-
-//  console.log(errors);
 
 //   {
 //     "email": [
@@ -69,15 +77,17 @@ const RegisterPage = () => {
 //   ]
 // }
 
+  console.log(errors);
+
   return (
     <div className={style.center}>
-        {errors && <ErrorList errors={Object.values(errors)} />}
+        {errors && !!Object.keys(errors).length && <ErrorList errors={Object.values(errors)} />}
         <h1>Zarejestruj się</h1>
         <form onSubmit={onSubmit}>
-          <TextInput ref={formRef.firstName} label='Imię' />
-          <TextInput ref={formRef.lastName} label='Nazwisko' />
-          <Email ref={formRef.email} label='E-mail' />
-          <Password ref={formRef.password} label='Hasło' />
+          <TextInput ref={formRef.firstName} label='Imię' errorLabel={fieldErrors?.first_name} />
+          <TextInput ref={formRef.lastName} label='Nazwisko' errorLabel={fieldErrors?.last_name} />
+          <Email ref={formRef.email} label='E-mail' errorLabel={fieldErrors?.email} />
+          <Password ref={formRef.password} label='Hasło' errorLabel={fieldErrors?.password} />
           { loading ? ("ładowanie") : (<button>Rejestracja</button>) }
         </form>
     </div>

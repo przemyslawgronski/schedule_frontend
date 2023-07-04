@@ -1,7 +1,8 @@
 import React, {useRef} from 'react';
-import { TextInput, CheckBox, CheckBoxRef } from '../form/Inputs';
+import { CheckBox, CheckBoxRef } from '../form/Inputs';
 import Form from '../form/Form';
 import RemoveButton from '../form/RemoveButton';
+import TextInput from '../form/inputs/TextInput';
 
 const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, employee, setToggle}) => {
     // employee, setToggle - optional
