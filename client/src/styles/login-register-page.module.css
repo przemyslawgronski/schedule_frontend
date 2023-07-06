@@ -1,0 +1,50 @@
+.center{
+    min-height: calc(100vh - var(--pagetop-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.center form>div:nth-of-type(1){
+    grid-area: first;
+}
+
+.center form>div:nth-of-type(2){
+    grid-area: second;
+}
+
+.center form>div:nth-of-type(3){
+    grid-area: third;
+}
+
+.center form>div:nth-of-type(4){
+    grid-area: fourth;
+}
+
+.center form>button{
+    grid-area: button;
+    margin: 0;
+    place-self: center;
+}
+
+.center form{
+    display: grid;
+    grid-template-areas: 'first second'
+                         'third fourth'
+                         'button button';
+    align-items: center;
+    justify-items: end;
+    row-gap: 1rem;
+    column-gap: 2rem;
+}
+
+@media screen and (max-width: 800px) {
+    .center form{
+        grid-template-areas: 'first'
+                             'second'
+                             'third'
+                             'fourth'
+                             'button';
+    }
+}

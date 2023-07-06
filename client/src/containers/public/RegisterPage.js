@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../features/user";
-import style from "../../styles/registerpage.module.css"
+import style from "../../styles/login-register-page.module.css"
 import ErrorList from "../../components/ErrorList";
 import TextInput from "../../components/form/inputs/TextInput";
 import EmailInput from "../../components/form/inputs/EmailInput";
@@ -77,8 +77,6 @@ const RegisterPage = () => {
 //       "To pole nie może być puste."
 //   ]
 // }
-
-  console.log(errors);
 
   return (
     <div className={style.center}>

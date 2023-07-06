@@ -1,16 +1,15 @@
 .input > label:nth-of-type(1) {
     grid-area: label;
-    background-color: red;
 }
 
 .input > label:nth-of-type(2) {
     grid-area: error;
-    background-color: blue;
+    color: darkred;
 }
 
 .input > input {
     grid-area: input;
-    background-color: green;
+    margin: 0;
 }
 
 .input {
@@ -22,10 +21,9 @@
 }
 
 @media screen and (max-width: 500px) {
-    .textinput {
-        grid-template-areas: 'input'
-                             'label'
+    .input {
+        grid-template-areas: 'label'
+                             'input'
                              'error';
-        gap: .2rem;
     }
 }
