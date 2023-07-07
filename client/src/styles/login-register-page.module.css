@@ -44,6 +44,11 @@
                          'button button';
 }
 
+.center h1{
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
 @media screen and (max-width: 800px) {
     .center form{
         grid-template-areas: 'first'
