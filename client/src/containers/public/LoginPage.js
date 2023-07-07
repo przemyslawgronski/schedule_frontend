@@ -31,11 +31,11 @@ const LoginPage = () => {
 
     return (
       <div className={style.center}>
-          <h1>Log into your account</h1>
+          <h1>Zaloguj się</h1>
           <form onSubmit={onSubmit}>
             <EmailInput ref={formRef.email}/>
             <PasswordInput ref={formRef.password}/>
-            { loading ? ("loading") : (<button> Login </button>) }
+            { loading ? ("Ładowanie...") : (<button>Logowanie</button>) }
           </form>
       </div>
     )
