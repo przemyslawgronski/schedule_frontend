@@ -4,7 +4,7 @@ import Form from "../form/Form";
 import RemoveButton from "../form/RemoveButton";
 import TextInput from "../form/inputs/TextInput";
 
-const GroupForm = ({submitFunc, setToggle, group, remove, constraints}) => {
+const GroupForm = ({submitFunc, setToggle, group, constraints}) => {
 
     const formRef = {
         group_name: useRef(),
