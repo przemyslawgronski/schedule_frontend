@@ -83,11 +83,11 @@ const RegisterPage = () => {
         {errors && !!Object.keys(errors).length && <ErrorList errors={Object.values(errors)} />}
         <h1>Zarejestruj się</h1>
         <form onSubmit={onSubmit}>
-          <TextInput ref={formRef.firstName} label='Imię' errorLabel={fieldErrors?.first_name} />
-          <TextInput ref={formRef.lastName} label='Nazwisko' errorLabel={fieldErrors?.last_name} />
+          <TextInput ref={formRef.firstName} label='Imię:' errorLabel={fieldErrors?.first_name} />
+          <TextInput ref={formRef.lastName} label='Nazwisko:' errorLabel={fieldErrors?.last_name} />
           <EmailInput ref={formRef.email} errorLabel={fieldErrors?.email} />
-          <PasswordInput ref={formRef.password} label='Hasło' errorLabel={fieldErrors?.password} />
-          { loading ? ("ładowanie") : (<button>Rejestracja</button>) }
+          <PasswordInput ref={formRef.password} errorLabel={fieldErrors?.password} />
+          { loading ? ("Ładowanie...") : (<button>Rejestracja</button>) }
         </form>
     </div>
   )
