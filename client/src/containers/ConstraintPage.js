@@ -31,7 +31,7 @@ const ConstraintPage = () => {
 
   return (
       <div>
-          <h1>Ograniczenie:</h1>
+          <h1>Zasada</h1>
 
           <ToggleComponents
               Component1={ConstraintForm}
