@@ -5,11 +5,11 @@ const EmployeeData = ({employee, groups, spanTag, removeInfo}) => {
   const empData = {
     'Imię:': employee?.first_name,
     'Nazwisko:': employee?.last_name,
-    'Grupy': employee?.groups?.map?.((group_id)=>
+    'Grupy:': employee?.groups?.map?.((group_id)=>
         <span key={group_id}>{groups?.find(group=>group.id===group_id)?.group_name} </span>
     ),
-    'Ostatnia zmiana': employee?.updated,
-    'Ukryty': employee?.hide ? 'tak' : 'nie'
+    'Ostatnia zmiana:': employee?.updated,
+    'Ukryty:': employee?.hide ? 'tak' : 'nie'
     }
 
     if(removeInfo && Array.isArray(removeInfo) && removeInfo.length > 0){

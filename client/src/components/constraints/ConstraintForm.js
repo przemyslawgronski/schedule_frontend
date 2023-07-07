@@ -19,7 +19,7 @@ const ConstraintForm = ({availableConstraints, choosedConstraints, submitFunc, c
 
   return (
     <div>
-    <Form submitFunc={submitFuncReady} legend={constraint ? 'Zmień dane:' : 'Dodaj ograniczenie:'}>
+    <Form submitFunc={submitFuncReady} legend={constraint ? 'Zmień dane:' : 'Dodaj zasadę:'}>
         <TextInput ref={representation}
             label="Nazwa:"
             defaultValue={constraint ? constraint.representation : null}
