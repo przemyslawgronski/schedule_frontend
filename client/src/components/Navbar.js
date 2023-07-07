@@ -12,27 +12,27 @@ const Navbar = () => {
 
     const authLinks = (
         <nav className={mobileMenuOn ? `${styles.logged} ${styles.loggedVisible}` : styles.logged}>
-                <NavLink to='/shifts'       onClick={()=>setMobileMenuOn(false)}>Shifts</NavLink>
-                <NavLink to='/employees'    onClick={()=>setMobileMenuOn(false)}>Employees</NavLink>
-                <NavLink to='/groups'       onClick={()=>setMobileMenuOn(false)}>Groups</NavLink>
-                <NavLink to='/constraints'  onClick={()=>setMobileMenuOn(false)}>Constraints</NavLink>
+                <NavLink to='/shifts'       onClick={()=>setMobileMenuOn(false)}>Zmiany</NavLink>
+                <NavLink to='/employees'    onClick={()=>setMobileMenuOn(false)}>Pracownicy</NavLink>
+                <NavLink to='/groups'       onClick={()=>setMobileMenuOn(false)}>Grupy</NavLink>
+                <NavLink to='/constraints'  onClick={()=>setMobileMenuOn(false)}>Zasady</NavLink>
         </nav>
     );
 
     const guestLinks = (
       <div>
-            <NavLink to='/login'>Login</NavLink>
-            <NavLink to='/register'>Register</NavLink>
+            <NavLink to='/login'>Logowanie</NavLink>
+            <NavLink to='/register'>Rejestracja</NavLink>
       </div>  
     );
 
     const logOutLinks = (
         <div>
-            <NavLink to='/dashboard' onClick={()=>setMobileMenuOn(false)}>Dashboard</NavLink>
+            <NavLink to='/dashboard' onClick={()=>setMobileMenuOn(false)}>Panel</NavLink>
             <a href="#!" onClick={()=>{
                 setMobileMenuOn(false);
                 dispatch(logout());
-                }}> Logout </a>
+                }}>Wyloguj</a>
         </div>
     );
 
@@ -54,7 +54,7 @@ const Navbar = () => {
                         <div></div>
                     </div>
                 }
-                <NavLink to='/' onClick={()=>setMobileMenuOn(false)}>Home</NavLink>
+                <NavLink to='/' onClick={()=>setMobileMenuOn(false)}>Strona domowa</NavLink>
             </div>
             {isAuthenticated ? logOutLinks : guestLinks}
         </nav>
