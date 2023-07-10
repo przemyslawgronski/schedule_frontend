@@ -5,6 +5,7 @@
 .input > label:nth-of-type(2) {
     grid-area: error;
     color: darkred;
+    background-color: pink;
 }
 
 .input > input {
