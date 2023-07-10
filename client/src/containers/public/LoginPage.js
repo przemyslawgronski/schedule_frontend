@@ -35,7 +35,7 @@ const LoginPage = () => {
           })
         );
 
-      unwrapResult(resultAction); // Needed to get error
+      unwrapResult(resultAction); // Needed to catch error
 
       } catch(err){
         setError(err.error);
