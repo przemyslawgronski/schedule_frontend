@@ -1,11 +1,16 @@
 .input > label:nth-of-type(1) {
     grid-area: label;
+    width: max-content; /* Do not brake E-mail in two lines */
 }
 
 .input > label:nth-of-type(2) {
     grid-area: error;
     color: darkred;
     background-color: pink;
+    padding: .5rem;
+    border-radius: .3rem;
+    text-align: center;
+    place-self: stretch;
 }
 
 .input > input {
