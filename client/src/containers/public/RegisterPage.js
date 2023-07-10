@@ -78,9 +78,10 @@ const RegisterPage = () => {
 //   ]
 // }
 
+  if (errors && !!Object.keys(errors).length) return <ErrorList errors={Object.values(errors)} />
+
   return (
     <div className={style.center}>
-        {errors && !!Object.keys(errors).length && <ErrorList errors={Object.values(errors)} />}
         <h1>Zarejestruj się</h1>
         <form onSubmit={onSubmit}>
           <TextInput ref={formRef.firstName} label='Imię:' errorLabel={fieldErrors?.first_name} />
