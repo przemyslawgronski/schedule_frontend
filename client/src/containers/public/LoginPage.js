@@ -51,11 +51,10 @@ const LoginPage = () => {
     return (
       <div className={style.center}>
           <h1>Zaloguj się</h1>
-          {/* TODO: Make this pretty, maybe <Error/> ?*/}
-          {loginError && loginError}
           <form onSubmit={onSubmit}>
             <EmailInput ref={formRef.email}/>
             <PasswordInput ref={formRef.password}/>
+            {loginError && <span>{loginError}</span>}
             { loading ? ("Ładowanie...") : (<button>Logowanie</button>) }
           </form>
       </div>

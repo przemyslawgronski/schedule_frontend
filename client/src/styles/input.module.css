@@ -3,6 +3,7 @@
     width: max-content; /* Do not brake E-mail in two lines */
 }
 
+/* TODO: same as .center form>span in login-register-page.module.css */
 .input > label:nth-of-type(2) {
     grid-area: error;
     color: darkred;
