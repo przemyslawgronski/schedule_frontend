@@ -33,6 +33,7 @@
     grid-template-areas: 'first second'
                          'third fourth'
                          'button button';
+    grid-auto-columns: min-content;
     align-items: start;
     justify-items: end;
     row-gap: 1rem;
