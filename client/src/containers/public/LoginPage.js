@@ -12,7 +12,8 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     const { loading, isAuthenticated, registered } = useSelector(state => state.user)
 
-    const [error, setError] = useState(null);
+    const [serverError, setServerError] = useState(null);
+    const [loginError, setLoginError] = useState(null);
 
     const formRef = {
       email: useRef(null),
@@ -39,16 +40,19 @@ const LoginPage = () => {
       unwrapResult(resultAction); // Needed to catch error
 
       } catch(err){
-        setError(err.error); // Set error to massage
+        if(err?.serverError) setServerError(err.serverError); // Set serverError to massage
+        else if(err?.detail) setLoginError(err.detail); // Set loginError to massage
+        else setServerError("Coś poszło nie tak podczas logowania");
       }
     }
 
-    if(error) return <ErrorList errors={[error]} />
+    if(serverError) return <ErrorList errors={[serverError]} />;
 
     return (
       <div className={style.center}>
           <h1>Zaloguj się</h1>
-          { error && <span className={style.error}>{error}</span> }
+          {/* TODO: Make this pretty, maybe <Error/> ?*/}
+          {loginError && loginError}
           <form onSubmit={onSubmit}>
             <EmailInput ref={formRef.email}/>
             <PasswordInput ref={formRef.password}/>
