@@ -6,6 +6,7 @@ import style from "../../styles/login-register-page.module.css"
 import EmailInput from "../../components/form/inputs/EmailInput";
 import PasswordInput from "../../components/form/inputs/PasswordInput";
 import { unwrapResult } from "@reduxjs/toolkit";
+import ErrorList from "../../components/ErrorList";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -38,9 +39,11 @@ const LoginPage = () => {
       unwrapResult(resultAction); // Needed to catch error
 
       } catch(err){
-        setError(err.error);
+        setError(err.error); // Set error to massage
       }
     }
+
+    if(error) return <ErrorList errors={[error]} />
 
     return (
       <div className={style.center}>
