@@ -31,7 +31,7 @@ router.post('/api/users/register', async (req, res) => {
         return res.status(registerResponse.status).json(data)
     } catch(err){
         return res.status(500).json({
-            error: 'Something went wrong when registering account'
+            error: 'Coś poszło nie tak podczas rejestracji'
         });
     }
 });
