@@ -28,6 +28,7 @@ const LoginPage = () => {
   
     const onSubmit = async (e) => {
       e.preventDefault();
+      setLoginError(null); // Clear loginError before new request
 
       try{
        const resultAction = await dispatch( // await is working and has effect

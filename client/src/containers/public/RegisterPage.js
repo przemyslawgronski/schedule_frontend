@@ -40,6 +40,8 @@ const RegisterPage = () => {
 
   const onSubmit = async(e) => {
     e.preventDefault();
+    setFieldErrors(null); // Clear fieldErrors before new request
+
     try{
       await dispatch(register({
         first_name: formRef.firstName.current.value,
