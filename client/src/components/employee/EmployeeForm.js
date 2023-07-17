@@ -44,7 +44,8 @@ const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, empl
 
             <fieldset>
                 <legend>Grupy pracowanika:</legend>
-                    {allgroups?.map((group) =>
+                    {allgroups.length === 0 ? <p>Brak grup</p> :
+                    allgroups.map((group) =>
                     <CheckBox
                         key={group.id}
                         isChecked={checkedGroups.includes(group.id)}
