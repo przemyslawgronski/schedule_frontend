@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import useCreateData from '../features/customHooks/useCreateData';
 import ErrorList from '../components/ErrorList';
-import EmployeeData from '../components/employee/EmployeeData';
 import { addOrRemove } from '../features/utils/arrayUtils';
 import EmployeeForm from '../components/employee/EmployeeForm';
+import EmployeesData from '../components/employee/EmployeesData';
 
 const EmployeesPage = () => {
 
@@ -36,15 +35,7 @@ const EmployeesPage = () => {
   return (
   <div>
       <p>Pracownicy:</p>
-
-      <ul>
-        {visibleEmployees?.map(employee =>(
-            <li key={employee.id}>
-              <EmployeeData employee={employee} groups={groupsState.data} spanTag={true} removeInfo={['Ukryty']}/>
-              <Link to={`/employees/${employee.id}`}>Więcej</Link>
-            </li>
-        ))}
-      </ul>
+      <EmployeesData employees={visibleEmployees} groups={groupsState.data} removeInfo={['Ukryty']}/>
       
       {empState.data && <p> Utworzono: {JSON.stringify(empState.data)}</p>}
 
@@ -55,17 +46,8 @@ const EmployeesPage = () => {
         onChangeGroup={(id)=>setCheckedGroupsIDs((prev)=>addOrRemove(prev, id))}
         />
       
-      <div>
-        <p>Ukryci pracownicy:</p>
-        <ul>
-        {hiddenEmployees?.map(employee =>(
-          <li key={employee.id}>
-            <span key={employee.id}>{employee.first_name}</span>
-            <Link to={`/employees/${employee.id}`}>Więcej</Link>
-          </li>
-        ))}
-        </ul>
-      </div>
+      <p>Ukryci pracownicy:</p>
+      <EmployeesData employees={hiddenEmployees} groups={groupsState.data}/>
   </div>
   )
 };
