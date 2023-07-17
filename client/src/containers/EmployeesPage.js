@@ -21,6 +21,15 @@ const EmployeesPage = () => {
 
   if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
 
+  if (!Array.isArray(empsState.data) || !Array.isArray(groupsState.data)) return <div><p>Ładowanie...</p></div>;
+
+  // if(!groupsState.data.length || !empsState.data.length) return(
+  //   <div>
+  //     {groupsState.data.length === 0 && <p>Brak grup</p>}
+  //     {empsState.data.length === 0 && <p>Brak pracowników</p>}
+  //   </div>
+  // )
+
   const visibleEmployees = empsState.data?.filter(employee => !employee.hide);
   const hiddenEmployees = empsState.data?.filter(employee => employee.hide);
 
