@@ -45,6 +45,7 @@ def search_text_in_file(extension=".js", exclude_path_words=None):
                                 content = content.replace(key, value)
                                 # save back to file
                                 file.write(content)
+                                break # update only once
 
                 except UnicodeDecodeError as e:
                     print("Error reading file: " + full_path)
