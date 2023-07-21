@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useGetAndChange from '../features/customHooks/useGetAndChange'
-import ErrorList from '../components/ErrorList'
+import ErrorList from '../components/ErrorList/ErrorList'
 import ToggleComponents from '../components/ToggleComponents'
 import ConstraintData from '../components/constraints/ConstraintData'
 import ConstraintForm from '../components/constraints/ConstraintForm'

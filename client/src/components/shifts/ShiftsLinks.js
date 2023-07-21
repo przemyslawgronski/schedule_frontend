@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import useGetAndChange from '../../features/customHooks/useGetAndChange'
-import ErrorList from '../ErrorList'
+import ErrorList from '../ErrorList/ErrorList'
 import { Link } from 'react-router-dom'
 import { GroupIdContext } from '../newShift/ChooseGroup'
 import style from '../../styles/shiftslinks.module.css'

@@ -4,7 +4,7 @@ import GroupDataExtended from '../components/group/GroupDataExtended';
 import GroupForm from '../components/group/GroupForm';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ToggleComponents from '../components/ToggleComponents';
-import ErrorList from '../components/ErrorList';
+import ErrorList from '../components/ErrorList/ErrorList';
 
 
 const GroupPage = () => {

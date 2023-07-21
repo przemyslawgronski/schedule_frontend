@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect } from 'react'
 import useCreateData from '../../features/customHooks/useCreateData';
-import ErrorList from '../ErrorList';
+import ErrorList from '../ErrorList/ErrorList';
 import { DateContext } from './ChooseDate';
 import { GroupIdContext } from './ChooseGroup';
 

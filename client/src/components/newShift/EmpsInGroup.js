@@ -1,7 +1,7 @@
 import React, { useContext, useCallback, createContext } from 'react'
 import useGetAndChange from '../../features/customHooks/useGetAndChange'
 import { GroupIdContext } from './ChooseGroup'
-import ErrorList from '../ErrorList'
+import ErrorList from '../ErrorList/ErrorList'
 
 export const EmpsInGroupContext = createContext();
 

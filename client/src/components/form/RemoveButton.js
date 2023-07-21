@@ -1,7 +1,7 @@
 import React from 'react';
 import useRemoveItem from '../../features/customHooks/useRemoveItem';
 import { useNavigate } from 'react-router-dom';
-import ErrorList from '../ErrorList';
+import ErrorList from '../ErrorList/ErrorList';
 
 const RemoveButton = ({name, url, after_url, msg}) => {
 

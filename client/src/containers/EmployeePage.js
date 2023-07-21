@@ -4,7 +4,7 @@ import EmployeeData from '../components/employee/EmployeeData'
 import EmployeeForm from '../components/employee/EmployeeForm'
 import useGetAndChange from '../features/customHooks/useGetAndChange'
 import ToggleComponents from '../components/ToggleComponents'
-import ErrorList from '../components/ErrorList'
+import ErrorList from '../components/ErrorList/ErrorList'
 import { addOrRemove } from '../features/utils/arrayUtils'
 
 const EmployeePage = () => {

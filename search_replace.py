@@ -28,24 +28,40 @@ def search_text_in_file(extension=".js", exclude_path_words=None):
 
         conversion_dict = {
             '../ErrorList': '../ErrorList/ErrorList',
-            '../components/ErrorList': '../components/ErrorList/ErrorList',
             '../../components/ErrorList': '../../components/ErrorList/ErrorList',
+            '../components/ErrorList': '../components/ErrorList/ErrorList',
         }
 
         for file in files:
             if file.endswith(extension):
                 full_path = os.path.join(root, file)
+
+                before = 0
+                after = 0
                 
                 try:
                     with open(full_path, encoding='utf8', mode='r+') as file:
                         content = file.read()
 
+                        before = len(content.splitlines())
+
                         for key, value in conversion_dict.items():
                             if key in content:
                                 content = content.replace(key, value)
-                                # save back to file
-                                file.write(content)
-                                break # update only once
+                                
+                        after = len(content.splitlines())
+
+                        if before == after:
+                            # save back to file
+                            file.seek(0) # go to the beginning of the file
+                            file.write(content)
+                            file.truncate() # remove remaining part
+
+                        else:
+                            print("Number of file lines changed!: " + full_path)
+                            print("Before: " + str(before))
+                            print("After: " + str(after))
+                            print("----------")
 
                 except UnicodeDecodeError as e:
                     print("Error reading file: " + full_path)

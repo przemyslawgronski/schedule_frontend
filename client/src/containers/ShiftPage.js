@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
-import ErrorList from '../components/ErrorList';
+import ErrorList from '../components/ErrorList/ErrorList';
 import RemoveButton from '../components/form/RemoveButton';
 import { dateUtils } from '../features/utils/dateUtils';
 import ShiftsTable from '../components/ShiftsTable';

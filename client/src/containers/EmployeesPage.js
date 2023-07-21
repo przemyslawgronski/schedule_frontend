@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import useCreateData from '../features/customHooks/useCreateData';
-import ErrorList from '../components/ErrorList';
+import ErrorList from '../components/ErrorList/ErrorList';
 import { addOrRemove } from '../features/utils/arrayUtils';
 import EmployeeForm from '../components/employee/EmployeeForm';
 import EmployeesData from '../components/employee/EmployeesData';

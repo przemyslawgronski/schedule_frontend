@@ -6,7 +6,7 @@ import style from "../../styles/login-register-page.module.css"
 import EmailInput from "../../components/form/inputs/EmailInput";
 import PasswordInput from "../../components/form/inputs/PasswordInput";
 import { unwrapResult } from "@reduxjs/toolkit";
-import ErrorList from "../../components/ErrorList";
+import ErrorList from "../../components/ErrorList/ErrorList";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
