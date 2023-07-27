@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { resetRegistered, login } from "../../features/user";
 import { Navigate } from "react-router-dom";
-import style from "../../styles/login-register-page.module.css"
+import style from "./login-register-page.module.css"
 import EmailInput from "../../components/form/inputs/EmailInput";
 import PasswordInput from "../../components/form/inputs/PasswordInput";
 import { unwrapResult } from "@reduxjs/toolkit";

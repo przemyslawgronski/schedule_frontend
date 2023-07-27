@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../features/user";
-import style from "../../styles/login-register-page.module.css"
+import style from "./login-register-page.module.css"
 import TextInput from "../../components/form/inputs/TextInput";
 import EmailInput from "../../components/form/inputs/EmailInput";
 import PasswordInput from "../../components/form/inputs/PasswordInput";
