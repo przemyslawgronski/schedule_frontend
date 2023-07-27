@@ -3,7 +3,7 @@ import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList/ErrorList';
 import RemoveButton from '../components/form/RemoveButton';
 import { dateUtils } from '../features/utils/dateUtils';
-import ShiftsTable from '../components/ShiftsTable';
+import ShiftsTable from '../components/ShiftsTable/ShiftsTable';
 import { genHeaders } from '../features/pageSpecific/shiftPageFunc';
 import TbodyShifts from '../components/TbodyShifts';
 

@@ -1,4 +1,4 @@
-import style from '../styles/tables.module.css'
+import style from './tables.module.css'
 
 const ShiftsTable = ({headers, children}) => {
 
