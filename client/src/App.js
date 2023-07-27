@@ -7,7 +7,7 @@ import { checkAuth } from "./features/user";
 
 // Pages
   //Public
-import HomePage from "./containers/public/HomePage";
+import HomePage from "./containers/public/HomePage/HomePage";
 import LoginPage from "./containers/public/LoginPage";
 import RegisterPage from "./containers/public/RegisterPage";
 import PageNotFound from "./containers/public/PageNotFound";
