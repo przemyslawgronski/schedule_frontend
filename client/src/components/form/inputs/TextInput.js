@@ -1,5 +1,5 @@
 import React, { useId } from "react"
-import style from './../../../styles/input.module.css';
+import style from './input.module.css';
 
 const toCamelCase = (str) => {
     let result = str.replace(/\b[a-z]/g, char => char.toUpperCase()); // First letter of each word to upper case

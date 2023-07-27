@@ -1,5 +1,5 @@
 import React, { useId } from "react"
-import style from './../../../styles/input.module.css';
+import style from './input.module.css';
 
 const EmailInput = React.forwardRef(({errorLabel}, ref) => {
 
