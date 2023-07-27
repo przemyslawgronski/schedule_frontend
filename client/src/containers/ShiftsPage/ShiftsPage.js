@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import ChooseGroup from '../components/newShift/ChooseGroup'
-import ShiftsLinks from '../components/shifts/ShiftsLinks'
+import ChooseGroup from '../../components/newShift/ChooseGroup'
+import ShiftsLinks from '../../components/shifts/ShiftsLinks'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
-import style from '../styles/shiftspage.module.css'
+import style from '../ShiftsPage/shiftspage.module.css'
 
 const ShiftsPage = () => {
 

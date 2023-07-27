@@ -17,7 +17,7 @@ import GroupsPage from "./containers/GroupsPage";
 import GroupPage from "./containers/GroupPage";
 import EmployeesPage from "./containers/EmployeesPage"
 import EmployeePage from "./containers/EmployeePage"
-import ShiftsPage from "./containers/ShiftsPage"
+import ShiftsPage from "./containers/ShiftsPage/ShiftsPage"
 import NewShiftPage from "./containers/NewShiftPage"
 import ShiftPage from "./containers/ShiftPage"
 import ConstraintPage from "./containers/ConstraintPage"
