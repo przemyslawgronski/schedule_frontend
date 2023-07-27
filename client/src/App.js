@@ -23,7 +23,7 @@ import ShiftPage from "./containers/ShiftPage"
 import ConstraintPage from "./containers/ConstraintPage"
 
 //components
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import ConstraintsPage from "./containers/ConstraintsPage";
 

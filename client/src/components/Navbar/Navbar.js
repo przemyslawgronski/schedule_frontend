@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../features/user";
-import styles from "../styles/navbar.module.css";
+import { logout } from "../../features/user";
+import styles from "../Navbar/navbar.module.css";
 
 const Navbar = () => {
 
