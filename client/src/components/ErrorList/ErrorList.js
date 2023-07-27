@@ -1,4 +1,4 @@
-import style from "../ErrorList/errorlist.module.css"
+import style from "./errorlist.module.css"
 
 const ErrorList = ({errors}) => {
     // filter out undefined and null values

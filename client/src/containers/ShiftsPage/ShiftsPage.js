@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import ChooseGroup from '../../components/newShift/ChooseGroup'
 import ShiftsLinks from '../../components/shifts/ShiftsLinks'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
-import style from '../ShiftsPage/shiftspage.module.css'
+import style from './shiftspage.module.css'
 
 const ShiftsPage = () => {
 
