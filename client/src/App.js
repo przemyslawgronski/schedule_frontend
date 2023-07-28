@@ -15,7 +15,7 @@ import PageNotFound from "./containers/public/PageNotFound";
 import DashboardPage from "./containers/DashboardPage";
 import GroupsPage from "./containers/GroupsPage";
 import GroupPage from "./containers/GroupPage";
-import EmployeesPage from "./containers/EmployeesPage"
+import EmployeesPage from "./containers/EmployeesPage/EmployeesPage"
 import EmployeePage from "./containers/EmployeePage"
 import ShiftsPage from "./containers/ShiftsPage/ShiftsPage"
 import NewShiftPage from "./containers/NewShiftPage"

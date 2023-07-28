@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import useGetAndChange from '../features/customHooks/useGetAndChange';
-import useCreateData from '../features/customHooks/useCreateData';
-import ErrorList from '../components/ErrorList/ErrorList';
-import { addOrRemove } from '../features/utils/arrayUtils';
-import EmployeeForm from '../components/employee/EmployeeForm';
-import EmployeesData from '../components/employee/EmployeesData';
+import useGetAndChange from '../../features/customHooks/useGetAndChange';
+import useCreateData from '../../features/customHooks/useCreateData';
+import ErrorList from '../../components/ErrorList/ErrorList';
+import { addOrRemove } from '../../features/utils/arrayUtils';
+import EmployeeForm from '../../components/employee/EmployeeForm';
+import EmployeesData from '../../components/employee/EmployeesData';
+import style from './EmployeesPage.module.css';
 
 const EmployeesPage = () => {
 
@@ -26,7 +27,7 @@ const EmployeesPage = () => {
   const hiddenEmployees = empsState.data?.filter(employee => employee.hide);
 
   return (
-  <div>
+  <div className={style.employee}>
       <p>Pracownicy:</p>
       <EmployeesData employees={visibleEmployees} groups={groupsState.data} removeInfo={['Ukryty']}/>
       
