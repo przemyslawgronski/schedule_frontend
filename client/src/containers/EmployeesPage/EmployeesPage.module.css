@@ -8,10 +8,12 @@
 
 .employee form>fieldset>fieldset{
     grid-area: groupsFieldset;
+    justify-self: stretch;
 }
 
-.employee form>fieldset>fieldset>button{
+.employee form>fieldset>button{
     grid-area: button;
+    justify-self: center;
 }
 
 .employee form>fieldset{
@@ -19,7 +21,11 @@
     grid-template-areas: 'name surname'
                          'groupsFieldset groupsFieldset'
                          'button button';
-    grid-column-gap: 2rem;
+    grid-auto-columns: min-content;
+    align-items: start;
+    justify-items: end;
+    row-gap: 1rem;
+    column-gap: 2rem;
 }
 
 @media screen and (max-width: 60rem) {
