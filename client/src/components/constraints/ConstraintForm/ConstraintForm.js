@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
-import { CheckBox } from "../form/Inputs";
-import Form from "../form/Form";
-import RemoveButton from "../form/RemoveButton";
-import TextInput from "../form/inputs/TextInput";
+import { CheckBox } from "../../form/Inputs";
+import Form from "../../form/Form";
+import RemoveButton from "../../form/RemoveButton";
+import TextInput from "../../form/inputs/TextInput";
+import style from "./ConstraintForm.module.css"
 
 const ConstraintForm = ({availableConstraints, choosedConstraints, submitFunc, constraint, onChangeConstraint, setToggle}) => {
 
@@ -18,7 +19,7 @@ const ConstraintForm = ({availableConstraints, choosedConstraints, submitFunc, c
     };
 
   return (
-    <div>
+    <div className={style.constraintForm}>
     <Form submitFunc={submitFuncReady} legend={constraint ? 'Zmień dane:' : 'Dodaj zasadę:'}>
         <TextInput ref={representation}
             label="Nazwa:"

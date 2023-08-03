@@ -4,7 +4,7 @@ import useGetAndChange from '../features/customHooks/useGetAndChange'
 import ErrorList from '../components/ErrorList/ErrorList'
 import useCreateData from '../features/customHooks/useCreateData'
 import { addOrRemove } from '../features/utils/arrayUtils'
-import ConstraintForm from '../components/constraints/ConstraintForm'
+import ConstraintForm from '../components/constraints/ConstraintForm/ConstraintForm'
 
 const ConstraintsPage = () => {
 
