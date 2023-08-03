@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
-import { CheckBoxRef, DropDownGroupRef } from "../../form/Inputs";
+import { CheckBoxRef } from "../../form/Inputs";
 import Form from "../../form/Form";
 import RemoveButton from "../../form/RemoveButton";
 import TextInput from "../../form/inputs/TextInput";
 import ShiftsInput from "../../form/inputs/ShiftsInput";
 import style from './GroupForm.module.css'
+import { DropDownGroupRef } from "../../form/inputs/DropDownGroupRef";
 
 const GroupForm = ({submitFunc, setToggle, group, constraints}) => {
 
