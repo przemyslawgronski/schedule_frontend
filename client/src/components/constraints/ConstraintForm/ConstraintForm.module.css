@@ -1,3 +1,32 @@
 .constraintForm{
-    background-color: blue;
+    display: flex;
+    justify-content: center;
+}
+
+.constraintForm form>fieldset>div:nth-of-type(1){
+    grid-area: name;
+}
+
+.constraintForm form>fieldset>fieldset{
+    grid-area: constraints;
+    justify-self: stretch;
+    margin: 0;
+}
+
+.constraintForm form>fieldset>button{
+    grid-area: button;
+    justify-self: center;
+    margin: 0;
+}
+
+.constraintForm form>fieldset{
+    display: grid;
+    grid-template-areas: 'name'
+                         'constraints'
+                         'button';
+    grid-auto-columns: min-content;
+    align-items: start;
+    justify-items: end;
+    row-gap: 1rem;
+    column-gap: 2rem;
 }
