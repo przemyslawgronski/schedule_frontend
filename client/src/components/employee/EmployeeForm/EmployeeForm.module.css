@@ -1,5 +1,4 @@
 .employeeForm{
-    /* center form horizontally */
     display: flex;
     justify-content: center;
 }
