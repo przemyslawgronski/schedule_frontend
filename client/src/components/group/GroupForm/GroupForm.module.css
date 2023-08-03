@@ -3,6 +3,47 @@
     justify-content: center;
 }
 
-form>fieldset>div:nth-of-type(1){
+.groupForm form>fieldset>div:nth-of-type(1){
     grid-area: name;
+}
+
+.groupForm form>fieldset>div:nth-of-type(2){
+    grid-area: numOfShifts;
+}
+
+.groupForm form>fieldset>div:nth-of-type(3){
+    grid-area: constraints;
+}
+
+.groupForm form>fieldset>button{
+    grid-area: button;
+    justify-self: center;
+    margin: 0;
+}
+
+.groupForm form>fieldset{
+    display: grid;
+    grid-template-areas: 'name numOfShifts'
+                         'constraints constraints'
+                         'button button';
+    grid-auto-columns: min-content;
+    align-items: start;
+    justify-items: end;
+    row-gap: 1rem;
+    column-gap: 2rem;
+}
+
+@media screen and (max-width: 60rem) {
+    .groupForm form>fieldset{
+        grid-template-areas: 'name'
+                             'numOfShifts'
+                             'constraints'
+                             'button';
+    }
+}
+
+@media screen and (max-width: 40rem) {
+    .groupForm form>fieldset{
+        justify-items: center;
+    }
 }

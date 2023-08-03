@@ -7,7 +7,7 @@ const ShiftsInput = React.forwardRef(({defaultValue}, ref) => {
     
     return (
       <div className={style.input}>
-        <label htmlFor={id}>Ilość zmian</label>
+        <label htmlFor={id}>Ilość zmian:</label>
         <input
           ref={ref}
           type='number'
