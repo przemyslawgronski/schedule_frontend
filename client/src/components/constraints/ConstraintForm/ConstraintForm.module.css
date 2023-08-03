@@ -15,7 +15,6 @@
 
 .constraintForm form>fieldset>button{
     grid-area: button;
-    justify-self: center;
     margin: 0;
 }
 
@@ -26,7 +25,7 @@
                          'button';
     grid-auto-columns: min-content;
     align-items: start;
-    justify-items: end;
+    justify-items: center;
     row-gap: 1rem;
     column-gap: 2rem;
 }

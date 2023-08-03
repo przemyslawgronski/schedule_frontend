@@ -5,7 +5,7 @@ export const CheckBox = ({isChecked, changeFunc, name, value, labelText}) => {
   const id = useId()+'checkbox';
 
   return (
-    <span>
+    <div>
         <input
           id={id}
           type="checkbox"
@@ -15,7 +15,7 @@ export const CheckBox = ({isChecked, changeFunc, name, value, labelText}) => {
           onChange={changeFunc}
         />
         { labelText && <label htmlFor={id}>{labelText}</label>} {/* Optional */}
-    </span>
+    </div>
   )
 }
 
