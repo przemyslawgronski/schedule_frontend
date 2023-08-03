@@ -1,22 +1,30 @@
-.employee form>fieldset>div:nth-of-type(1){
+.employeeForm{
+    /* center form horizontally */
+    display: flex;
+    justify-content: center;
+}
+
+.employeeForm form>fieldset>div:nth-of-type(1){
     grid-area: name;
 }
 
-.employee form>fieldset>div:nth-of-type(2){
+.employeeForm form>fieldset>div:nth-of-type(2){
     grid-area: surname;
 }
 
-.employee form>fieldset>fieldset{
+.employeeForm form>fieldset>fieldset{
     grid-area: groupsFieldset;
     justify-self: stretch;
+    margin: 0;
 }
 
-.employee form>fieldset>button{
+.employeeForm form>fieldset>button{
     grid-area: button;
     justify-self: center;
+    margin: 0;
 }
 
-.employee form>fieldset{
+.employeeForm form>fieldset{
     display: grid;
     grid-template-areas: 'name surname'
                          'groupsFieldset groupsFieldset'
@@ -29,7 +37,7 @@
 }
 
 @media screen and (max-width: 60rem) {
-    .employee form>fieldset{
+    .employeeForm form>fieldset{
         grid-template-areas: 'name'
                              'surname'
                              'groupsFieldset'

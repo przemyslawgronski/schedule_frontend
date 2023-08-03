@@ -1,8 +1,9 @@
 import React, {useRef} from 'react';
-import { CheckBox, CheckBoxRef } from '../form/Inputs';
-import Form from '../form/Form';
-import RemoveButton from '../form/RemoveButton';
-import TextInput from '../form/inputs/TextInput';
+import { CheckBox, CheckBoxRef } from '../../form/Inputs';
+import Form from '../../form/Form';
+import RemoveButton from '../../form/RemoveButton';
+import TextInput from '../../form/inputs/TextInput';
+import style from './EmployeeForm.module.css';
 
 const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, employee, setToggle}) => {
     // employee, setToggle - optional
@@ -25,7 +26,7 @@ const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, empl
     };
 
   return (
-    <div>
+    <div className={style.employeeForm}>
         <Form submitFunc={submitFuncReady} legend={employee ? 'Zmień dane:' : 'Dodaj pracowanika:'}>
             <TextInput
                 ref={formRef.firstName}

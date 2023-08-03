@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import EmployeeData from '../components/employee/EmployeeData'
-import EmployeeForm from '../components/employee/EmployeeForm'
+import EmployeeForm from '../components/employee/EmployeeForm/EmployeeForm'
 import useGetAndChange from '../features/customHooks/useGetAndChange'
 import ToggleComponents from '../components/ToggleComponents'
 import ErrorList from '../components/ErrorList/ErrorList'
