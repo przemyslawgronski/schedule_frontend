@@ -27,7 +27,7 @@ const EmployeesPage = () => {
 
   return (
   <div>
-      <p>Pracownicy:</p>
+      <h2>Pracownicy:</h2>
       <EmployeesData employees={visibleEmployees} groups={groupsState.data} removeInfo={['Ukryty']}/>
       
       {empState.data && <p> Utworzono: {JSON.stringify(empState.data)}</p>}
@@ -39,7 +39,8 @@ const EmployeesPage = () => {
         onChangeGroup={(id)=>setCheckedGroupsIDs((prev)=>addOrRemove(prev, id))}
         />
       
-      <p>Ukryci pracownicy:</p>
+      <hr/>
+      <h3>Ukryci pracownicy:</h3>
       <EmployeesData employees={hiddenEmployees} groups={groupsState.data}/>
   </div>
   )
