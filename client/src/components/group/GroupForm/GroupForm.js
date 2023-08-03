@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
-import { ShiftsNum, CheckBoxRef, DropDownGroupRef } from "../../form/Inputs";
+import { CheckBoxRef, DropDownGroupRef } from "../../form/Inputs";
 import Form from "../../form/Form";
 import RemoveButton from "../../form/RemoveButton";
 import TextInput from "../../form/inputs/TextInput";
+import ShiftsInput from "../../form/inputs/ShiftsInput";
 import style from './GroupForm.module.css'
 
 const GroupForm = ({submitFunc, setToggle, group, constraints}) => {
@@ -33,7 +34,7 @@ const GroupForm = ({submitFunc, setToggle, group, constraints}) => {
             label="Nazwa:"
             defaultValue={group ? group.group_name : null}
             />
-        <ShiftsNum
+        <ShiftsInput
             ref={formRef.num_of_shifts}
             defaultValue={group ? group.num_of_shifts : null}
             />

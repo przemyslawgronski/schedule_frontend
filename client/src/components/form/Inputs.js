@@ -36,26 +36,6 @@ export const CheckBoxRef = React.forwardRef(({labelText, defaultValue}, ref) => 
   )
 })
 
-export const ShiftsNum = React.forwardRef(({defaultValue}, ref) => {
-  
-  const id = useId()+'ShiftsNum'; 
-  
-  return (
-    <>
-      <label htmlFor={id}>Ilość zmian</label>
-      <input
-        ref={ref}
-        type='number'
-        id={id}
-        min="0"
-        max="100"
-        defaultValue={defaultValue == null ? undefined : defaultValue}
-        required
-      />
-    </>
-  )
-})
-
 export const DropDownRef = React.forwardRef(({label, name, defaultVal, options, valueKey, objKey, objText, onChangeFunc}, ref) => {
 
   const id = useId()+'DropDownRef';
