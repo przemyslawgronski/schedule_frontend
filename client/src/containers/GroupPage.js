@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import GroupDataExtended from '../components/group/GroupDataExtended';
-import GroupForm from '../components/group/GroupForm';
+import GroupForm from '../components/group/GroupForm/GroupForm';
 import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ToggleComponents from '../components/ToggleComponents';
 import ErrorList from '../components/ErrorList/ErrorList';

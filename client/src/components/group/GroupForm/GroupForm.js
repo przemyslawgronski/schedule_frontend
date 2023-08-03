@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
-import { ShiftsNum, CheckBoxRef, DropDownGroupRef } from "../form/Inputs";
-import Form from "../form/Form";
-import RemoveButton from "../form/RemoveButton";
-import TextInput from "../form/inputs/TextInput";
+import { ShiftsNum, CheckBoxRef, DropDownGroupRef } from "../../form/Inputs";
+import Form from "../../form/Form";
+import RemoveButton from "../../form/RemoveButton";
+import TextInput from "../../form/inputs/TextInput";
+import style from './GroupForm.module.css'
 
 const GroupForm = ({submitFunc, setToggle, group, constraints}) => {
 
@@ -25,7 +26,7 @@ const GroupForm = ({submitFunc, setToggle, group, constraints}) => {
     };
 
   return (
-    <div>
+    <div className={style.groupForm}>
     <Form submitFunc={submitFuncReady} legend={group ? 'Zmień dane:' : 'Dodaj grupę:'}>
         <TextInput
             ref={formRef.group_name}

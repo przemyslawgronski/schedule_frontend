@@ -4,7 +4,7 @@ import useGetAndChange from '../features/customHooks/useGetAndChange';
 import ErrorList from '../components/ErrorList/ErrorList';
 import useCreateData from '../features/customHooks/useCreateData';
 import GroupDataBasic from '../components/group/GroupDataBasic';
-import GroupForm from '../components/group/GroupForm';
+import GroupForm from '../components/group/GroupForm/GroupForm';
 
 const GroupsPage = () => {
 
