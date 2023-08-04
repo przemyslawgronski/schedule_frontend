@@ -37,7 +37,7 @@ def search_text_in_file(extension=".js", exclude_path_words=None):
                         # if(results):
                         #     for result in results:
                         #         print(result)
-                        if "daysOff2" in content:
+                        if "TODO" in content:
                             print(full_path)
                 except UnicodeDecodeError as e:
                     print("Error reading file: " + full_path)
