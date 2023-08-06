@@ -14,3 +14,12 @@
 .modal > dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+.modal button{
+    display: inline-flex;
+    align-items: center;
+}
+
+.modal button > svg{
+    margin: 0 0 0 0.3rem;
+}
