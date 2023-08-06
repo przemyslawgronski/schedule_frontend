@@ -166,6 +166,10 @@ caption{
   margin-bottom: .2rem;
 }
 
+hr{
+  border-top: .3rem solid var(--darkblue1);
+}
+
 @media screen and (max-width: 600px) {
   #root>:last-child{
     margin-left: 0;
