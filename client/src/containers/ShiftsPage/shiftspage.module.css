@@ -22,8 +22,3 @@
 .shiftspage>div:first-of-type>a>svg{
     margin: 0 0 0 0.3rem;
 }
-
-.shiftspage>div:nth-of-type(2){
-    height: .3rem;
-    background-color: var(--darkblue1);
-}
