@@ -14,7 +14,7 @@ const ShiftsPage = () => {
         <Link to="new">Nowe <AddCircleIcon/></Link>
       </div>
 
-      <div></div>
+      <hr/>
 
       <ChooseGroup>
         <ShiftsLinks />

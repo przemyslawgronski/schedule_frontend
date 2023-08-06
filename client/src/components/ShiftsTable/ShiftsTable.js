@@ -1,4 +1,5 @@
 import style from './tables.module.css'
+import Modal from '../Modal'
 
 const ShiftsTable = ({headers, children}) => {
 
@@ -19,6 +20,9 @@ const ShiftsTable = ({headers, children}) => {
               {children}
             </table>
           </div>
+          <Modal>
+            <p>Test</p>
+          </Modal>
       </>
       )
 }

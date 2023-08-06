@@ -24,7 +24,7 @@ const ChooseGroup = ({children}) => {
 
     if (groups.length === 0) return <div><p>Brak grup</p></div>;
 
-    // if (groupId == null) return <div><p>Ładowanie...</p></div>; // <- This is not needed ?
+    if (groupId == null) return <div><p>Ładowanie...</p></div>;
 
   return (
     <div>
