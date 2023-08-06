@@ -1,0 +1,16 @@
+.modal {
+    background-color: red;
+}
+
+.modal > dialog {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    width: 95%;
+    height: 95vh;
+}
+
+.modal > dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
