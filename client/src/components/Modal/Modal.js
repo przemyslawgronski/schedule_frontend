@@ -10,8 +10,12 @@ const Modal = ({children}) => {
     <div className={style.modal}>
         <button onClick={()=>dialogRef.current.showModal()}>Powiększ<OpenInFullIcon/></button>
         <dialog ref={dialogRef}>
-            <button onClick={()=>dialogRef.current.close()}>Zamknij<CloseFullscreenIcon/></button>
+          <div>
+            <div>
+              <button onClick={()=>dialogRef.current.close()}>Zamknij<CloseFullscreenIcon/></button>
+            </div>
             <div>{children}</div>
+          </div>
         </dialog>
     </div>
   )

@@ -1,18 +1,30 @@
 .modal {
-    background-color: red;
+    display: flex;
+    justify-content: center;
 }
 
 .modal > dialog {
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    overflow: auto;
-    width: 95%;
-    height: 95vh;
+    padding-top: 0;
 }
 
 .modal > dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal > dialog > div{
+    position: static;
+}
+
+.modal > dialog > div > div:nth-of-type(1){
+    background-color: red;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: end;
+}
+
+.modal > dialog > div > div:nth-of-type(2){
+    margin-top: 0;
 }
 
 .modal button{
