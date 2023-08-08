@@ -16,11 +16,12 @@
 }
 
 .modal > dialog > div > div:nth-of-type(1){
-    background-color: red;
+    background-color: white;
     position: sticky;
     top: 0;
     display: flex;
     justify-content: end;
+    border-bottom: 1px solid black;
 }
 
 .modal > dialog > div > div:nth-of-type(2){
