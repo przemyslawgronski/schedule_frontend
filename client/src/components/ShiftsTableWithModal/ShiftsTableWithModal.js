@@ -1,7 +1,7 @@
 import style from './tables.module.css'
 import Modal from '../Modal/Modal'
 
-const ShiftsTable = ({headers, children}) => {
+const ShiftsTableWithModal = ({headers, children}) => {
 
   // TODO: Zrobić przycisk do przeglądania jak w excel online
 
@@ -34,4 +34,4 @@ const ShiftsTable = ({headers, children}) => {
       </>
       )
 }
-export default ShiftsTable
+export default ShiftsTableWithModal

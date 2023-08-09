@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { SolutionContext } from './newShift/GetSolution';
 import { EmpsInGroupContext } from './newShift/EmpsInGroup';
 import { DateContext } from './newShift/ChooseDate';
-import ShiftsTable from './ShiftsTable/ShiftsTable';
+import ShiftsTable from './ShiftsTableWithModal/ShiftsTableWithModal';
 import TbodyShifts from './TbodyShifts';
 
 const RenderSolution = () => {

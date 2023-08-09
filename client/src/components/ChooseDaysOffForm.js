@@ -1,6 +1,6 @@
 import ChoosedDaysOff from "./newShift/ChoosedDaysOff";
 import CheckDataRows from './newShift/CheckDataRows';
-import ShiftsTable from "./ShiftsTable/ShiftsTable";
+import ShiftsTable from "./ShiftsTableWithModal/ShiftsTableWithModal";
 
 const ChooseDaysOffForm = ({employees, daysOff, handleDaysOff}) => {
 
