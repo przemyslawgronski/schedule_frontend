@@ -1,5 +1,6 @@
-import style from './tables.module.css'
 import Modal from '../Modal/Modal'
+import ShiftsTable from '../ShiftsTable/ShiftsTable'
+import style from './ShiftsTableWithModal.module.css'
 
 const ShiftsTableWithModal = ({headers, children}) => {
 
@@ -9,27 +10,15 @@ const ShiftsTableWithModal = ({headers, children}) => {
 
     return (
         <>
-          <div className={style.responsivetable}>
-            <table>
-              <thead>
-                <tr>
-                    <th>Dzień</th>
-                    {headers.map((emp)=>(<th key={emp.id}>{emp.full_name}</th>))}
-                </tr>
-              </thead>
-              {children}
-            </table>
+          <div className={style.crop}>
+            <ShiftsTable headers={headers}>
+                {children}
+            </ShiftsTable>
           </div>
           <Modal>
-          <table>
-              <thead>
-                <tr>
-                    <th>Dzień</th>
-                    {headers.map((emp)=>(<th key={emp.id}>{emp.full_name}</th>))}
-                </tr>
-              </thead>
-              {children}
-            </table>
+            <ShiftsTable headers={headers}>
+                {children}
+            </ShiftsTable>
           </Modal>
       </>
       )

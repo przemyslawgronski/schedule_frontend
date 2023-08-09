@@ -1,0 +1,7 @@
+.crop{
+    margin: 1rem auto 0 auto;
+    overflow: auto;
+    height: 18rem;
+    width: 70%;
+    border: 2px solid black;
+}
