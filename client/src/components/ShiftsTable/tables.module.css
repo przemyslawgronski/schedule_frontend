@@ -15,6 +15,11 @@
     text-align: center;
 }
 
+.responsivetable thead{
+    position: sticky;
+    top: 0;
+}
+
 @media screen and (max-width: 800px) {
     .responsivetable table{
         min-width: 100%;
