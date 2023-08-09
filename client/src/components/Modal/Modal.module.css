@@ -4,33 +4,23 @@
 }
 
 .modal > dialog {
-    padding-top: 0;
+    top: 3rem;
+    max-height: calc((100% - 6px) - 2em - 3rem);
 }
 
 .modal > dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal > dialog > div{
-    position: static;
-}
-
-.modal > dialog > div > div:nth-of-type(1){
-    background-color: white;
-    position: sticky;
-    top: 0;
-    display: flex;
-    justify-content: end;
-    border-bottom: 1px solid black;
-}
-
-.modal > dialog > div > div:nth-of-type(2){
-    margin-top: 0;
-}
-
 .modal button{
     display: inline-flex;
     align-items: center;
+}
+
+.modal > dialog > button {
+    position: fixed;
+    right: 0;
+    top: 0;
 }
 
 .modal button > svg{
