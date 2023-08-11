@@ -10,6 +10,25 @@
 .responsivetable thead{
     position: sticky;
     top: 0;
+    z-index: 2;
+}
+
+table thead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    border-left: none;
+  }
+
+.responsivetable > table > tbody > tr > td:first-of-type{
+    position: sticky;
+    left: 0;
+    background-color: var(--darkblue1);
+    color: white;
+    border-right: 5px solid red inset;
+    white-space: nowrap;
+    border-left: none;
+    z-index: 1;
 }
 
 .responsivetable th{
@@ -19,5 +38,5 @@
 @media screen and (max-width: 800px) {
     .responsivetable table{
         min-width: 100%;
-    }   
+    }
 }
