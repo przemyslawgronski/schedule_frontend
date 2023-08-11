@@ -6,6 +6,7 @@
 .modal > dialog {
     top: 3rem;
     max-height: calc((100% - 6px) - 2em - 3rem);
+    padding: 0;
 }
 
 .modal > dialog::backdrop {
