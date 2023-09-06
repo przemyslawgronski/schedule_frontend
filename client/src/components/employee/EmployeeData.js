@@ -2,14 +2,16 @@ import DisplayObject from "../DisplayObject";
 
 const EmployeeData = ({employee, groups, spanTag, removeInfo}) => {
 
+  if(employee === null) return <p>Czekam na dane...</p>;
+
   const empData = {
-    'Imię': employee?.first_name || 'Ładowanie...',
-    'Nazwisko': employee?.last_name || 'Ładowanie...',
+    'Imię': employee?.first_name,
+    'Nazwisko': employee?.last_name,
     'Grupy': employee?.groups?.map?.((group_id)=>
         <span key={group_id}>{groups?.find(group=>group.id===group_id)?.group_name} </span>
-    ) || 'Ładowanie...',
-    'Ostatnia zmiana': employee?.updated || 'Ładowanie...',
-    'Ukryty': employee?.hide === undefined ? 'Ładowanie...' : employee.hide ? 'Tak' : 'Nie',
+    ),
+    'Ostatnia zmiana': employee?.updated,
+    'Ukryty': employee?.hide ? 'Tak' : 'Nie',
     }
 
     if(removeInfo && Array.isArray(removeInfo) && removeInfo.length > 0){
