@@ -53,9 +53,24 @@ const useGetAndChange = ({ url, modify }) => {
         },
       });
 
+      // Handle error
       if (!fetchResponse.ok) {
+        
+        // Logout if unauthorized
         if (fetchResponse.status === 401) dispatch(logout());
-        throw new Error(`Błąd: ${fetchResponse.status} ${fetchResponse.statusText}`);
+        
+        // Get error details
+        const errorDetails = await fetchResponse.json();
+
+        // Log error
+        console.error({
+          'url': url,
+          'status': fetchResponse.status,
+          'statusText': fetchResponse.statusText,
+          'errorDetails': errorDetails
+        });
+
+        throw new Error(`${fetchResponse.status}: ${errorDetails?.message || fetchResponse.statusText}`);
       }
 
       // Everything is ok
