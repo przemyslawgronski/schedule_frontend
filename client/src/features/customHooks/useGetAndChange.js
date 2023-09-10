@@ -62,14 +62,6 @@ const useGetAndChange = ({ url, modify }) => {
         // Get error details
         const errorDetails = await fetchResponse.json();
 
-        // Log error
-        console.error({
-          'url': url,
-          'status': fetchResponse.status,
-          'statusText': fetchResponse.statusText,
-          'errorDetails': errorDetails
-        });
-
         throw new Error(`${fetchResponse.status}: ${errorDetails?.message || fetchResponse.statusText}`);
       }
 
