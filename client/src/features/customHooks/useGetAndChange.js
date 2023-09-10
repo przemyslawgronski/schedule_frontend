@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { logout } from "../user";
 import { useEffect, useReducer, useCallback } from "react";
+import { checkForError } from "../utils/checkForError";
 
 //Fettch data from django backend
 // url - url to be fetched
@@ -53,17 +53,7 @@ const useGetAndChange = ({ url, modify }) => {
         },
       });
 
-      // Handle error
-      if (!fetchResponse.ok) {
-        
-        // Logout if unauthorized
-        if (fetchResponse.status === 401) dispatch(logout());
-        
-        // Get error details
-        const errorDetails = await fetchResponse.json();
-
-        throw new Error(`${fetchResponse.status}: ${errorDetails?.message || fetchResponse.statusText}`);
-      }
+      await checkForError(fetchResponse, dispatch);
 
       // Everything is ok
 
@@ -101,10 +91,7 @@ const useGetAndChange = ({ url, modify }) => {
         body: JSON.stringify(body),
       });
 
-      if (!fetchResponse.ok) {
-        if (fetchResponse.status === 401) dispatch(logout());
-        throw new Error(`Błąd: ${fetchResponse.status} ${fetchResponse.statusText}`);
-      }
+      await checkForError(fetchResponse, dispatch);
 
       // Everything is ok
 

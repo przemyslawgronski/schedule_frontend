@@ -1,6 +1,6 @@
 import { useCallback, useReducer } from "react"
 import { useDispatch } from "react-redux";
-import { logout } from "../user";
+import { checkForError } from "../utils/checkForError";
 
 const ACTION = {
     FETCH_SUCCESS: "FETCH_SUCCESS",
@@ -45,10 +45,7 @@ const useCreateData = ({ url, refresh }) => {
                 body: JSON.stringify(body),
             });
     
-            if (!fetchResponse.ok) {
-                if (fetchResponse.status === 401) dispatch(logout());
-                throw new Error(`Błąd: ${fetchResponse.status} ${fetchResponse.statusText}`);
-            }
+            await checkForError(fetchResponse, dispatch);
         
             // Everything is ok
 

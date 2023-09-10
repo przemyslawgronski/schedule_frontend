@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { logout } from "../user";
+import { checkForError } from "../utils/checkForError";
 
 const useBatchChange = ({url}) => {
 
@@ -24,10 +24,7 @@ const useBatchChange = ({url}) => {
                         }
                     )
 
-                    if (!response.ok) {
-                        if (response.status === 401) reduxDispatch(logout());
-                        throw new Error(`Błąd: ${response.status} ${response.statusText}`);
-                    }
+                    await checkForError(response, reduxDispatch);
 
                     // await response.json(); // There is no need to use data from response
 
