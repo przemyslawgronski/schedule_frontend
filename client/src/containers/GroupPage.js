@@ -28,7 +28,7 @@ const GroupPage = () => {
 
     return (
             <div>
-                <p>Grupa:</p>
+                <h1>Grupa</h1>
 
                 <ToggleComponents
                     Component1={GroupForm}

@@ -33,7 +33,7 @@ const EmployeePage = () => {
 
     return (
         <div>
-            <p>Pracownik:</p>
+            <h1>Pracownik</h1>
                 <ToggleComponents
                     Component1={EmployeeForm}
                     component1Props={{

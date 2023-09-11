@@ -21,7 +21,7 @@ const GroupsPage = () => {
 
   return (
   <div>
-    <p>Groups Page</p>
+    <h1>Grupy</h1>
       <ul>
         {visibleGroups?.map(group =>(
           <li key={group.id}>

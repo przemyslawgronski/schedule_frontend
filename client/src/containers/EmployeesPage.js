@@ -27,7 +27,7 @@ const EmployeesPage = () => {
 
   return (
   <div>
-      <h2>Pracownicy:</h2>
+      <h1>Pracownicy</h1>
       <EmployeesData employees={visibleEmployees} groups={groupsState.data} removeInfo={['Ukryty']}/>
       
       {empState.data && <p> Utworzono: {JSON.stringify(empState.data)}</p>}
