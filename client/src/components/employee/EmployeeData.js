@@ -10,7 +10,7 @@ const EmployeeData = ({employee, groups, spanTag, removeInfo}) => {
     'Grupy': employee?.groups?.map?.((group_id)=>
         <span key={group_id}>{groups?.find(group=>group.id===group_id)?.group_name} </span>
     ),
-    'Ostatnia zmiana': employee?.updated,
+    'Ostatnia zmiana': employee?.updated && new Date(employee.updated).toLocaleString(),
     'Ukryty': employee?.hide ? 'Tak' : 'Nie',
     }
 
