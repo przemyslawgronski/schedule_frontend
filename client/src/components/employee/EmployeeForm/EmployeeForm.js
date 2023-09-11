@@ -37,12 +37,6 @@ const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, empl
                 ref={formRef.lastName}
                 label="Nazwisko:"
                 defaultValue={employee ? employee.last_name : ''} />
-            <CheckBoxRef
-                ref={formRef.hide}
-                labelText="Ukryj"
-                defaultValue={employee?.hide}
-                />
-
             <fieldset>
                 <legend>Grupy pracowanika:</legend>
                     {allgroups.length === 0 ? <p>Brak grup</p> :
@@ -57,6 +51,11 @@ const EmployeeForm = ({allgroups, submitFunc, checkedGroups, onChangeGroup, empl
                     />
                     )}
             </fieldset>
+            <CheckBoxRef
+                ref={formRef.hide}
+                labelText="Ukryj"
+                defaultValue={employee?.hide}
+                />
         </Form>
 
         { employee && <RemoveButton
