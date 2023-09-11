@@ -34,7 +34,7 @@
                          'button button';
     grid-auto-columns: min-content;
     align-items: start;
-    justify-items: left;
+    justify-items: start;
     row-gap: 1rem;
     column-gap: 2rem;
 }
