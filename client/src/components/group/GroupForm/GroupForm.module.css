@@ -20,6 +20,7 @@
 
 .groupForm form>fieldset>div:nth-of-type(4){
     grid-area: hideCheckbox;
+    justify-self: start;
 }
 
 .groupForm form>fieldset>button{

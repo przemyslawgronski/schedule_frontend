@@ -16,7 +16,7 @@
 
 .employeeForm form>fieldset>div:nth-of-type(3){
     grid-area: hideCheckbox;
-    justify-self: left;
+    justify-self: start;
 }
 
 .employeeForm form>fieldset>fieldset{
