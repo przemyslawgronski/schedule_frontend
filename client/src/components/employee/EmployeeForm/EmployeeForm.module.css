@@ -1,3 +1,5 @@
+/* Similar to client\src\components\group\GroupForm\GroupForm.module.css */
+
 .employeeForm{
     display: flex;
     flex-direction: column;
