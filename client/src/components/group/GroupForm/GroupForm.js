@@ -39,11 +39,11 @@ const GroupForm = ({submitFunc, setToggle, group, constraints}) => {
             ref={formRef.num_of_shifts}
             defaultValue={group ? group.num_of_shifts : null}
             />
-        { group && <CheckBoxRef
+        <CheckBoxRef
             ref={formRef.hide}
             labelText="Ukryj:"
-            defaultValue={group.hide}
-            /> }
+            defaultValue={group?.hide}
+            />
 
         { constraints && <DropDownGroupRef
             ref={formRef.constraints}

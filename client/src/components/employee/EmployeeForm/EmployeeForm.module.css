@@ -11,6 +11,11 @@
     grid-area: surname;
 }
 
+.employeeForm form>fieldset>div:nth-of-type(3){
+    grid-area: hideCheckbox;
+    justify-self: left;
+}
+
 .employeeForm form>fieldset>fieldset{
     grid-area: groupsFieldset;
     justify-self: stretch;
@@ -27,6 +32,7 @@
     display: grid;
     grid-template-areas: 'name surname'
                          'groupsFieldset groupsFieldset'
+                         'hideCheckbox hideCheckbox'
                          'button button';
     grid-auto-columns: min-content;
     align-items: start;
@@ -40,6 +46,7 @@
         grid-template-areas: 'name'
                              'surname'
                              'groupsFieldset'
+                             'hideCheckbox'
                              'button';
     }
 }

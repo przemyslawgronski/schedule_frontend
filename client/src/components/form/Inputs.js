@@ -24,7 +24,7 @@ export const CheckBoxRef = React.forwardRef(({labelText, defaultValue}, ref) => 
   const id = useId()+'checkbox';
 
   return (
-    <>
+    <div>
       <input
         ref={ref}
         id={id}
@@ -32,7 +32,7 @@ export const CheckBoxRef = React.forwardRef(({labelText, defaultValue}, ref) => 
         defaultChecked = {defaultValue || false}
       />
       { labelText && <label htmlFor={id}>{labelText}</label>} {/* Optional */}
-    </>
+    </div>
   )
 })
 
