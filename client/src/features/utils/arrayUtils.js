@@ -76,3 +76,38 @@ export const unArr = (item) => {
   if(item.length === 1) return item[0];
   return item.join(', ');
 }
+
+
+// input:
+// [   { "date": "2023-09-01", "employee": 8, "shift_num": [ 1 ] },
+//     { "date": "2023-09-01", "employee": 12, "shift_num": [ 0 ] },
+//     { "date": "2023-09-02", "employee": 8, "shift_num": [ 1 ] },
+//     { "date": "2023-09-02", "employee": 12, "shift_num": [ 0 ] },
+//     { "date": "2023-09-03", "employee": 8, "shift_num": [ 1 ] },
+//     { "date": "2023-09-03", "employee": 12, "shift_num": [ 0 ] },
+//     ...
+
+// result:
+//  Map{
+//    "2023-09-01" => Map{ 8 => [ 1 ], 12 => [ 0 ] },
+//    "2023-09-02" => Map{ 8 => [ 1 ], 12 => [ 0 ] },
+//    "2023-09-03" => Map{ 8 => [ 1 ], 12 => [ 0 ]  },
+//     ...
+
+export const convertShifts = (shifts) => {
+
+  return shifts.reduce((acc, curr) => {
+      
+      const {date, employee, shift_num} = curr;
+
+      // If date is not in map add it
+      if(!acc.has(date)) acc.set(date, new Map());
+
+      // eg.: '2023-09-01' => Map{ 8 => [ 1 ], 12 => [ 0 ] }
+      //       date        =>  {employee => shift_num, ...}
+      acc.get(date).set(employee, shift_num);
+  
+      return acc;
+  }, new Map());
+
+}

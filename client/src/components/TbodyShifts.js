@@ -1,25 +1,28 @@
 import { unArr } from '../features/utils/arrayUtils'
+import { convertShifts } from '../features/utils/arrayUtils'
 
 const TbodyShifts = ({shifts, headers}) => {
 
-  console.log({shifts, headers})
-  // TODO: Important! - this is not working properly
-  // Warning: Encountered two children with the same key, `2023-08-01`.
-  // Keys should be unique so that components maintain their identity across updates.
-  // Non-unique keys may cause children to be duplicated and/or omitted
-  // — the behavior is unsupported and could change in a future version.
+  // return new Map in format: { date => {employee => shift_num, ...}, ... }
+  // eg.: '2023-09-01' => Map{ 8 => [ 1 ], 12 => [ 0 ] }
+  const convertedShifts = convertShifts(shifts);
+
+  const tableToRender = [];
+
+  convertedShifts.forEach((empsToShifts, date) => {
+    tableToRender.push(
+      // eg.: <tr><td>2023-09-10</td><td>0</td><td>1</td></tr>
+      <tr key={date}>
+        <td key='date'>{date}</td>
+        { // Keep order of headers (employees)
+        headers.map((emp) => <td key={emp.id}>{unArr(empsToShifts.get(emp.id))}</td>)}
+      </tr>
+    )
+  })
 
   return (
     <tbody>
-        {shifts.map((shift)=>(
-        // Each row (date) must be unique
-        <tr key={shift.date}>
-            <td>{shift.date}</td>
-            {headers.map((emp)=>(
-                <td key={emp.id}>{emp.id===shift.employee && unArr(shift.shift_num)}</td>
-            ))}
-        </tr>
-        ) )}
+      {tableToRender}
     </tbody>
   )
 }
