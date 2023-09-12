@@ -93,21 +93,16 @@ export const unArr = (item) => {
 //    "2023-09-02" => Map{ 8 => [ 1 ], 12 => [ 0 ] },
 //    "2023-09-03" => Map{ 8 => [ 1 ], 12 => [ 0 ]  },
 //     ...
+//    ( date        =>  {employee => shift_num, ...})
 
 export const convertShifts = (shifts) => {
 
   return shifts.reduce((acc, curr) => {
-      
       const {date, employee, shift_num} = curr;
 
-      // If date is not in map add it
       if(!acc.has(date)) acc.set(date, new Map());
-
-      // eg.: '2023-09-01' => Map{ 8 => [ 1 ], 12 => [ 0 ] }
-      //       date        =>  {employee => shift_num, ...}
       acc.get(date).set(employee, shift_num);
   
       return acc;
   }, new Map());
-
 }
