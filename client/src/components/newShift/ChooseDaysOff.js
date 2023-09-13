@@ -14,9 +14,9 @@ const ChooseDaysOff = () => {
 
     const [daysOff, setDaysOff] = useState([]);
 
-    const handleDaysOff = (dayOffId)=>setDaysOff( prev=> {
+    const handleDaysOff = (dateToChange, empIdToChange)=>setDaysOff( prev=> {
       const newDaysOff = JSON.parse(JSON.stringify(prev));
-      const dayOff = newDaysOff.find( ({id})=>id===dayOffId );
+      const dayOff = newDaysOff.find( ({date, empId})=>date===dateToChange && empId===empIdToChange);
       dayOff.dayOff = !dayOff.dayOff;
       return newDaysOff;
     });
@@ -24,13 +24,6 @@ const ChooseDaysOff = () => {
     useEffect(()=>resetSolution(),[resetSolution, daysOff]); // Reset solution if daysOff changed
 
     const daysCount = dateUtils.daysInMonth(date.year, date.month);
-
-    // {
-    //  id: 1,
-    //  fullName: 'Jan Kowalski',
-    //  Date: 21.05.2023,
-    //  dayOff: true
-    // }
 
     useEffect(()=>{
       const dates = dateUtils.datesArray(date.year, date.month);
@@ -40,7 +33,6 @@ const ChooseDaysOff = () => {
       dates.forEach( (date) => {
         empsInGroup.forEach( (emp) => {
           newDaysOff.push({
-            id: `${emp.id}-${date}`,
             empId: emp.id,
             date: date,
             dayOff: false
@@ -51,6 +43,8 @@ const ChooseDaysOff = () => {
       setDaysOff(newDaysOff);
     
     },[empsInGroup, date]);
+
+    if(daysOff.length===0) return null;
 
   return (
     <>

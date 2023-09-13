@@ -1,68 +1,49 @@
 export function groupDaysOffByDate(daysOff){
-    return daysOff.reduce((acc, curr)=>{
-        if(acc[curr.date]==null) acc[curr.date] = {};
-        if(acc[curr.date][curr.empId]==null) acc[curr.date][curr.empId] = {};
-        acc[curr.date][curr.empId] = {dayOff: curr.dayOff, id: curr.id};
-        return acc;
-  }, {});
+  return daysOff.reduce((acc, curr)=>{
+
+    if(!acc.has(curr.date)) acc.set(curr.date, new Map());
+    acc.get(curr.date).set(curr.empId, curr.dayOff);
+    
+    return acc;
+  }, new Map());
 }
 
 // Function converts data from this:
 
-//   [
-//     {
-//         "id": "8-2023-05-01",
-//         "fullName": "nowy nowy2",
-//         "date": "2023-05-01",
-//         "dayOff": false
-//     },
-//     {
-//         "id": "11-2023-05-01",
-//         "fullName": "AAAAAAA 999",
-//         "date": "2023-05-01",
-//         "dayOff": false
-//     },
-//     {
-//         "id": "8-2023-05-02",
-//         "fullName": "nowy nowy2",
-//         "date": "2023-05-02",
-//         "dayOff": false
-//     },
-//     ...
-// ]
+// [
+//   {
+//       "id": "12-2023-10-01",
+//       "empId": 12,
+//       "date": "2023-10-01",
+//       "dayOff": false
+//   },
+//   {
+//       "id": "8-2023-10-01",
+//       "empId": 8,
+//       "date": "2023-10-01",
+//       "dayOff": false
+//   },
+//   {
+//       "id": "12-2023-10-02",
+//       "empId": 12,
+//       "date": "2023-10-02",
+//       "dayOff": false
+//   },
+//   {
+//       "id": "8-2023-10-02",
+//       "empId": 8,
+//       "date": "2023-10-02",
+//       "dayOff": false
+//   },
 
 // to this:
 
-// {
-//     "2028-02-01": {
-//         "8": {
-//             "dayOff": false,
-//             "id": "8-2028-02-01"
-//         },
-//         "11": {
-//             "dayOff": false,
-//             "id": "11-2028-02-01"
-//         }
-//     },
-//     "2028-02-02": {
-//         "8": {
-//             "dayOff": false,
-//             "id": "8-2028-02-02"
-//         },
-//         "11": {
-//             "dayOff": false,
-//             "id": "11-2028-02-02"
-//         }
-//     },
-//     "2028-02-03": {
-//         "8": {
-//             "dayOff": false,
-//             "id": "8-2028-02-03"
-//         },
-//         "11": {
-//             "dayOff": false,
-//             "id": "11-2028-02-03"
-//         }
-//     },
-//     ...
-// }
+// Map {
+//   "2023-10-01" => Map {
+//     12 => false,
+//     8 => false
+//   },
+//   "2023-10-02" => Map {
+//     12 => false,
+//     8 => false
+//   },

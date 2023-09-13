@@ -5,26 +5,29 @@ const CheckDataRows = ({daysOff, handleDaysOff, headers}) => {
 
   const daysOffByDate = groupDaysOffByDate(daysOff);
 
+  const tableToRender = [];
+
+  daysOffByDate.forEach((empIdToDayOff, date)=>{
+    tableToRender.push(
+      <tr key={date}>
+        <td>{date}</td>
+        {
+          headers.map(emp=>( // Keep order of headers
+            <td key={emp.id}>
+              <CheckBox
+                isChecked={empIdToDayOff.get(emp.id)}
+                changeFunc={()=>handleDaysOff(date, emp.id)}
+              />
+            </td>
+          ))
+        }
+      </tr>
+    )
+  })
+
   return (
     <tbody>
-    {
-      Object.keys(daysOffByDate).map(day=>(
-        <tr key={day}>
-          <td>{day}</td>
-          {
-            headers.map(emp=>(
-              <td key={emp.id}>
-                <CheckBox
-                  isChecked={daysOffByDate[day][emp.id].dayOff}
-                  changeFunc={()=>handleDaysOff(daysOffByDate[day][emp.id].id)}
-                />
-              </td>
-            ))
-          }
-        </tr>
-      ))
-    }
-
+      {tableToRender}
     </tbody>
   )
 }
