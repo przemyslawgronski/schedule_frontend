@@ -1,13 +1,10 @@
 import { CheckBox } from "../form/Inputs"
-import { groupDaysOffByDate } from "../../features/pageSpecific/checkDataRowsFunc"
 
 const CheckDataRows = ({daysOff, handleDaysOff, headers}) => {
 
-  const daysOffByDate = groupDaysOffByDate(daysOff);
-
   const tableToRender = [];
 
-  daysOffByDate.forEach((empIdToDayOff, date)=>{
+  daysOff.forEach((empIdToDayOff, date)=>{
     tableToRender.push(
       <tr key={date}>
         <td>{date}</td>

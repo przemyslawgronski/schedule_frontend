@@ -14,31 +14,20 @@ const ChooseDaysOff = () => {
 
     const [daysOff, setDaysOff] = useState([]);
 
-    const handleDaysOff = (dateToChange, empIdToChange)=>setDaysOff( prev=> {
-      const newDaysOff = structuredClone(prev);
-      const dayOff = newDaysOff.find( ({date, empId})=>date===dateToChange && empId===empIdToChange);
-      dayOff.dayOff = !dayOff.dayOff;
-      return newDaysOff;
-    });
-
     useEffect(()=>resetSolution(),[resetSolution, daysOff]); // Reset solution if daysOff changed
 
-    const daysCount = dateUtils.daysInMonth(date.year, date.month);
-
     useEffect(()=>{
+
       const dates = dateUtils.datesArray(date.year, date.month);
 
-      const newDaysOff = [];
-      
+      const newDaysOff = new Map();
+
       dates.forEach( (date) => {
+        newDaysOff.set(date, new Map());
         empsInGroup.forEach( (emp) => {
-          newDaysOff.push({
-            empId: emp.id,
-            date: date,
-            dayOff: false
-          })
+          newDaysOff.get(date).set(emp.id, false);
         })
-      })
+      });
 
       setDaysOff(newDaysOff);
     
@@ -46,13 +35,38 @@ const ChooseDaysOff = () => {
 
     if(daysOff.length===0) return null;
 
+    const handleDaysOff = (dateToChange, empIdToChange)=>setDaysOff( prev=> {
+      const newDaysOff = structuredClone(prev);
+      const valueToggle = newDaysOff.get(dateToChange).get(empIdToChange);
+      newDaysOff.get(dateToChange).set(empIdToChange, !valueToggle);
+      return newDaysOff;
+    });
+
+    // eg.: Map {
+    //   12 => [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+    //   8 => [ 1, 8, 9, 10 ]
+    // }
+    const empIdToDaysOff = new Map();
+
+    daysOff.forEach((empIdToDayOff, date) => {
+      empIdToDayOff.forEach((dayOff, empId) => {
+        if(!empIdToDaysOff.has(empId)) empIdToDaysOff.set(empId, []);
+        if(dayOff) empIdToDaysOff.get(empId).push(new Date(date).getDate());
+      })
+    });
+
   return (
     <>
-          <p>Dni w miesiącu: {daysCount}</p>
+          <p>Dni w miesiącu: {daysOff.size}</p>
 
-          <ChooseDaysOffForm employees={empsInGroup} daysOff={daysOff} handleDaysOff={handleDaysOff} />
+          <ChooseDaysOffForm
+            employees={empsInGroup}
+            daysOff={daysOff}
+            handleDaysOff={handleDaysOff}
+            empIdToDaysOff={empIdToDaysOff}
+            />
 
-          <GenerateButton daysOff={daysOff} />
+          <GenerateButton daysOff={daysOff} empIdToDaysOff={empIdToDaysOff}/>
     </>
   )
 }
