@@ -15,7 +15,7 @@ const ChooseDaysOff = () => {
     const [daysOff, setDaysOff] = useState([]);
 
     const handleDaysOff = (dateToChange, empIdToChange)=>setDaysOff( prev=> {
-      const newDaysOff = JSON.parse(JSON.stringify(prev));
+      const newDaysOff = structuredClone(prev);
       const dayOff = newDaysOff.find( ({date, empId})=>date===dateToChange && empId===empIdToChange);
       dayOff.dayOff = !dayOff.dayOff;
       return newDaysOff;
