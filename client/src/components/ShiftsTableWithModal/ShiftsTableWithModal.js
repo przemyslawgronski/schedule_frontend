@@ -4,8 +4,6 @@ import style from './ShiftsTableWithModal.module.css'
 
 const ShiftsTableWithModal = ({headers, children}) => {
 
-  // TODO: Co gdy w jednym dniu będzie więcej niż jedna zmiana?
-
     return (
         <>
           <div className={style.crop}>
