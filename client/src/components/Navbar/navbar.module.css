@@ -37,6 +37,7 @@
     height: calc(100vh - var(--pagetop-height));
     width: 12rem;
     overflow-y: auto;
+    z-index: 99;
 }
 
 .logged a{
