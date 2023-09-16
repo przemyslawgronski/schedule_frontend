@@ -32,6 +32,8 @@ const EmployeesPage = () => {
       
       {empState.data && <p> Utworzono: {JSON.stringify(empState.data)}</p>}
 
+
+      {/* TODO: Zrobić 'Dodaj' jak w zmianach, gdzie przenosi do nowego formularza */}
       <EmployeeForm
         allgroups={groupsState.data}
         submitFunc={createEmployee}
