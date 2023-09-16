@@ -4,8 +4,8 @@ import DisplayObject from '../DisplayObject'
 const ConstraintData = ({constraint, availableConstraint}) => {
 
   const data = {
-    'Nazwa:': constraint?.representation,
-    'Ostatnia zmiana:': constraint?.updated && new Date(constraint.updated).toLocaleString(),
+    'Nazwa': constraint?.representation,
+    'Ostatnia zmiana': constraint?.updated && new Date(constraint.updated).toLocaleString(),
   };
 
   const choosedConstraints = availableConstraint?.filter((c) => constraint?.available_constraints?.includes(c.id));
