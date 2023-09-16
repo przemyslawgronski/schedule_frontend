@@ -1,8 +1,16 @@
-const DropDown = ({label, name, defaultVal, options, valueKey, objKey, objText, onChangeFunc}) => (
-    <label>
-        {label}
+import React, { useId } from "react"
+import style from './DropDown.module.css'
+
+const DropDown = ({label, name, defaultVal, options, valueKey, objKey, objText, onChangeFunc}) => {
+  
+  const id = useId()+(name || 'dropDown');
+
+  return (
+    <div className={style.dropDown}>
+        <label htmlFor={id}>{label}</label>
         <select
           name={name}
+          id={id}
           onChange={onChangeFunc}
           defaultValue={defaultVal ? JSON.stringify(defaultVal) : options && JSON.stringify(options[0])}
         >
@@ -16,8 +24,8 @@ const DropDown = ({label, name, defaultVal, options, valueKey, objKey, objText, 
                 </option>
             ))}
         </select>
-    </label>
-  )
+    </div>
+  )}
 
 export default DropDown
 

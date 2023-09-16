@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, createContext } from 'react'
 import useGetAndChange from '../../features/customHooks/useGetAndChange'
 import ErrorList from '../ErrorList/ErrorList'
-import DropDown from '../form/DropDown'
+import DropDown from '../form/DropDown/DropDown'
 
 export const GroupIdContext = createContext();
 

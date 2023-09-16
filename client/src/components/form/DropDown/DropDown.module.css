@@ -1,0 +1,9 @@
+.dropDown {
+    display: inline-block;
+    margin: 0.4rem;
+    border-bottom: 1px solid var(--darkblue1);
+}
+
+.dropDown > label {
+    padding: 0.6rem 0 0.6rem 0.4rem;
+}
