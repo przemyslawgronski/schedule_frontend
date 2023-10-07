@@ -22,22 +22,22 @@ const NewShiftPage = () => {
 
   return (
     <ChooseGroup>                   {/*create: GroupIdContext,      consume: */}
-      <EmpsInGroup>                 {/*create: EmpsInGroupContext,  consume: GroupIdContext*/}
-        <ChooseDate>                {/*create: DateContext,         consume: */}
+      <ChooseDate>                {/*create: DateContext,         consume: GroupIdContext*/}
+        <EmpsInGroup>                 {/*create: EmpsInGroupContext,  consume: GroupIdContext*/}
 
-          <SaveSuccess>             {/*create: SaveSuccessContext,  consume: */}
-            <GetSolution>             {/*create: SolutionContext,     consume: DateContext, GroupIdContext */}
+            <SaveSuccess>             {/*create: SaveSuccessContext,  consume: */}
+              <GetSolution>             {/*create: SolutionContext,     consume: DateContext, GroupIdContext */}
 
-              <ChooseDaysOff/>         {/*create: DaysOffContext,      consume: EmpsInGroupContext, DateContext, SolutionContext*/}
-                {/* <GenerateButton/>    create:                      consume: GroupIdContext, SolutionContext */}
-              <RenderSolution/>       {/*create:                      consume: EmpsInGroupContext, SolutionContext, DateContext*/}
-              <SaveButton/>           {/*create:                      consume: SaveSuccessContext, DateContext, GroupIdContext, SolutionContext*/}
-            
-            </GetSolution>
-          </SaveSuccess>
+                <ChooseDaysOff/>         {/*create: DaysOffContext,      consume: EmpsInGroupContext, DateContext, SolutionContext*/}
+                  {/* <GenerateButton/>    create:                      consume: GroupIdContext, SolutionContext */}
+                <RenderSolution/>       {/*create:                      consume: EmpsInGroupContext, SolutionContext, DateContext*/}
+                <SaveButton/>           {/*create:                      consume: SaveSuccessContext, DateContext, GroupIdContext, SolutionContext*/}
+              
+              </GetSolution>
+            </SaveSuccess>
 
-        </ChooseDate>
-      </EmpsInGroup>
+        </EmpsInGroup>
+      </ChooseDate>
     </ChooseGroup>
   )
 }
