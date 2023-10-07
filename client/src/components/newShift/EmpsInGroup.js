@@ -17,19 +17,14 @@ const EmpsInGroup = ({children}) => {
 
       const errors = [empsInGroupError].filter(Boolean);
 
-      if (errors.length) {
-          return <ErrorList errors={errors.map(({ message }) => message)} />;
-      }
+  if (errors.length) return <ErrorList errors={errors.map(({ message }) => message)} />;
+  else if (empsInGroup === null) return <p>Ładowanie...</p>;
+  else if (empsInGroup.length === 0) return <p>Brak pracowników w grupie</p>;
 
   return (
-    <>
-    { empsInGroup?.length > 0 ?
         <EmpsInGroupContext.Provider value={empsInGroup}>
             {children}
-        </EmpsInGroupContext.Provider> :
-        <p>Brak pracowników w grupie</p>
-    }
-    </>
+        </EmpsInGroupContext.Provider>
   )
 }
 
