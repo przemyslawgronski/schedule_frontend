@@ -10,6 +10,7 @@ const ACTION = {
   FETCH_DATA: "FETCH_DATA",
   CHANGE_DATA: "CHANGE_DATA",
   FETCH_ERROR: "FETCH_ERROR",
+  RESET: "RESET",
 };
 
 const initialState = {
@@ -34,6 +35,8 @@ const reducer = (state, action) => {
         ...state,
         error: action.payload,
       };
+    case ACTION.RESET:
+      return initialState;
     default:
       return state;
   }
@@ -46,6 +49,9 @@ const useGetAndChange = ({ url, modify }) => {
   const getData = useCallback(async () => {
 
     try {
+      // Reset state to avoid showing old (wrong) data
+      dispatchState({ type: ACTION.RESET });
+
       const fetchResponse = await fetch(url, {
         method: "GET",
         headers: {
