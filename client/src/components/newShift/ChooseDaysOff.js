@@ -5,6 +5,7 @@ import { EmpsInGroupContext } from './EmpsInGroup'
 import { DateContext } from './ChooseDate'
 import { SolutionContext } from './GetSolution'
 import GenerateButton from './GenerateButton'
+import toggleDayOff from '../../features/pageSpecific/toggleDayOff'
 
 const ChooseDaysOff = () => {
 
@@ -35,12 +36,7 @@ const ChooseDaysOff = () => {
 
     if(daysOff.length===0) return null;
 
-    const handleDaysOff = (dateToChange, empIdToChange)=>setDaysOff( prev=> {
-      const newDaysOff = structuredClone(prev);
-      const valueToggle = newDaysOff.get(dateToChange).get(empIdToChange);
-      newDaysOff.get(dateToChange).set(empIdToChange, !valueToggle);
-      return newDaysOff;
-    });
+    const handleDaysOff = (date, empId) => toggleDayOff(date, empId, setDaysOff);
 
     // eg.: Map {
     //   12 => [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
