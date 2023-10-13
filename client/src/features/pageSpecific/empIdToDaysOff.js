@@ -17,7 +17,7 @@ const empIdToDaysOff = (daysOff) => {
         // empId: 27
         // dayOff: true
 
-        if(!dayOff) return; // If dayOff is false, skip it
+        if(!dayOff) return; // Don't care if it's normal day
 
         // If empId (e.g.:27) is not in mapIdToDaysOff keys, add it
         if(!mapIdToDaysOff.has(empId)) mapIdToDaysOff.set(empId, []);
@@ -26,8 +26,6 @@ const empIdToDaysOff = (daysOff) => {
         mapIdToDaysOff.get(empId).push(new Date(date).getDate());
       })
     })
-
-    console.log('mapIdToDaysOff: ', mapIdToDaysOff);
 
     // return e.g.: {27 => [1, 3], 7 => [2]}
     return mapIdToDaysOff;
