@@ -1,12 +1,12 @@
 import React, {useEffect, useContext, useState} from 'react'
 import ChooseDaysOffForm from '../ChooseDaysOffForm'
-import { dateUtils } from '../../features/utils/dateUtils'
 import { EmpsInGroupContext } from './EmpsInGroup'
 import { DateContext } from './ChooseDate'
 import { SolutionContext } from './GetSolution'
 import GenerateButton from './GenerateButton'
 import toggleDayOff from '../../features/pageSpecific/toggleDayOff'
 import empIdToDaysOff from '../../features/pageSpecific/empIdToDaysOff'
+import newDaysOff from '../../features/pageSpecific/newDaysOff'
 
 const ChooseDaysOff = () => {
 
@@ -16,24 +16,10 @@ const ChooseDaysOff = () => {
 
     const [daysOff, setDaysOff] = useState([]);
 
-    useEffect(()=>resetSolution(),[resetSolution, daysOff]); // Reset solution if daysOff changed
+    useEffect(() => resetSolution(),[resetSolution, daysOff]); // Reset solution if daysOff changed
 
-    useEffect(()=>{
-
-      const dates = dateUtils.datesArray(date.year, date.month);
-
-      const newDaysOff = new Map();
-
-      dates.forEach( (date) => {
-        newDaysOff.set(date, new Map());
-        empsInGroup.forEach( (emp) => {
-          newDaysOff.get(date).set(emp.id, false);
-        })
-      });
-
-      setDaysOff(newDaysOff);
-    
-    },[empsInGroup, date]);
+    // Set daysOff to new Map if empsInGroup or date changed    
+    useEffect(() => setDaysOff(newDaysOff(empsInGroup, date)) ,[empsInGroup, date]);
 
     if(daysOff.length===0) return null;
 
