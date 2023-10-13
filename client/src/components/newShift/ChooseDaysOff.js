@@ -6,6 +6,7 @@ import { DateContext } from './ChooseDate'
 import { SolutionContext } from './GetSolution'
 import GenerateButton from './GenerateButton'
 import toggleDayOff from '../../features/pageSpecific/toggleDayOff'
+import empIdToDaysOff from '../../features/pageSpecific/empIdToDaysOff'
 
 const ChooseDaysOff = () => {
 
@@ -38,18 +39,7 @@ const ChooseDaysOff = () => {
 
     const handleDaysOff = (date, empId) => toggleDayOff(date, empId, setDaysOff);
 
-    // eg.: Map {
-    //   12 => [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-    //   8 => [ 1, 8, 9, 10 ]
-    // }
-    const empIdToDaysOff = new Map();
-
-    daysOff.forEach((empIdToDayOff, date) => {
-      empIdToDayOff.forEach((dayOff, empId) => {
-        if(!empIdToDaysOff.has(empId)) empIdToDaysOff.set(empId, []);
-        if(dayOff) empIdToDaysOff.get(empId).push(new Date(date).getDate());
-      })
-    });
+    const empIdToDaysOffData = empIdToDaysOff(daysOff);
 
   return (
     <>
@@ -59,10 +49,10 @@ const ChooseDaysOff = () => {
             employees={empsInGroup}
             daysOff={daysOff}
             handleDaysOff={handleDaysOff}
-            empIdToDaysOff={empIdToDaysOff}
+            empIdToDaysOff={empIdToDaysOffData}
             />
 
-          <GenerateButton daysOff={daysOff} empIdToDaysOff={empIdToDaysOff}/>
+          <GenerateButton daysOff={daysOff} empIdToDaysOff={empIdToDaysOffData}/>
     </>
   )
 }
