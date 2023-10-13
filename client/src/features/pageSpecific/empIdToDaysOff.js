@@ -17,11 +17,13 @@ const empIdToDaysOff = (daysOff) => {
         // empId: 27
         // dayOff: true
 
-        // If empId (e.g.:27) is not in mapIdToDaysOff, add it
+        if(!dayOff) return; // If dayOff is false, skip it
+
+        // If empId (e.g.:27) is not in mapIdToDaysOff keys, add it
         if(!mapIdToDaysOff.has(empId)) mapIdToDaysOff.set(empId, []);
 
-        // If dayOff is true, push day-of-the-month (e.g.: "01") to mapIdToDaysOff
-        if(dayOff) mapIdToDaysOff.get(empId).push(new Date(date).getDate());
+        // push day-of-the-month (e.g.: "01") to mapIdToDaysOff
+        mapIdToDaysOff.get(empId).push(new Date(date).getDate());
       })
     })
 
