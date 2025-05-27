@@ -1,3 +1,6 @@
 #moje
 
 /node_modules
+.env
+client/.env
+frontend.code-workspace
